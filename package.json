@@ -1,0 +1,20 @@
+{
+  "name": "fullstack-boilerplate",
+  "version": "1.0.0",
+  "description": "a template for starting fullstack apps",
+  "main": "index.js",
+  "author": "Heather Pierce",
+  "license": "ISC",
+  "dependencies": {
+    "concurrently": "^5.0.1"
+  },
+  "devDependencies": {
+    "cypress": "^3.7.0"
+  },
+  "scripts": {
+    "start": "concurrently \"cd client && npm run dev\" \"cd server && npm start\"",
+    "test": "concurrently \"cd client && npm test\" \"cd server && npm test\"",
+    "lint": "concurrently \"cd client && npm run lint\" \"cd server && npm run lint\"",
+    "cypress": "cypress open"
+  }
+}
