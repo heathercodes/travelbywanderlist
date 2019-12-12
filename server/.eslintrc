@@ -1,0 +1,30 @@
+{
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "mocha": true,
+        "es6": true,
+        "commonjs": true
+    },
+    "rules": {
+        "indent": ["error", 4],
+        "space-before-function-paren": "off",
+        "linebreak-style": "off",
+        "global-require": "off",
+        "semi": "warn",
+        "arrow-body-style": "off",
+        "no-multiple-empty-lines": ["warn", { "max": 1 }],
+        "no-unused-expressions": [
+            "error",
+            {
+                "allowTaggedTemplates": true
+            }
+        ]
+    }
+}

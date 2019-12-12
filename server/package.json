@@ -3,7 +3,7 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "nodemon server.js",
+    "start": "nodemon src/index.ts",
     "test": "mocha",
     "db:migrate:latest": "knex migrate:latest",
     "db:migrate:rollback": "knex migrate:rollback",
@@ -12,8 +12,6 @@
   },
   "dependencies": {
     "@koa/cors": "3.0.0",
-    "apollo-server-koa": "2.9.12",
-    "graphql": "^14.5.8",
     "knex": "^0.20.3",
     "koa": "2.11.0",
     "koa-bodyparser": "4.2.1",
@@ -21,9 +19,16 @@
     "pg": "^7.14.0"
   },
   "devDependencies": {
+    "@types/koa": "^2.11.0",
+    "@types/koa-bodyparser": "^4.3.0",
+    "@types/koa-json": "^2.0.18",
+    "@types/koa-logger": "^3.1.1",
+    "@types/koa-router": "^7.0.42",
+    "@types/node": "^12.12.17",
     "chai": "^4.2.0",
     "chai-http": "^4.3.0",
     "mocha": "^6.2.2",
-    "nodemon": "1.19.3"
+    "nodemon": "1.19.3",
+    "ts-node": "^8.5.4"
   }
 }
