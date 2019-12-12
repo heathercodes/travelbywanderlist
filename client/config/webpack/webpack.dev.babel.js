@@ -8,33 +8,33 @@ module.exports = {
     output: {
         filename: '[name].bundle.js',
         path: paths.outputPath,
-        chunkFilename: '[name].js'
+        chunkFilename: '[name].js',
     },
     module: {
-        rules
+        rules,
     },
     performance: {
         hints: 'warning',
         maxAssetSize: 450000,
         maxEntrypointSize: 8500000,
-        assetFilter: assetFilename => {
+        assetFilter: (assetFilename) => {
             return (
                 assetFilename.endsWith('.css') || assetFilename.endsWith('.js')
             );
-        }
+        },
     },
     optimization: {
         splitChunks: {
-            chunks: 'all'
-        }
+            chunks: 'all',
+        },
     },
     devServer: {
         contentBase: paths.outputPath,
         compress: true,
         hot: true,
-        historyApiFallback: true
+        historyApiFallback: true,
     },
     plugins: [
-        new webpack.HotModuleReplacementPlugin()
-    ]
+        new webpack.HotModuleReplacementPlugin(),
+    ],
 };

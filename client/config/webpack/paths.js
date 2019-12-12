@@ -1,7 +1,7 @@
 const path = require('path');
 
 module.exports = {
-    outputPath: path.resolve('build'),
-    entryPath: path.resolve('src/index.js'),
+    outputPath: path.resolve('dist/index.js'),
+    entryPath: path.resolve('src/index.tsx'),
     templatePath: path.resolve('src/index.html'),
 };
