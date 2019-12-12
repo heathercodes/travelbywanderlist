@@ -1,0 +1,52 @@
+{
+    "parser": "babel-eslint",
+    "extends": ["airbnb"],
+    "parserOptions": {
+        "ecmaVersion": 6,
+        "ecmaFeatures": {
+            "jsx": true
+        }
+    },
+    "env": {
+        "browser": true,
+        "node": true,
+        "mocha": true,
+        "es6": true
+    },
+    "rules": {
+        "indent": ["error", 4],
+        "space-before-function-paren": "off",
+        "react/prefer-stateless-function": "warn",
+        "react/jsx-one-expression-per-line": "off",
+        "react/forbid-prop-types": "off",
+        "react/require-default-props": "off",
+        "import/no-extraneous-dependencies": [
+            "error",
+            { "devDependencies": true }
+        ],
+        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
+        "linebreak-style": "off",
+        "global-require": "off",
+        "semi": "warn",
+        "arrow-body-style": "off",
+        "no-multiple-empty-lines": ["warn", { "max": 1 }],
+        "no-unused-expressions": [
+            "error",
+            {
+                "allowTaggedTemplates": true
+            }
+        ],
+        "no-underscore-dangle": [
+            2,
+            { "allow": ["__REDUX_DEVTOOLS_EXTENSION__"] }
+        ],
+        "jsx-a11y/label-has-associated-control": [ 2, {
+            "labelComponents": ["CustomInputLabel"],
+            "labelAttributes": ["label"],
+            "controlComponents": ["CustomInput"],
+            "depth": 3
+        }],
+        "no-mixed-operators": "off",
+        "max-len": "off"
+    }
+}
