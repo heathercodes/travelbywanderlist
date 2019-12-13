@@ -1,22 +1,23 @@
 import React from 'react';
 import { Marker } from 'react-map-gl';
+import markerImage from '../images/marker.png';
 
-interface Coordinates {
+interface LocationDetails {
+	name: string;
     lat: number;
     lng: number;
 }
 
-export default function MapMarker(location: [string, Coordinates]): JSX.Element {
+export default function MapMarker(location: LocationDetails): JSX.Element {
     return (
 		<Marker
-			longitude={location[1].lng}
-			latitude={location[1].lat}
+			longitude={location.lng}
+			latitude={location.lat}
 			offsetLeft={-20}
 			offsetTop={-35}
 		>
 			<div>
-                {location[0]}
-				<img src="../deps/marker.png" alt="map marker" />
+				<img src={markerImage} alt="map marker" />
 			</div>
 		</Marker>
     );
