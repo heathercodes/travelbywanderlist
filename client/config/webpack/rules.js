@@ -25,5 +25,5 @@ module.exports = [
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
         exclude: /node_modules/,
         loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
-    }
+    },
 ];

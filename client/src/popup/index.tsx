@@ -1,4 +1,6 @@
+/** @jsx jsx */
 import React from 'react';
+import { css, jsx } from '@emotion/core';
 import { Popup } from 'react-map-gl';
 
 interface LocationDetails {
@@ -9,20 +11,21 @@ interface LocationDetails {
 
 interface PopupProps {
   location: LocationDetails[];
-  handleClose(): void;
 }
 
 export default function MapPopup(
-  { location, handleClose, children }: React.PropsWithChildren<PopupProps>,
+  { location, children }: React.PropsWithChildren<PopupProps>,
 ): JSX.Element {
   return (
       <Popup
-          longitude={location[0].lat}
-          latitude={location[0].lng}
-          onClose={handleClose}
+          longitude={location[0].lng}
+          latitude={location[0].lat}
+          closeOnClick
           tipSize={7}
       >
+        <div>
           { children }
+        </div>
       </Popup>
   );
 }

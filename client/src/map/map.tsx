@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+/** @jsx jsx */
+import React, { useState, Fragment } from 'react';
+import { css, jsx } from '@emotion/core';
 import ReactMapGL from 'react-map-gl';
 import MapMarker from '../marker';
 import MapPopup from '../popup';
@@ -6,6 +8,14 @@ import MapPopup from '../popup';
 import useViewport from './deps/useViewport';
 import useLocation from './deps/useLocation';
 import useCurrentLocation from './deps/useCurrentLocation';
+
+const mapWidth = css`
+  width: 100vw;
+`;
+
+const mapHeight = css`
+  height: 100vh;
+`;
 
 export default function WanderlistMap(): JSX.Element {
     const { viewport, setViewport } = useViewport();
@@ -20,12 +30,13 @@ export default function WanderlistMap(): JSX.Element {
 
     const getLocationDetails = (e): void => {
         const featureName = e.features[0] ? e.features[0].properties.name : '';
+        const [longitude, latitude] = e.lngLat;
 
         setCurrentLocation({
 			[featureName]: {
                 name: featureName,
-				lat: e.lngLat[1],
-				lng: e.lngLat[0],
+				lat: latitude,
+				lng: longitude,
 			},
         });
 
@@ -37,13 +48,16 @@ export default function WanderlistMap(): JSX.Element {
             ...locations,
 			...currentLocation,
         });
+
+        setCurrentLocation({});
+        handleToggle();
     };
 
     return (
         <ReactMapGL
             {...viewport}
-            width={window.innerWidth}
-			height={window.innerHeight}
+            width="100vw"
+			height="100vh"
             onViewportChange={(e): void => setViewport(e)}
             mapStyle={process.env.MAPBOX_STYLES}
             mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
@@ -51,14 +65,14 @@ export default function WanderlistMap(): JSX.Element {
         >
             {
                 togglePopup && (
-                    <MapPopup handleClose={handleToggle} location={Object.values(currentLocation)}>
+                    <MapPopup location={Object.values(currentLocation)}>
                         {
                             currentLocation ? (
-                                <>
-                                    <h2>{currentLocation.name}</h2>
-                                        <p>Add this location?</p>
-                                    <button type="submit" onClick={saveLocation}>Yes</button>
-                                </>
+                                <Fragment>
+                                    <h2>{Object.keys(currentLocation)[0]}</h2>
+                                    <p>Add this location?</p>
+                                    <button type="button" onClick={saveLocation}>Yes</button>
+                                </Fragment>
                             ) : (
                                 <p>Zoom in to the map to find a location</p>
                             )

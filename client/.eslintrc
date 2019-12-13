@@ -25,6 +25,7 @@
         "no-tabs": "off",
         "react/jsx-indent": "off",
         "react/jsx-indent-props": "off",
+        "react/jsx-fragments": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "react/jsx-props-no-spreading": "off",
         "@typescript-eslint/no-angle-bracket-type-assertion": "off",

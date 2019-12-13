@@ -17,11 +17,6 @@ module.exports = {
         hints: 'warning',
         maxAssetSize: 450000,
         maxEntrypointSize: 8500000,
-        assetFilter: (assetFilename) => {
-            return (
-                assetFilename.endsWith('.css') || assetFilename.endsWith('.js')
-            );
-        },
     },
     optimization: {
         splitChunks: {
