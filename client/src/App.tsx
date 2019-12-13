@@ -1,7 +1,8 @@
 import React from 'react';
+import WanderlistMap from './map';
 
-export default class App extends React.Component {
-    render() {
-        return <div>Welcome to React Boilerplate App</div>
-    }
+export default function App(): JSX.Element {
+    return (
+        <WanderlistMap />
+    );
 }

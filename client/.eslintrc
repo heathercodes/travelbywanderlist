@@ -1,9 +1,10 @@
 {
-    "extends": ["airbnb"],
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "ecmaFeatures": {
-            "jsx": true
+    "extends": ["airbnb", "plugin:@typescript-eslint/recommended", "plugin:import/typescript"],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "settings": {
+        "import/parsers": {
+            "@typescript-eslint/parser": [".ts", ".tsx"]
         }
     },
     "env": {
@@ -12,40 +13,30 @@
         "mocha": true,
         "es6": true
     },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018, // Allows for the parsing of modern ECMAScript features
+        "sourceType": "module" // Allows for the use of imports
+    },
     "rules": {
-        "indent": ["error", 4],
-        "space-before-function-paren": "off",
-        "react/prefer-stateless-function": "warn",
-        "react/jsx-one-expression-per-line": "off",
-        "react/forbid-prop-types": "off",
-        "react/require-default-props": "off",
+        "indent": "off",
+        "no-tabs": "off",
+        "react/jsx-indent": "off",
+        "react/jsx-indent-props": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "react/jsx-props-no-spreading": "off",
+        "@typescript-eslint/no-angle-bracket-type-assertion": "off",
+        "@typescript-eslint/no-object-literal-type-assertion": "off",
+        "react/jsx-filename-extension": [2, { "extensions": [".js", ".ts", ".tsx"] }],
         "import/no-extraneous-dependencies": [
             "error",
-            { "devDependencies": true }
-        ],
-        "react/jsx-filename-extension": [1, { "extensions": [".js", ".jsx"] }],
-        "linebreak-style": "off",
-        "global-require": "off",
-        "semi": "warn",
-        "arrow-body-style": "off",
-        "no-multiple-empty-lines": ["warn", { "max": 1 }],
-        "no-unused-expressions": [
-            "error",
             {
-                "allowTaggedTemplates": true
+                "devDependencies": ["**/test/**/**", "**/__tests__/**/**"],
+                "optionalDependencies": false,
+                "peerDependencies": false
             }
-        ],
-        "no-underscore-dangle": [
-            2,
-            { "allow": ["__REDUX_DEVTOOLS_EXTENSION__"] }
-        ],
-        "jsx-a11y/label-has-associated-control": [ 2, {
-            "labelComponents": ["CustomInputLabel"],
-            "labelAttributes": ["label"],
-            "controlComponents": ["CustomInput"],
-            "depth": 3
-        }],
-        "no-mixed-operators": "off",
-        "max-len": "off"
+        ]
     }
 }

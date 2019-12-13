@@ -2,7 +2,7 @@
     "name": "react-boilerplate",
     "version": "1.0.0",
     "description": "React boilerplate for personal projects and technical challenges",
-    "main": "index.js",
+    "main": "src/index.tsx",
     "author": "Lauren Greenway",
     "license": "UNLICENSED",
     "repository": {
@@ -12,12 +12,13 @@
     "scripts": {
         "build": "cross-env NODE_ENV=production webpack",
         "dev": "cross-env NODE_ENV=development webpack-dev-server --open",
-        "lint": "eslint ./src/**/**.js",
-        "lint:fix": "eslint ./src/**/**.js --fix",
+        "lint": "eslint ./src/**/**.tsx",
+        "lint:fix": "eslint ./src/**/**.tsx --fix",
         "test": "mocha -r test/env"
     },
     "devDependencies": {
-        "awesome-typescript-loader": "^5.2.1",
+        "@typescript-eslint/eslint-plugin": "^2.11.0",
+        "@typescript-eslint/parser": "^2.11.0",
         "brotli-webpack-plugin": "^1.1.0",
         "chai": "^4.2.0",
         "clean-webpack-plugin": "^3.0.0",
@@ -28,12 +29,13 @@
         "eslint-plugin-import": "^2.18.2",
         "eslint-plugin-jsx-a11y": "^6.2.3",
         "eslint-plugin-react": "^7.16.0",
-        "file-loader": "^4.2.0",
+        "file-loader": "^4.3.0",
         "html-webpack-plugin": "^3.2.0",
         "img-loader": "^3.0.1",
         "mocha": "^6.2.2",
         "source-map-loader": "^0.2.4",
         "terser-webpack-plugin": "^2.2.2",
+        "ts-loader": "^6.2.1",
         "url-loader": "^2.2.0",
         "webpack": "^4.41.2",
         "webpack-cli": "^3.3.10",
@@ -42,11 +44,15 @@
         "webpack-node-externals": "^1.7.2"
     },
     "dependencies": {
+        "@types/core-js": "^2.5.2",
         "@types/react": "^16.9.16",
         "@types/react-dom": "^16.9.4",
+        "@types/react-map-gl": "^5.0.3",
         "cross-env": "^6.0.3",
+        "dotenv": "^8.2.0",
         "react": "^16.11.0",
         "react-dom": "^16.11.0",
+        "react-map-gl": "^5.1.3",
         "react-router-dom": "^5.1.2"
     }
 }

@@ -3,7 +3,7 @@ module.exports = [
         test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
         use: {
-            loader: 'awesome-typescript-loader',
+            loader: 'ts-loader',
         },
     },
     {
@@ -12,7 +12,7 @@ module.exports = [
         loader: 'source-map-loader',
     },
     {
-        test: /\.eot(\?v=\d+\.\d+\.\d+)?$/,
+        test: /\.(png|svg|jpg|gif)$/,
         exclude: /node_modules/,
         loader: 'file-loader',
     },
@@ -25,9 +25,5 @@ module.exports = [
         test: /\.ttf(\?v=\d+\.\d+\.\d+)?$/,
         exclude: /node_modules/,
         loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
-    },
-    {
-        test: /\.(jpe?g|png|gif|svg)$/i,
-        use: ['url-loader?limit=10000', 'img-loader'],
-    },
+    }
 ];

@@ -1,7 +1,7 @@
 const webpack = require('webpack');
+require('dotenv').config();
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const BrotliPlugin = require('brotli-webpack-plugin');
 const paths = require('./paths');
 const rules = require('./rules');
 
@@ -18,6 +18,13 @@ module.exports = {
         extensions: ['*', '.ts', '.tsx', '.js', '.scss', '.css'],
     },
     plugins: [
+        new webpack.DefinePlugin({
+            'process.env': {
+                NODE_ENV: JSON.stringify(process.env.NODE_ENV),
+                MAPBOX_TOKEN: JSON.stringify(process.env.MAPBOX_TOKEN),
+                MAPBOX_STYLES: JSON.stringify(process.env.MAPBOX_STYLES),
+            },
+        }),
         new webpack.ProgressPlugin(),
         new HtmlWebpackPlugin({
             filename: 'index.html',
@@ -30,12 +37,6 @@ module.exports = {
                 removeComments: true,
                 removeAttributeQuotes: true,
             },
-        }),
-        new BrotliPlugin({
-            asset: '[path].br[query]',
-            test: /\.(js|css|html|svg)$/,
-            threshold: 10240,
-            minRatio: 0.8,
         }),
     ],
     optimization: {
@@ -53,5 +54,4 @@ module.exports = {
             },
         },
     },
-    devtool: 'source-map',
 };
