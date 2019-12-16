@@ -1,3 +1,4 @@
+const paths = require('./paths');
 module.exports = [
     {
         test: /\.(t|j)sx?$/,
@@ -13,7 +14,6 @@ module.exports = [
     },
     {
         test: /\.(png|svg|jpg|gif)$/,
-        exclude: /node_modules/,
         loader: 'file-loader',
     },
     {

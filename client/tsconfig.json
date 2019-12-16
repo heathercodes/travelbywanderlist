@@ -6,6 +6,7 @@
         "skipLibCheck": true,
         "esModuleInterop": true,
         "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
         "outDir": "./dist/",        // path to output directory
         "sourceMap": true,          // allow sourcemap support
         "strictNullChecks": true,   // enable strict null checks as a best practice
@@ -14,9 +15,9 @@
         "allowJs": true             // allow a partial TypeScript and JavaScript codebase
     },
     "include": [
-        "./src/**/*", "./src/typings.d.ts"
+        "./src/**/*", "./typings.d.ts"
     ],
     "exclude": [
         "./node_modules/**/*"
-    ]
+    ],
 }

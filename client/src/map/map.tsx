@@ -9,14 +9,6 @@ import useViewport from './deps/useViewport';
 import useLocation from './deps/useLocation';
 import useCurrentLocation from './deps/useCurrentLocation';
 
-const mapWidth = css`
-  width: 100vw;
-`;
-
-const mapHeight = css`
-  height: 100vh;
-`;
-
 export default function WanderlistMap(): JSX.Element {
     const { viewport, setViewport } = useViewport();
     const { locations, setLocations } = useLocation();

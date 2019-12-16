@@ -1,6 +1,6 @@
 import React from 'react';
 import { Marker } from 'react-map-gl';
-import markerImage from '../images/marker.png';
+import markerImage from '../assets/images/marker.png';
 
 interface LocationDetails {
 	name: string;
