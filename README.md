@@ -1,6 +1,6 @@
-# FullStack Template
+# Travel By Wanderlist
 
-A basic startup template for creating fullstack applications.
+An interactive map to plan your next trip. Integrated with CrowdRiff.
 
 The frontend is configured with React and Apollo Client
 The backend is configured with Node (Koa), GraphQL and Knex
