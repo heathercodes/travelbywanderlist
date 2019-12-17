@@ -1,30 +1,30 @@
 {
-    "parserOptions": {
-        "ecmaVersion": 6,
-        "ecmaFeatures": {
-            "jsx": true
+    "extends": [ "plugin:@typescript-eslint/recommended", "plugin:import/typescript"],
+    "parser": "@typescript-eslint/parser",
+    "plugins": ["@typescript-eslint"],
+    "settings": {
+        "import/parsers": {
+            "@typescript-eslint/parser": [".ts", ".tsx"]
         }
     },
     "env": {
         "browser": true,
         "node": true,
         "mocha": true,
-        "es6": true,
-        "commonjs": true
+        "es6": true
+    },
+    "parserOptions": {
+        "ecmaFeatures": {
+            "jsx": true
+        },
+        "ecmaVersion": 2018, // Allows for the parsing of modern ECMAScript features
+        "sourceType": "module" // Allows for the use of imports
     },
     "rules": {
-        "indent": ["error", 4],
-        "space-before-function-paren": "off",
-        "linebreak-style": "off",
-        "global-require": "off",
-        "semi": "warn",
-        "arrow-body-style": "off",
-        "no-multiple-empty-lines": ["warn", { "max": 1 }],
-        "no-unused-expressions": [
-            "error",
-            {
-                "allowTaggedTemplates": true
-            }
-        ]
+        "indent": "off",
+        "no-tabs": "off",
+        "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/no-angle-bracket-type-assertion": "off",
+        "@typescript-eslint/no-object-literal-type-assertion": "off",
     }
 }

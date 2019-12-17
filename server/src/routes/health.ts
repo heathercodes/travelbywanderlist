@@ -1,8 +1,9 @@
-const Router = require('koa-router');
-// const healthController = require('../controllers/health');
+import koaRouter from 'koa-router';
+export const healthRouter = new koaRouter();
 
-export const router = new Router();
-
-router.get('/', async (ctx, next) => {
-    ctx.body = 'Hello World'
+healthRouter.get('/health', async (ctx) => {
+    ctx.body = {
+        status: 'success',
+        message: 'hello, world!'
+    };
 });

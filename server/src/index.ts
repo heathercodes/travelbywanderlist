@@ -1,19 +1,20 @@
-const fs = require('fs');
-const { ApolloServer, gql } = require('apollo-server-koa');
-const bodyParser = require('koa-bodyparser');
-const cors = require('@koa/cors');
-const Koa = require('koa');
-const { router } = require('./routes/health');
+import bodyParser from 'koa-bodyparser';
+import cors from '@koa/cors';
+import Koa from 'koa';
+import dotenv from 'dotenv';
+import { healthRouter } from './routes/health';
 
+dotenv.config();
 const PORT = 9000;
 
 const app = new Koa();
-app.use(cors(), bodyParser());
-app.use(router.routes())
-app.use(router.allowedMethods())
+app.use(bodyParser())
+app.use(cors());
+app.use(healthRouter.routes());
+app.use(healthRouter.allowedMethods());
 
 const server = app.listen(PORT, () => {
     console.info(`Server started on port ${PORT}`);
 });
 
-module.exports = server;
+export default server;

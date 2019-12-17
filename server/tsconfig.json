@@ -1,16 +1,22 @@
 {
-    "version": "2.0.0",
     "compilerOptions": {
-        "outDir": "./dist",
-        "lib": ["ES6"],
-        "target": "ES6",
-        "module": "CommonJS",
+        "jsx": "react",
+        "lib": [ "es2016", "es2017", "dom", "es2017.object" ],
+        // "downlevelIteration": true, // for supporting Object.entries
+        "esModuleInterop": true,
         "moduleResolution": "node",
+        "allowSyntheticDefaultImports": true,
+        "outDir": "./dist/",        // path to output directory
+        "sourceMap": true,          // allow sourcemap support
+        "strictNullChecks": true,   // enable strict null checks as a best practice
+        "module": "commonjs",            // specify module code generation
+        "target": "es6",            // specify ECMAScript target version
+        "allowJs": true             // allow a partial TypeScript and JavaScript codebase
     },
     "include": [
-        "./src/**/*"
+        "./src/**/*", "./typings.d.ts"
     ],
     "exclude": [
-        "./node-modules/**/*"
-    ]
+        "./node_modules/**/*"
+    ],
 }
