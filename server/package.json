@@ -11,22 +11,17 @@
     "db:seed": "knex seed:run"
   },
   "dependencies": {
-    "@koa/cors": "3.0.0",
+    "@types/body-parser": "^1.17.1",
+    "@types/express": "^4.17.2",
     "@types/node-fetch": "^2.5.4",
+    "body-parser": "^1.19.0",
     "dotenv": "^8.2.0",
+    "express": "^4.17.1",
     "knex": "^0.20.3",
-    "koa": "2.11.0",
-    "koa-bodyparser": "4.2.1",
-    "koa-router": "7.4.0",
     "node-fetch": "^2.6.0",
     "pg": "^7.14.0"
   },
   "devDependencies": {
-    "@types/koa": "^2.11.0",
-    "@types/koa-bodyparser": "^4.3.0",
-    "@types/koa-json": "^2.0.18",
-    "@types/koa-logger": "^3.1.1",
-    "@types/koa-router": "^7.0.42",
     "@types/node": "^12.12.17",
     "@typescript-eslint/eslint-plugin": "^2.11.0",
     "@typescript-eslint/parser": "^2.11.0",

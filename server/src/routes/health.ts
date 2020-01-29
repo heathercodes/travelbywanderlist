@@ -1,9 +1,8 @@
-import koaRouter from 'koa-router';
-export const healthRouter = new koaRouter();
+import { Router, Request, Response } from 'express';
+const router = Router();
 
-healthRouter.get('/health', async (ctx) => {
-    ctx.body = {
-        status: 'success',
-        message: 'hello, world!'
-    };
+router.get('/health', (req: Request, res: Response) => {
+    res.send('health check OK')
 });
+
+export { router }

@@ -5,8 +5,9 @@
         // "downlevelIteration": true, // for supporting Object.entries
         "esModuleInterop": true,
         "moduleResolution": "node",
+        "rootDir": "./src",
+        "outDir": "./dist",
         "allowSyntheticDefaultImports": true,
-        "outDir": "./dist/",        // path to output directory
         "sourceMap": true,          // allow sourcemap support
         "strictNullChecks": true,   // enable strict null checks as a best practice
         "module": "commonjs",            // specify module code generation

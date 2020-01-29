@@ -14,7 +14,8 @@
         "dev": "cross-env NODE_ENV=development webpack-dev-server --open",
         "lint": "eslint ./src/**/**.tsx",
         "lint:fix": "eslint ./src/**/**.tsx --fix",
-        "test": "mocha -r test/env"
+        "test": "mocha -r test/env",
+        "start": "concurrently \"npm run build\" \"npm run dev\""
     },
     "devDependencies": {
         "@typescript-eslint/eslint-plugin": "^2.11.0",
@@ -48,6 +49,7 @@
         "@types/react": "^16.9.16",
         "@types/react-dom": "^16.9.4",
         "@types/react-map-gl": "^5.0.3",
+        "concurrently": "^5.0.2",
         "cross-env": "^6.0.3",
         "dotenv": "^8.2.0",
         "emotion-normalize": "^10.1.0",

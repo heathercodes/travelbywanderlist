@@ -1,17 +1,14 @@
-import bodyParser from 'koa-bodyparser';
-import cors from '@koa/cors';
-import Koa from 'koa';
+import express from 'express';
 import dotenv from 'dotenv';
-import { healthRouter } from './routes/health';
+import bodyParser from 'body-parser';
+import { router } from './routes/health';
 
 dotenv.config();
 const PORT = 9000;
+const app = express();
 
-const app = new Koa();
-app.use(bodyParser())
-app.use(cors());
-app.use(healthRouter.routes());
-app.use(healthRouter.allowedMethods());
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(router);
 
 const server = app.listen(PORT, () => {
     console.info(`Server started on port ${PORT}`);
