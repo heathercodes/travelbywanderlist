@@ -1,20 +1,18 @@
 {
-  "name": "fullstack-boilerplate",
+  "name": "travel-by-wanderlist",
   "version": "1.0.0",
-  "description": "a template for starting fullstack apps",
+  "description": "travel planning app",
   "main": "index.js",
   "author": "Heather Pierce",
   "license": "ISC",
   "dependencies": {
     "concurrently": "^5.0.1"
   },
-  "devDependencies": {
-    "cypress": "^3.7.0"
-  },
+  "devDependencies": {},
   "scripts": {
     "start": "concurrently \"cd client && npm run dev\" \"cd server && npm start\"",
     "test": "concurrently \"cd client && npm test\" \"cd server && npm test\"",
     "lint": "concurrently \"cd client && npm run lint\" \"cd server && npm run lint\"",
-    "cypress": "cypress open"
+    "setup": "concurrently \"cd client && npm i\" \"cd server && npm i\""
   }
 }
