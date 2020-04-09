@@ -1,1 +1,6 @@
-node_modules/*
+.git
+.vscode
+dist
+test/*
+node_modules
+server/node_modules
