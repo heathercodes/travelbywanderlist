@@ -21,5 +21,4 @@ module.exports = {
             minRatio: 0.8,
         }),
     ],
-    devtool: 'source-map',
 };

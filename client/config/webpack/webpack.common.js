@@ -4,6 +4,8 @@ const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const paths = require('./paths');
 const rules = require('./rules');
+// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
+
 
 module.exports = {
     entry: paths.entryPath,
@@ -18,6 +20,7 @@ module.exports = {
         extensions: ['.ts', '.tsx', '.js', '.png'],
     },
     plugins: [
+        // new BundleAnalyzerPlugin(),
         new webpack.DefinePlugin({
             'process.env': {
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV),
@@ -39,6 +42,9 @@ module.exports = {
             },
         }),
     ],
+    externals: {
+        mapbox: 'mapbox-gl'
+    },
     optimization: {
         minimize: true,
         minimizer: [new TerserPlugin()],
