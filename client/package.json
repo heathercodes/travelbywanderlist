@@ -1,5 +1,5 @@
 {
-    "name": "react-boilerplate",
+    "name": "travelbywanderlist-client",
     "version": "1.0.0",
     "description": "Client side for Cheap Old Houses app",
     "main": "src/index.tsx",
@@ -12,6 +12,7 @@
     "scripts": {
         "build": "parcel build src/index.html --out-dir build/dist/ --public-url ./",
         "dev": "parcel serve src/index.html --open --out-dir build/debug",
+        "start": "parcel build/dist/index.html",
         "lint": "eslint ./src/**/**.tsx",
         "lint:fix": "eslint ./src/**/**.tsx --fix",
         "test": "mocha -r test/env"
@@ -32,8 +33,6 @@
         "eslint-plugin-react": "^7.16.0",
         "mapbox-gl": "^1.9.1",
         "mocha": "^6.2.2",
-        "parcel": "^1.12.4",
-        "parcel-plugin-stdin": "^0.1.1",
         "typescript": "^3.8.3"
     },
     "dependencies": {
@@ -41,6 +40,8 @@
         "cross-env": "^6.0.3",
         "dotenv": "^8.2.0",
         "emotion-normalize": "^10.1.0",
+        "parcel": "^1.12.4",
+        "parcel-plugin-stdin": "^0.1.1",
         "react": "^16.11.0",
         "react-dom": "^16.11.0",
         "react-map-gl": "^5.1.3"
