@@ -1,8 +1,8 @@
 /** @jsx jsx */
-import React, { Fragment } from 'react';
+import React, { Fragment, Suspense, lazy } from 'react';
 import { Global, css, jsx } from '@emotion/core';
 import emotionNormalize from 'emotion-normalize';
-import WanderlistMap from './map/map';
+const Map = lazy(() => import('./map/map'));
 
 const body = css`
     ${emotionNormalize}
@@ -13,6 +13,10 @@ const body = css`
     }
 `;
 
+if (module.hot) {
+    module.hot.accept()
+}
+
 // import 'mapbox-gl/dist/mapbox-gl.css';
 
 export default function App(): JSX.Element {
@@ -21,7 +25,9 @@ export default function App(): JSX.Element {
             <Global
                 styles={body}
             />
-            <WanderlistMap />
+            <Suspense fallback={<div>Loading...</div>}>
+                <Map />
+            </Suspense>
         </Fragment>
     );
 }

@@ -3,18 +3,19 @@
         "jsx": "react",
         "rootDir": "./src",
         "outDir": "./dist",
-        "lib": [ "es2016", "es2017", "dom", "es2017.object" ],
+        "lib": [ "es2016", "es2017", "dom", "es2017.object", "esnext" ],
         // "downlevelIteration": true, // for supporting Object.entries
         "esModuleInterop": true,
         "moduleResolution": "node",
         "allowSyntheticDefaultImports": true,
-        "sourceMap": true,          // allow sourcemap support
         "strictNullChecks": true,   // enable strict null checks as a best practice
-        "module": "commonjs",            // specify module code generation
-        "target": "es6",            // specify ECMAScript target version
-        "allowJs": true             // allow a partial TypeScript and JavaScript codebase
+        "allowJs": true,             // allow a partial TypeScript and JavaScript codebase
+        "target": "es2018",
+        "sourceMap": true,
+        "module": "esnext",
     },
     "include": [
+        "./src/**/*",
         "typings.d.ts"
     ],
     "exclude": [

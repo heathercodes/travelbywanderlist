@@ -13,5 +13,6 @@
     "test": "concurrently \"cd client && npm test\" \"cd server && npm test\"",
     "lint": "concurrently \"cd client && npm run lint\" \"cd server && npm run lint\"",
     "setup": "concurrently \"cd client && npm i\" \"cd server && npm i\""
-  }
+  },
+  "dependencies": {}
 }

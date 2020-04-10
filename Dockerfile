@@ -2,7 +2,7 @@ FROM node:stretch-slim
 
 WORKDIR /app
 
-COPY ./client/dist /app/client/dist/
+COPY ./client/build/dist /app/client/dist/
 COPY ./server /app/server/
 COPY ./package*.json /app/
 
