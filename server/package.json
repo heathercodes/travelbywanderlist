@@ -1,5 +1,5 @@
 {
-  "name": "node-koa-boilerplate",
+  "name": "travelbywanderlist-server",
   "private": true,
   "license": "MIT",
   "scripts": {
