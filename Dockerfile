@@ -2,13 +2,21 @@ FROM node:stretch-slim
 
 WORKDIR /app
 
-COPY ./client/dist /app/client/dist/
-COPY ./server /app/server/
-COPY ./package*.json /app/
+COPY . .
 
-RUN npm i --production
-RUN cd /app/server/ && npm i --production && npm run build
+RUN cd /app/client && npm i && npm run build
+RUN cd /app/server && npm i && npm run build
 
-EXPOSE 9000
+FROM node:stretch-slim
 
-CMD ["node", "/app/server/dist/index.js"]
+WORKDIR /app
+
+COPY --from=0 /app/client/dist /app/client
+COPY --from=0 /app/server/dist /app/server
+COPY --from=0 /app/server/package*.json /app/server/
+
+RUN cd /app/server/ && npm i --production
+
+# EXPOSE 9000
+
+CMD /bin/bash
