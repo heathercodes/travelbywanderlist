@@ -1,6 +1,6 @@
 /** @jsx jsx */
 import React from 'react';
-import { css, jsx } from '@emotion/core';
+import { jsx } from '@emotion/core';
 import { Popup } from 'react-map-gl';
 
 interface LocationDetails {
