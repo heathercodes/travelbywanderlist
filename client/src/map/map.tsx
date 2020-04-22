@@ -1,6 +1,6 @@
 /** @jsx jsx */
-import React, { useState, Fragment } from 'react';
-import { css, jsx } from '@emotion/core';
+import { useState, Fragment } from 'react';
+import { jsx } from '@emotion/core';
 import ReactMapGL from 'react-map-gl';
 import MapMarker from '../marker';
 import MapPopup from '../popup';
@@ -73,8 +73,8 @@ export default function WanderlistMap(): JSX.Element {
                 )
             }
             {
-                Object.values(locations).map((loc, index) => (
-                    <MapMarker key={`loc-${index}`} {...loc} />
+                Object.values(locations).map((loc) => (
+                    <MapMarker key={`loc-${loc}`} {...loc} />
                 ))
             }
         </ReactMapGL>

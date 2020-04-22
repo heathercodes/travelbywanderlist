@@ -1,0 +1,30 @@
+name: CI
+
+on: [push]
+
+jobs:
+  client_lint:
+    runs-on: ubuntu-latest
+    name: Client Lint
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: npm install
+      run: cd client && npm install
+
+    - name: run lint
+      run: cd client && npm run lint
+
+  server_lint:
+    runs-on: ubuntu-latest
+    name: Server Lint
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: npm install
+      run: cd server && npm install
+
+    - name: run lint
+      run: cd server && npm run lint

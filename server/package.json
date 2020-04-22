@@ -5,6 +5,7 @@
   "scripts": {
     "start": "nodemon src/index.ts",
     "test": "mocha",
+    "lint": "eslint ./src/**/**.ts",
     "build": "tsc",
     "db:migrate:latest": "knex migrate:latest",
     "db:migrate:rollback": "knex migrate:rollback",
