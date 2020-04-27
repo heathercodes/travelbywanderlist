@@ -7,4 +7,4 @@ const router = Router();
 router.use('/', healthRouter);
 router.use('/images', imageRouter);
 
-export router;
+export { router };

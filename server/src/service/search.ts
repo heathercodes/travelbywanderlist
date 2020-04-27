@@ -13,4 +13,4 @@ async function fetchImageByLocation(searchTerm: string): Promise<void> {
     }
 }
 
-export default fetchAssetBySearch;
+export { fetchImageByLocation };

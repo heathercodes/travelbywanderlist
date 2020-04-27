@@ -13,13 +13,14 @@ interface FetchRequest {
 
 async function fetchImages(request: FetchRequest): Promise<void> {
     try {
-        return fetch(`https://api.unsplash.com/${request.url}`,{
+        return fetch(`https://api.unsplash.com/${request.url}`,
+        {
             method: request.method,
             body:   JSON.stringify(request.body),
             headers: {
                 'Content-Type': 'application/json',
-                Accept-Version: v1,
-                Authorization: `Client-${process.env.UNSPLASH_ACCESS_KEY}`
+                'Accept-Version': 'v1',
+                Authorization: `Client-${process.env.UNSPLASH_ACCESS_KEY}`,
             },
         })
         .then(res => res.json())
@@ -29,4 +30,4 @@ async function fetchImages(request: FetchRequest): Promise<void> {
     }
 }
 
-export fetchImages;
+export { fetchImages };
