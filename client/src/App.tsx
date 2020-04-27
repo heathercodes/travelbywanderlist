@@ -2,7 +2,7 @@
 import React, { Fragment } from 'react';
 import { Global, css, jsx } from '@emotion/core';
 import emotionNormalize from 'emotion-normalize';
-import WanderlistMap from './map/map';
+import WanderlistMap from './map';
 
 const body = css`
     ${emotionNormalize}
@@ -12,8 +12,6 @@ const body = css`
         background-color: #F8F4ED;
     }
 `;
-
-// import 'mapbox-gl/dist/mapbox-gl.css';
 
 export default function App(): JSX.Element {
     return (

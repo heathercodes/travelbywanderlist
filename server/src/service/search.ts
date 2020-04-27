@@ -1,13 +1,13 @@
-import fetchCrowdRiff from './fetch';
+import { fetchImages } from './fetch';
 
-async function fetchAssetBySearch(searchTerm: string): Promise<void> {
+async function fetchImageByLocation(searchTerm: string): Promise<void> {
     try {
         const request = {
-            url: 'apps/',
-            body: { searchTerm },
-            method: 'post'
+            url: '/search/photos',
+            query: searchTerm,
+            method: 'get'
         }
-        fetchCrowdRiff(request);
+        return fetchImages(request);
     } catch(err) {
         console.log(err)
     }

@@ -1,11 +1,9 @@
 const webpack = require('webpack');
-require('dotenv').config();
+require('dotenv').config({ path: '../../.env' });
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const paths = require('./paths');
 const rules = require('./rules');
-// const BundleAnalyzerPlugin = require('webpack-bundle-analyzer').BundleAnalyzerPlugin;
-
 
 module.exports = {
     entry: paths.entryPath,

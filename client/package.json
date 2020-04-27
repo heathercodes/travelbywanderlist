@@ -4,11 +4,10 @@
     "main": "src/index.tsx",
     "scripts": {
         "build": "cross-env NODE_ENV=production webpack -p",
-        "dev": "cross-env NODE_ENV=development webpack-dev-server --open",
+        "start": "cross-env NODE_ENV=development webpack-dev-server --open",
         "lint": "eslint ./src/**/**.tsx",
         "lint:fix": "eslint ./src/**/**.tsx --fix",
-        "test": "mocha -r test/env",
-        "start": "concurrently \"npm run build\" \"npm run dev\""
+        "test": "mocha -r test/env"
     },
     "devDependencies": {
         "@types/core-js": "^2.5.2",

@@ -5,4 +5,4 @@ router.get('/health', (req: Request, res: Response) => {
     res.send('health check OK')
 });
 
-export { router }
+export { router };

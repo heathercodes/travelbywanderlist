@@ -2,7 +2,7 @@ import express from 'express';
 import dotenv from 'dotenv';
 import path from 'path';
 import bodyParser from 'body-parser';
-import { router } from './routes/health';
+import { router } from './routes';
 
 dotenv.config();
 const PORT = 9000;

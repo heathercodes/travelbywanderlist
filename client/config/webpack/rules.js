@@ -3,9 +3,7 @@ module.exports = [
     {
         test: /\.(t|j)sx?$/,
         exclude: /node_modules/,
-        use: {
-            loader: 'ts-loader',
-        },
+        loader: 'ts-loader',
     },
     {
         enforce: 'pre',
@@ -15,6 +13,11 @@ module.exports = [
     {
         test: /\.(png|svg|jpg|gif)$/,
         loader: 'file-loader',
+        options: {
+            name: '[name]_[hash].[ext]',
+            publicPath: '/images/',
+            outputPath: '../images/'
+        }
     },
     {
         test: /\.(woff|woff2)$/,

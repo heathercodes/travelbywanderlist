@@ -11,14 +11,15 @@ interface FetchRequest {
     method: string;
 }
 
-async function fetchCrowdRiff(request: FetchRequest): Promise<void> {
+async function fetchImages(request: FetchRequest): Promise<void> {
     try {
-        return fetch(`${process.env.CROWDRIFF_BASEURL}${request.url}`,{
+        return fetch(`https://api.unsplash.com/${request.url}`,{
             method: request.method,
-            body:    JSON.stringify(request.body),
+            body:   JSON.stringify(request.body),
             headers: {
                 'Content-Type': 'application/json',
-                Authorization: `Bearer ${process.env.CROWDRIFF_API}`
+                Accept-Version: v1,
+                Authorization: `Client-${process.env.UNSPLASH_ACCESS_KEY}`
             },
         })
         .then(res => res.json())
@@ -28,4 +29,4 @@ async function fetchCrowdRiff(request: FetchRequest): Promise<void> {
     }
 }
 
-export default fetchCrowdRiff;
+export fetchImages;

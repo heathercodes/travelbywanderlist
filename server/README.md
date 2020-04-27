@@ -1,9 +1,7 @@
 # Wanderlist Server
 
-a wrapper for hitting the CrowdRiff external API
-endpoints include:
-* search for a single image
+a wrapper for hitting Unsplash for images of a point of interest:
 
-also will include a users saved settings:
+also will includes a users saved settings:
 * markers placed on map
 * photos attached to map markers
