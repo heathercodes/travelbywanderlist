@@ -7,7 +7,7 @@ const locationRouter = Router();
 locationRouter.get('/:id', locationController.getLocationById);
 locationRouter.post('', locationController.createLocation);
 locationRouter.put('/:id', locationController.updateLocation);
-locationRouter.delete('/:id', locationController.deleteLocation);
+locationRouter.delete('/:id', locationController.deleteLocationById);
 
 export { locationRouter };
 

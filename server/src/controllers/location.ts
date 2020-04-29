@@ -20,7 +20,7 @@ export async function updateLocation(req, res) {
     const { id } = req.params;
 
     try {
-        const data = await locationService.updateLocation({ id, details: req.body })
+        const data = await locationService.updateLocation({ id, ...req.body })
 
         if (data) {
             return res.status(200).json({ data });
@@ -30,11 +30,11 @@ export async function updateLocation(req, res) {
     }
 };
 
-export async function deleteLocation(req, res) {
+export async function deleteLocationById(req, res) {
     const { id } = req.params;
 
     try {
-        const ok = await locationService.deleteLocation({ id })
+        const ok = await locationService.deleteLocationById({ id })
 
         if (ok) {
             return res.status(200).json({ data: 'Location deleted' });

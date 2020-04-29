@@ -32,8 +32,8 @@ export async function updateLocation(data) {
     return location;
 }
 
-export async function deleteLocation(data) {
-    const location = await locationRepo.deleteLocation(data);
+export async function deleteLocationById(data) {
+    const location = await locationRepo.deleteLocationById(data);
 
     // if (!location) {
     //     throw boom.internal('get location failed');
