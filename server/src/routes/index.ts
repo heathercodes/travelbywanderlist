@@ -1,10 +1,12 @@
 import { Router } from 'express';
 import { healthRouter } from './health';
-import { imageRouter } from '../images';
+import { locationRouter } from './location'
+import { collectionRouter } from './collection';
 
 const router = Router();
 
-router.use('/', healthRouter);
-router.use('/images', imageRouter);
+router.use('/health', healthRouter);
+router.use('/location', locationRouter);
+router.use('/collection', collectionRouter);
 
 export { router };

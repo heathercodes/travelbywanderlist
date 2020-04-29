@@ -18,7 +18,7 @@ exports.up = function(knex) {
         table.increments();
         table.integer('user_id')
             .unsigned()
-            .notNullable()
+            // .notNullable()
             .references('id')
             .inTable('users');
         table.string('name');
@@ -28,7 +28,7 @@ exports.up = function(knex) {
         table.increments();
         table.integer('wanderlist_id')
             .unsigned()
-            .notNullable()
+            // .notNullable()
             .references('id')
             .inTable('wanderlists');
         table.string('name');

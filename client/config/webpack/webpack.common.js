@@ -1,5 +1,5 @@
 const webpack = require('webpack');
-require('dotenv').config({ path: '../../.env' });
+require('dotenv').config();
 const TerserPlugin = require('terser-webpack-plugin');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const paths = require('./paths');

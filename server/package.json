@@ -3,14 +3,14 @@
   "private": true,
   "license": "MIT",
   "scripts": {
-    "start": "nodemon src/index.ts",
+    "start": "NODE_ENV=development nodemon src/index.ts",
     "test": "mocha",
     "lint": "eslint ./src/**/**.ts",
     "build": "tsc",
     "db:migrate:latest": "NODE_ENV=development knex migrate:latest",
-    "db:migrate:rollback": "knex migrate:rollback",
+    "db:migrate:rollback": "NODE_ENV=development knex migrate:rollback",
     "db:migrate:create": "knex migrate:make",
-    "db:seed": "knex seed:run"
+    "db:seed": "NODE_ENV=development knex seed:run"
   },
   "dependencies": {
     "body-parser": "^1.19.0",

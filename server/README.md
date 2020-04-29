@@ -1,7 +1,7 @@
 # Wanderlist Server
 
-a wrapper for hitting Unsplash for images of a point of interest:
+Creates a Wanderlist collection in the database with your points of interest saved.
 
-also will includes a users saved settings:
-* markers placed on map
-* photos attached to map markers
+Eventually supporting:
+* adding notes to your points of interest
+* adding suggested images to your locations
