@@ -1,8 +1,8 @@
 import { Router, Request, Response } from 'express';
-const router = Router();
+const healthRouter = Router();
 
-router.get('/health', (req: Request, res: Response) => {
+healthRouter.get('/health', (req: Request, res: Response) => {
     res.send('health check OK')
 });
 
-export { router };
+export { healthRouter };

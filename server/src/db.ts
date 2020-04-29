@@ -1,6 +1,6 @@
-const Knex = require('knex');
-const configuration = require('../knexfile');
+import Knex from 'knex';
+import configuration from '../knexfile';
 
-const KnexInstance = Knex(configuration);
+const db = Knex(configuration);
 
-module.exports = KnexInstance;
+export { db };

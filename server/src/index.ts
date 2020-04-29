@@ -8,7 +8,8 @@ dotenv.config();
 const PORT = 9000;
 const app = express();
 
-app.use(bodyParser.urlencoded({ extended: true }));
+app.use(express.json())
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "../client")));
 app.use(router);
 
