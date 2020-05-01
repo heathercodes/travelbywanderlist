@@ -1,4 +1,4 @@
-const dotenv = require('dotenv');
+const dotenv = require('dotenv'); // eslint-disable-line
 dotenv.config({ path: '../.env' });
 
 module.exports = {
@@ -12,7 +12,7 @@ module.exports = {
     },
     pool: {
         min: 2,
-        max: 10
+        max: 10,
     },
     migrations: {
         directory: './db/migrations',
@@ -20,5 +20,5 @@ module.exports = {
     },
     seeds: {
         directory: './db/seeds',
-    }
+    },
 };

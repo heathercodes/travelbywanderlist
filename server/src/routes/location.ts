@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 // const { check } = require('express-validator/check');
 import * as locationController from '../controllers/location';
 
@@ -10,4 +10,3 @@ locationRouter.put('/:id', locationController.updateLocation);
 locationRouter.delete('/:id', locationController.deleteLocationById);
 
 export { locationRouter };
-

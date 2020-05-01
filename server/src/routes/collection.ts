@@ -1,4 +1,4 @@
-import { Router, Request, Response } from 'express';
+import { Router } from 'express';
 // const { check } = require('express-validator/check');
 import * as collectionController from '../controllers/collection';
 

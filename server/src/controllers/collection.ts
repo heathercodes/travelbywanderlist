@@ -1,54 +1,47 @@
+import { Response } from 'express';
 import * as collectionService from '../service/collection';
 // const { NotFoundError } = require('../../utils/errors');
 
-export async function createCollection(req, res) {
+export async function createCollection(req, res): Response {
     try {
-        const ok = await collectionService.createCollection(req.body)
+        const collectionId = await collectionService.createCollection(req.body);
 
-        if (ok) {
-            return res.status(200).json({ data: 'Wanderlist created' });
-        }
-    } catch(error) {
-        return res.status(422).json({ error })
+        return res.status(200).json({ data: `Wanderlist created ${collectionId}` });
+    } catch (error) {
+        return res.status(422).json({ error });
     }
-};
+}
 
-export async function getCollectionById(req, res) {
+export async function getCollectionById(req, res): Response {
     const { id } = req.params;
 
     try {
-        const data = await collectionService.getCollectionById({ id })
+        const data = await collectionService.getCollectionById({ id });
 
-        if (data) {
-            return res.status(200).json({ data });
-        }
-    } catch(error) {
-        return res.status(422).json({ error })
+        return res.status(200).json({ data });
+    } catch (error) {
+        return res.status(422).json({ error });
     }
-};
+}
 
-export async function updateCollection(req, res) {
+export async function updateCollection(req, res): Response {
     try {
-        const data = await collectionService.updateCollection(req.body)
+        const data = await collectionService.updateCollection(req.body);
 
-        if (data) {
-            return res.status(200).json({ data });
-        }
-    } catch(error) {
-        return res.status(422).json({ error })
+        return res.status(200).json({ data });
+    } catch (error) {
+        return res.status(422).json({ error });
     }
-};
+}
 
-export async function deleteCollection(req, res) {
+export async function deleteCollection(req, res): Response {
     const { id } = req.params;
 
     try {
-        const ok = await collectionService.deleteCollection({ id })
+        const collectionId = await collectionService.deleteCollection({ id });
 
-        if (ok) {
-            return res.status(200).json({ data: 'Wanderlist deleted' });
-        }
-    } catch(error) {
-        return res.status(422).json({ error })
+        return res.status(200).json({ data: `Wanderlist deleted ${collectionId}` });
+    } catch (error) {
+        return res.status(422).json({ error });
     }
-};
+}

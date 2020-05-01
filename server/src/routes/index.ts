@@ -1,6 +1,6 @@
 import { Router } from 'express';
 import { healthRouter } from './health';
-import { locationRouter } from './location'
+import { locationRouter } from './location';
 import { collectionRouter } from './collection';
 
 const router = Router();

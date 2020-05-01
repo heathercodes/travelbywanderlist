@@ -1,4 +1,4 @@
-{
+{	
     "extends": [ "plugin:@typescript-eslint/recommended", "plugin:import/typescript"],
     "parser": "@typescript-eslint/parser",
     "plugins": ["@typescript-eslint"],
@@ -23,8 +23,12 @@
     "rules": {
         "indent": "off",
         "no-tabs": "off",
+        "import/extensions": "off",
+        "import/prefer-default-export": "off",
         "@typescript-eslint/no-explicit-any": "off",
+        "@typescript-eslint/camelcase": "off",
         "@typescript-eslint/no-angle-bracket-type-assertion": "off",
         "@typescript-eslint/no-object-literal-type-assertion": "off",
-    }
-}
+        "@typescript-eslint/explicit-function-return-type": "error",
+    }	
+} 

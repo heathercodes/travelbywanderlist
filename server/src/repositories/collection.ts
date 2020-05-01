@@ -1,7 +1,8 @@
-import { db } from '../db';
 import { QueryResult } from 'pg';
+import { Collection } from '../models';
+import { db } from '../db';
 
-export async function createCollection(data) {
+export async function createCollection(data): Promise<number> {
     const results: QueryResult = await db('wanderlists').insert(data).returning('id');
 
     if (results.length !== 1) {
@@ -13,7 +14,7 @@ export async function createCollection(data) {
     return result;
 }
 
-export async function getCollectionById(data) {
+export async function getCollectionById(data): Promise<Collection> {
     const results: QueryResult = await db('wanderlists').where('id', data.id);
 
     if (results.length !== 1) {
@@ -25,7 +26,7 @@ export async function getCollectionById(data) {
     return result;
 }
 
-export async function updateCollection(data) {
+export async function updateCollection(data): Promise<Collection> {
     const { id } = data;
 
     const results: QueryResult = await db('wanderlists')
@@ -42,10 +43,10 @@ export async function updateCollection(data) {
     return result;
 }
 
-export async function deleteCollection(data) {
+export async function deleteCollection(data): Promise<number> {
     const result: QueryResult = await db('wanderlists')
         .where('id', data.id)
-        .del()
+        .del();
 
     if (result !== 1) {
         return null;
