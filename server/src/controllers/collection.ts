@@ -2,7 +2,7 @@ import { Response } from 'express';
 import * as collectionService from '../service/collection';
 // const { NotFoundError } = require('../../utils/errors');
 
-export async function createCollection(req, res): Response {
+export async function createCollection(req, res): Promise<Response> {
     try {
         const collectionId = await collectionService.createCollection(req.body);
 
@@ -12,7 +12,7 @@ export async function createCollection(req, res): Response {
     }
 }
 
-export async function getCollectionById(req, res): Response {
+export async function getCollectionById(req, res): Promise<Response> {
     const { id } = req.params;
 
     try {
@@ -24,7 +24,7 @@ export async function getCollectionById(req, res): Response {
     }
 }
 
-export async function updateCollection(req, res): Response {
+export async function updateCollection(req, res): Promise<Response> {
     try {
         const data = await collectionService.updateCollection(req.body);
 
@@ -34,7 +34,7 @@ export async function updateCollection(req, res): Response {
     }
 }
 
-export async function deleteCollection(req, res): Response {
+export async function deleteCollection(req, res): Promise<Response> {
     const { id } = req.params;
 
     try {

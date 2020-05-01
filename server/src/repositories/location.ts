@@ -2,10 +2,10 @@ import { QueryResult } from 'pg';
 import { Location } from '../models';
 import { db } from '../db';
 
-export async function createLocation(data): Promise<number> {
+export async function createLocation(data): Promise<number | null> {
     const results: QueryResult = await db('locations').insert(data).returning('id');
 
-    if (results.length !== 1) {
+    if (results.length === 0) {
         return null;
     }
 
@@ -14,10 +14,10 @@ export async function createLocation(data): Promise<number> {
     return result;
 }
 
-export async function getLocationById(data): Promise<Location> {
+export async function getLocationById(data): Promise<Location | void> {
     const results: QueryResult = await db('locations').where('id', data.id);
 
-    if (results.length !== 1) {
+    if (results.length === 0) {
         return null;
     }
 
@@ -26,13 +26,25 @@ export async function getLocationById(data): Promise<Location> {
     return result;
 }
 
-export async function updateLocation(data): Promise<Location> {
+export async function getLocationsByCollectionId(data): Promise<Location[] | void> {
+    const results: QueryResult = await db('locations')
+        .where('wanderlist_id', data.id);
+
+    if (results.length === 0) {
+        return null;
+    }
+
+    return results;
+}
+
+
+export async function updateLocation(data): Promise<Location | null> {
     const results: QueryResult = await db('locations')
         .where('id', data.id)
         .update({ ...data })
         .returning('*');
 
-    if (results.length !== 1) {
+    if (results.length === 0) {
         return null;
     }
 
@@ -41,24 +53,24 @@ export async function updateLocation(data): Promise<Location> {
     return result;
 }
 
-export async function deleteLocationById(data): Promise<number> {
+export async function deleteLocationById(data): Promise<number | null> {
     const result: QueryResult = await db('locations')
         .where('id', data.id)
         .del();
 
-    if (result !== 1) {
+    if (result === 0) {
         return null;
     }
 
     return result;
 }
 
-export async function deleteLocationByCollectionId(data): Promise<number> {
+export async function deleteLocationByCollectionId(data): Promise<number | null> {
     const result: QueryResult = await db('locations')
         .where('wanderlist_id', data.id)
         .del();
 
-    if (result !== 1) {
+    if (result === 0) {
         return null;
     }
 

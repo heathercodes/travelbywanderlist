@@ -24,6 +24,7 @@ module.exports = {
                 NODE_ENV: JSON.stringify(process.env.NODE_ENV),
                 MAPBOX_TOKEN: JSON.stringify(process.env.MAPBOX_TOKEN),
                 MAPBOX_STYLES: JSON.stringify(process.env.MAPBOX_STYLES),
+                API_URL: JSON.stringify(process.env.API_URL),
             },
         }),
         new webpack.ProgressPlugin(),

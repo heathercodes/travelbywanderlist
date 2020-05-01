@@ -1,35 +1,45 @@
 /** @jsx jsx */
-import { useState, Fragment } from 'react';
+import {
+    useState,
+    Fragment,
+    useContext,
+    useEffect,
+} from 'react';
 import { jsx } from '@emotion/core';
 import ReactMapGL from 'react-map-gl';
-import MapMarker from '../marker';
-import MapPopup from '../popup';
+import Marker from './components/Marker';
+import Popup from './components/Popup';
+import { WanderlistContext } from '../../provider/wanderlistProvider';
+import { useViewport } from './hooks/useViewport';
+import { useLocation } from './hooks/useLocation';
 
-import useViewport from './deps/useViewport';
-import useLocation from './deps/useLocation';
-import useCurrentLocation from './deps/useCurrentLocation';
-
-export default function WanderlistMap(): JSX.Element {
+export function InteractiveMap(): JSX.Element {
     const { viewport, setViewport } = useViewport();
     const { locations, setLocations } = useLocation();
-    const { currentLocation, setCurrentLocation } = useCurrentLocation();
-
+    const { wanderlists } = useContext(WanderlistContext);
+    const currentLocation = useLocation();
     const [togglePopup, setToggle] = useState();
 
     const handleToggle = (): void => {
         setToggle(!togglePopup);
     };
 
+    useEffect(() => {
+        if (wanderlists.locations) {
+            setLocations(wanderlists.locations);
+        }
+    }, [wanderlists.locations]);
+
     const getLocationDetails = (e): void => {
         const featureName = e.features[0] ? e.features[0].properties.name : '';
         const [longitude, latitude] = e.lngLat;
 
-        setCurrentLocation({
-			[featureName]: {
+        currentLocation.setLocations({
+            [featureName]: {
                 name: featureName,
-				lat: latitude,
-				lng: longitude,
-			},
+                lat: latitude,
+                lng: longitude,
+            },
         });
 
         handleToggle();
@@ -38,10 +48,10 @@ export default function WanderlistMap(): JSX.Element {
     const saveLocation = (): void => {
         setLocations({
             ...locations,
-			...currentLocation,
+            ...currentLocation.locations,
         });
 
-        setCurrentLocation({});
+        currentLocation.setLocations({});
         handleToggle();
     };
 
@@ -49,7 +59,7 @@ export default function WanderlistMap(): JSX.Element {
         <ReactMapGL
             {...viewport}
             width="100vw"
-			height="100vh"
+            height="100vh"
             onViewportChange={(e): void => setViewport(e)}
             mapStyle={process.env.MAPBOX_STYLES}
             mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
@@ -57,11 +67,11 @@ export default function WanderlistMap(): JSX.Element {
         >
             {
                 togglePopup && (
-                    <MapPopup location={Object.values(currentLocation)}>
+                    <Popup location={Object.values(currentLocation.location)}>
                         {
-                            currentLocation ? (
+                            currentLocation.location ? (
                                 <Fragment>
-                                    <h2>{Object.keys(currentLocation)[0]}</h2>
+                                    <h2>{Object.keys(currentLocation.location)[0]}</h2>
                                     <p>Add this location?</p>
                                     <button type="button" onClick={saveLocation}>Yes</button>
                                 </Fragment>
@@ -69,12 +79,12 @@ export default function WanderlistMap(): JSX.Element {
                                 <p>Zoom in to the map to find a location</p>
                             )
                         }
-                    </MapPopup>
+                    </Popup>
                 )
             }
             {
                 Object.values(locations).map((loc) => (
-                    <MapMarker key={`loc-${loc}`} {...loc} />
+                    <Marker key={`loc-${loc.id}`} {...loc} />
                 ))
             }
         </ReactMapGL>

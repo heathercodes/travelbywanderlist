@@ -9,8 +9,13 @@ export async function createLocation(data): Promise<number> {
     return id;
 }
 
-export async function getLocationById(data): Promise<Location> {
+export async function getLocationById(data): Promise<Location | void> {
     const location = await locationRepo.getLocationById(data);
+
+    if (!location) {
+        // TODO this is not how I'm handling errors
+        new Error('issue!')
+    }
 
     return location;
 }

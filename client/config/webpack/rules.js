@@ -1,4 +1,3 @@
-const paths = require('./paths');
 module.exports = [
     {
         test: /\.(t|j)sx?$/,
@@ -16,8 +15,8 @@ module.exports = [
         options: {
             name: '[name]_[hash].[ext]',
             publicPath: '/images/',
-            outputPath: '../images/'
-        }
+            outputPath: '../images/',
+        },
     },
     {
         test: /\.(woff|woff2)$/,

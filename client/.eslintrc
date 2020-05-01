@@ -23,6 +23,7 @@
     "rules": {
         "indent": "off",
         "no-tabs": "off",
+        "import/prefer-default-export": "off",
         "react/jsx-indent": "off",
         "react/jsx-indent-props": "off",
         "react/jsx-fragments": "off",
