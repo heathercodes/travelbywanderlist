@@ -28,15 +28,15 @@
         "react/jsx-fragments": "off",
         "@typescript-eslint/no-explicit-any": "off",
         "react/jsx-props-no-spreading": "off",
-        "@typescript-eslint/no-angle-bracket-type-assertion": "off",
-        "@typescript-eslint/no-object-literal-type-assertion": "off",
+        "@typescript-eslint/no-angle-bracket-type-assertion": "off",	
+        "@typescript-eslint/no-object-literal-type-assertion": "off",	
         "react/jsx-filename-extension": [2, { "extensions": [".js", ".ts", ".tsx"] }],
         "import/no-extraneous-dependencies": [
             "error",
             {
                 "devDependencies": ["**/test/**/**", "**/__tests__/**/**"],
                 "optionalDependencies": false,
-                "peerDependencies": false
+                "peerDependencies": false,
             }
         ]
     }
