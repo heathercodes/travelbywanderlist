@@ -1,5 +1,5 @@
 // TODO refactor into class
-import { Collection } from '../models';
+import { Collection, Location } from '../models';
 import * as collectionRepo from '../repositories/collection';
 import * as locationRepo from '../repositories/location';
 
@@ -8,12 +8,10 @@ export async function createCollection(data): Promise<number> {
     const collectionId = await collectionRepo.createCollection(collection);
 
     if (data.locations) {
-        const locationIds = await Promise.all(
+        await Promise.all(
             data.locations.map((loc) => locationRepo
                 .updateLocation({ wanderlist_id: collectionId, ...loc })),
         );
-
-        return { collectionId, locationIds };
     }
 
     return collectionId;
@@ -21,27 +19,34 @@ export async function createCollection(data): Promise<number> {
 
 export async function getCollectionById(data): Promise<Collection> {
     const collection = await collectionRepo.getCollectionById(data);
+    const locations = await locationRepo.getLocationsByCollectionId(data);
 
-    return collection;
+    if (locations) {
+        return { ...collection, locations };
+    }
+
+    return { ...collection };
 }
 
 export async function updateCollection(data): Promise<Collection> {
     const { collection } = data;
     const updatedCollection = await collectionRepo.updateCollection(collection);
 
-    if (data.locations) {
-        await Promise.all(
-            data.locations.map((loc) => {
-                if (!loc.id) {
-                    return locationRepo.createLocation({ wanderlist_id: collection.id, ...loc });
-                }
+    const locations: Location[] = await Promise.all(
+        data.locations.map((loc) => {
+            if (!loc.id) {
+                return locationRepo.createLocation({ wanderlist_id: collection.id, ...loc });
+            }
 
-                return locationRepo.updateLocation({ wanderlist_id: collection.id, ...loc });
-            }),
-        );
+            return locationRepo.updateLocation({ wanderlist_id: collection.id, ...loc });
+        }),
+    );
+
+    if (locations) {
+        return { ...updatedCollection, locations };
     }
 
-    return updatedCollection;
+    return { ...updatedCollection };
 }
 
 export async function deleteCollection(data): Promise<number> {

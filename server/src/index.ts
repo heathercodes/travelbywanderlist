@@ -1,15 +1,15 @@
 import express from 'express';
 import dotenv from 'dotenv';
-import path from 'path';
+import cors from 'cors';
 import { router } from './routes';
 
 dotenv.config();
 const PORT = 9000;
 const app = express();
 
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, '../client')));
 app.use(router);
 
 const server = app.listen(PORT, () => {

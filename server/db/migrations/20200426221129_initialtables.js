@@ -32,8 +32,8 @@ exports.up = function(knex) {
             .references('id')
             .inTable('wanderlists');
         table.string('name');
-        table.integer('latitude')
-        table.integer('longitude')
+        table.float8('latitude')
+        table.float8('longitude')
         table.text('image_url')
         table.text('description')
     });

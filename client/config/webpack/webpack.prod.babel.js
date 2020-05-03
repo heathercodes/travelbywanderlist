@@ -6,7 +6,7 @@ const rules = require('./rules');
 module.exports = {
     mode: 'production',
     output: {
-        filename: `[name].[hash].js`,
+        filename: '[name].[hash].js',
         path: paths.outputPath,
         chunkFilename: '[name].[chunkhash].js',
     },

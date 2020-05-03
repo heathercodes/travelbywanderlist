@@ -3,7 +3,7 @@ import { Response } from 'express';
 import * as locationService from '../service/location';
 // const { NotFoundError } = require('../../utils/errors');
 
-export async function getLocationById(req, res): Response {
+export async function getLocationById(req, res): Promise<Response> {
     const { id } = req.params;
 
     try {
@@ -15,7 +15,7 @@ export async function getLocationById(req, res): Response {
     }
 }
 
-export async function updateLocation(req, res): Response {
+export async function updateLocation(req, res): Promise<Response> {
     const { id } = req.params;
 
     try {
@@ -27,7 +27,7 @@ export async function updateLocation(req, res): Response {
     }
 }
 
-export async function deleteLocationById(req, res): Response {
+export async function deleteLocationById(req, res): Promise<Response> {
     const { id } = req.params;
 
     try {
@@ -39,7 +39,7 @@ export async function deleteLocationById(req, res): Response {
     }
 }
 
-export async function createLocation(req, res): Response {
+export async function createLocation(req, res): Promise<Response> {
     const { name, lat, lng } = req.body;
 
     try {

@@ -2,15 +2,10 @@
 import React from 'react';
 import { jsx } from '@emotion/core';
 import { Popup } from 'react-map-gl';
-
-interface LocationDetails {
-  name: string;
-  lat: number;
-  lng: number;
-}
+import { types } from '../../../utils';
 
 interface PopupProps {
-  location: LocationDetails[];
+  location: types.LocationDetails[];
 }
 
 export default function MapPopup(

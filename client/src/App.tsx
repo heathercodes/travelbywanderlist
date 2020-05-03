@@ -1,25 +1,25 @@
 /** @jsx jsx */
-import React, { Fragment } from 'react';
-import { Global, css, jsx } from '@emotion/core';
-import emotionNormalize from 'emotion-normalize';
-import WanderlistMap from './map';
-
-const body = css`
-    ${emotionNormalize}
-    html,
-    body {
-        font-family: 'Josefin Sans', sans-serif;
-        background-color: #F8F4ED;
-    }
-`;
+import * as React from 'react';
+import { jsx } from '@emotion/core';
+import { Route, Switch } from 'react-router-dom';
+import { WanderlistProvider } from './provider/wanderlistProvider';
+import { Login } from './components/login';
+import { InteractiveMap } from './components/map';
 
 export default function App(): JSX.Element {
     return (
-        <Fragment>
-            <Global
-                styles={body}
-            />
-            <WanderlistMap />
-        </Fragment>
+        <Switch>
+            <Route path="/map">
+                <WanderlistProvider>
+                    <InteractiveMap />
+                </WanderlistProvider>
+            </Route>
+
+            <Route path="/">
+                <WanderlistProvider>
+                    <Login />
+                </WanderlistProvider>
+            </Route>
+        </Switch>
     );
 }
