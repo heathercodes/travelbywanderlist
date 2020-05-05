@@ -20,10 +20,6 @@ export function InteractiveMap(): JSX.Element {
     const currentLocation = useLocation();
     const [togglePopup, setToggle] = useState();
 
-    const handleToggle = (): void => {
-        setToggle(!togglePopup);
-    };
-
     useEffect(() => {
         if (wanderlists.locations) {
             setLocations(wanderlists.locations);
@@ -34,25 +30,23 @@ export function InteractiveMap(): JSX.Element {
         const featureName = e.features[0] ? e.features[0].properties.name : '';
         const [longitude, latitude] = e.lngLat;
 
-        currentLocation.setLocations({
-            [featureName]: {
-                name: featureName,
-                lat: latitude,
-                lng: longitude,
-            },
-        });
+        currentLocation.setLocations([{
+            name: featureName,
+            latitude,
+            longitude,
+        }]);
 
-        handleToggle();
+        setToggle(!togglePopup);
     };
 
     const saveLocation = (): void => {
-        setLocations({
-            ...locations,
+        setLocations((prevLocations) => [
             ...currentLocation.locations,
-        });
+            ...prevLocations,
+        ]);
 
-        currentLocation.setLocations({});
-        handleToggle();
+        currentLocation.setLocations([]);
+        setToggle(!togglePopup);
     };
 
     return (
@@ -67,11 +61,11 @@ export function InteractiveMap(): JSX.Element {
         >
             {
                 togglePopup && (
-                    <Popup location={Object.values(currentLocation.location)}>
+                    <Popup location={currentLocation.locations[0]}>
                         {
-                            currentLocation.location ? (
+                            currentLocation.locations.length ? (
                                 <Fragment>
-                                    <h2>{Object.keys(currentLocation.location)[0]}</h2>
+                                    <h2>{currentLocation.locations[0].name}</h2>
                                     <p>Add this location?</p>
                                     <button type="button" onClick={saveLocation}>Yes</button>
                                 </Fragment>
@@ -83,7 +77,7 @@ export function InteractiveMap(): JSX.Element {
                 )
             }
             {
-                Object.values(locations).map((loc) => (
+                locations.length && locations.map((loc) => (
                     <Marker key={`loc-${loc.id}`} {...loc} />
                 ))
             }

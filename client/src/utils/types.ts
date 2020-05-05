@@ -29,8 +29,8 @@ export interface Location {
 }
 
 export interface LocationState {
-    locations: Location;
-    setLocations: Dispatch<SetStateAction<Location>>;
+    locations: Location[];
+    setLocations: Dispatch<SetStateAction<Location[]>>;
 }
 
 export interface Viewport {

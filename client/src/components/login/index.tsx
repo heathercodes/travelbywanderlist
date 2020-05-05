@@ -14,7 +14,7 @@ export function Login(): JSX.Element {
     const { setWanderlists } = useContext(WanderlistContext);
     const history = useHistory();
 
-    const authHandler = async (): void => {
+    const authHandler = async (): void => { // eslint-disable-line
         try {
             setLoading(true);
 
@@ -25,7 +25,8 @@ export function Login(): JSX.Element {
 
             history.push(`/map/${wanderlistId}`);
             setWanderlists(wanderlist.data);
-            setLoading(false);
+
+            return (): void => setLoading(false);
         } catch (err) {
             setLoading(false);
             showError(err.message);

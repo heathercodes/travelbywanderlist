@@ -6,8 +6,8 @@ import marker from '../../../images/marker.png';
 export default function MapMarker({ latitude, longitude }: types.LocationDetails): JSX.Element {
     return (
 		<Marker
-			longitude={latitude}
-			latitude={longitude}
+			longitude={longitude}
+			latitude={latitude}
 			offsetLeft={-20}
 			offsetTop={-35}
 		>

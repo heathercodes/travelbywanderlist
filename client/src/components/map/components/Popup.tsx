@@ -5,7 +5,7 @@ import { Popup } from 'react-map-gl';
 import { types } from '../../../utils';
 
 interface PopupProps {
-  location: types.LocationDetails[];
+  location: types.LocationDetails;
 }
 
 export default function MapPopup(
@@ -13,8 +13,8 @@ export default function MapPopup(
 ): JSX.Element {
   return (
       <Popup
-          longitude={location[0].lng}
-          latitude={location[0].lat}
+          longitude={location.longitude}
+          latitude={location.latitude}
           closeOnClick
           tipSize={7}
       >
