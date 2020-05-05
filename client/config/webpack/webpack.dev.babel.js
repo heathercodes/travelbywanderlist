@@ -5,6 +5,7 @@ const rules = require('./rules');
 
 module.exports = {
     mode: 'development',
+    // devtool: 'inline-source-map',
     output: {
         filename: '[name].bundle.js',
         path: paths.outputPath,
@@ -32,5 +33,4 @@ module.exports = {
     plugins: [
         new webpack.HotModuleReplacementPlugin(),
     ],
-    // devtool: 'inline-source-map'
 };

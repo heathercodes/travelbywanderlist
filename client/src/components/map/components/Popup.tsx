@@ -2,7 +2,7 @@
 import React from 'react';
 import { jsx } from '@emotion/core';
 import { Popup } from 'react-map-gl';
-import { types } from '../../../utils';
+import * as types from '../../../utils/types';
 
 interface PopupProps {
   location: types.LocationDetails;

@@ -7,8 +7,8 @@ export interface UserAuthState {
 
 export interface UserAuthHandler {
     auth: UserAuthState;
-    setAuthStatus(status: string): void;
-    setUnauthStatus(): void;
+    setAuthStatus: ((authState: UserAuthState) => void) | null;
+    setUnauthStatus: (() => void) | null;
 }
 
 export interface ErrorHandler {

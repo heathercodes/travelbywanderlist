@@ -5,7 +5,8 @@ import { jsx } from '@emotion/core';
 import { ErrorMessage } from '../generic/ErrorMessage';
 import { useErrorHandler } from '../generic/hooks/useErrorHandler';
 import { WanderlistContext } from '../../provider/wanderlistProvider';
-import { fetchAPI, validateLoginForm } from '../../utils';
+import { fetchAPI } from '../../utils/fetch';
+import { validateLoginForm } from '../../utils/login-validation';
 
 export function Login(): JSX.Element {
     const [wanderlistId, setWanderlistId] = useState('');

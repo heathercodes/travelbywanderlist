@@ -1,5 +1,5 @@
 import React from 'react';
-import { types } from '../../../utils';
+import * as types from '../../../utils/types';
 
 function useErrorHandler(initialState: string | null): types.ErrorHandler {
     const [error, setError] = React.useState(initialState);

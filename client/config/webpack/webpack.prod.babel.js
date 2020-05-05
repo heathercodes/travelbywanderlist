@@ -5,6 +5,7 @@ const rules = require('./rules');
 
 module.exports = {
     mode: 'production',
+    devtool: 'source-map',
     output: {
         filename: '[name].[hash].js',
         path: paths.outputPath,
@@ -12,6 +13,11 @@ module.exports = {
     },
     module: {
         rules,
+    },
+    externals: {
+        mapbox: 'mapbox-gl',
+        react: 'React',
+        'react-dom': 'ReactDOM',
     },
     plugins: [
         new BrotliPlugin({

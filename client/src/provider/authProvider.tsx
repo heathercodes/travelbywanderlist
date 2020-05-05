@@ -1,6 +1,8 @@
 import React, { createContext } from 'react';
 import { useAuthHandler } from './hooks/useAuthHandler';
-import { getStoredUserAuth, constants, types } from '../utils';
+import { getStoredUserAuth } from '../utils/local-storage-helpers';
+import * as constants from '../utils/constants';
+import * as types from '../utils/types';
 
 export const AuthContext = createContext({
     auth: constants.DEFAULT_USER_AUTH,
@@ -8,9 +10,9 @@ export const AuthContext = createContext({
     setUnauthStatus: null,
 });
 
-export function AuthProvider({ children }: React.ReactNode): types.UserAuthHandler {
+export function AuthProvider({ children }: any): JSX.Element {
     const storedAuth = getStoredUserAuth();
-    const authContext = useAuthHandler(storedAuth);
+    const authContext: types.UserAuthHandler = useAuthHandler(storedAuth);
 
     return <AuthContext.Provider value={authContext}>{children}</AuthContext.Provider>;
 }

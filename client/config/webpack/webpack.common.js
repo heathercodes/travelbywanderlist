@@ -14,7 +14,6 @@ module.exports = {
         rules,
     },
     resolve: {
-        modules: ['src', 'node_modules'],
         extensions: ['.ts', '.tsx', '.js', '.png'],
     },
     plugins: [
@@ -42,7 +41,7 @@ module.exports = {
         }),
     ],
     externals: {
-        mapbox: 'mapbox-gl'
+        mapbox: 'mapbox-gl',
     },
     optimization: {
         minimize: true,
