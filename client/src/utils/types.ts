@@ -16,16 +16,12 @@ export interface ErrorHandler {
     showError(msg: string): void;
 }
 
-export interface LocationDetails {
+export interface Location {
 	name: string;
     lat: number;
     lng: number;
     imageUrl?: string;
     description?: string;
-}
-
-export interface Location {
-    [name: string]: LocationDetails;
 }
 
 export interface LocationState {
@@ -44,8 +40,12 @@ export interface ViewportState {
     setViewport: Dispatch<SetStateAction<Viewport>>;
 }
 
-export interface Wanderlist {
+export interface Collection {
     id: number;
     name: string;
-    locations?: Location[];
+}
+
+export interface Wanderlist {
+    collection: Collection;
+    locations: Locations[];
 }

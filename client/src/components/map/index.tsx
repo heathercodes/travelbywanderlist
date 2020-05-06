@@ -9,6 +9,7 @@ import { jsx } from '@emotion/core';
 import ReactMapGL from 'react-map-gl';
 import Marker from './components/Marker';
 import Popup from './components/Popup';
+import { WanderlistEditor } from './components/WanderlistEditor';
 import { WanderlistContext } from '../../provider/wanderlistProvider';
 import { useViewport } from './hooks/useViewport';
 import { useLocation } from './hooks/useLocation';
@@ -18,7 +19,7 @@ export function InteractiveMap(): JSX.Element {
     const { locations, setLocations } = useLocation();
     const { wanderlists } = useContext(WanderlistContext);
     const currentLocation = useLocation();
-    const [togglePopup, setToggle] = useState();
+    const [openPopup, handlePopup] = useState(false);
 
     useEffect(() => {
         if (wanderlists.locations) {
@@ -26,8 +27,13 @@ export function InteractiveMap(): JSX.Element {
         }
     }, [wanderlists.locations]);
 
+    const closePopup = (): void => {
+        handlePopup(false);
+        currentLocation.setLocations([]);
+    };
+
     const getLocationDetails = (e): void => {
-        const featureName = e.features[0] ? e.features[0].properties.name : '';
+        const featureName = e.features[0].properties?.name ? e.features[0].properties.name : 'Unnamed Location';
         const [longitude, latitude] = e.lngLat;
 
         currentLocation.setLocations([{
@@ -36,7 +42,7 @@ export function InteractiveMap(): JSX.Element {
             longitude,
         }]);
 
-        setToggle(!togglePopup);
+        handlePopup(!openPopup);
     };
 
     const saveLocation = (): void => {
@@ -45,8 +51,7 @@ export function InteractiveMap(): JSX.Element {
             ...prevLocations,
         ]);
 
-        currentLocation.setLocations([]);
-        setToggle(!togglePopup);
+        closePopup();
     };
 
     return (
@@ -59,26 +64,19 @@ export function InteractiveMap(): JSX.Element {
             mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
             onClick={getLocationDetails}
         >
+            <WanderlistEditor locations={locations} />
             {
-                togglePopup && (
-                    <Popup location={currentLocation.locations[0]}>
-                        {
-                            currentLocation.locations.length ? (
-                                <Fragment>
-                                    <h2>{currentLocation.locations[0].name}</h2>
-                                    <p>Add this location?</p>
-                                    <button type="button" onClick={saveLocation}>Yes</button>
-                                </Fragment>
-                            ) : (
-                                <p>Zoom in to the map to find a location</p>
-                            )
-                        }
+                openPopup && (
+                    <Popup location={currentLocation.locations[0]} handleClose={closePopup}>
+                        <h2>{currentLocation.locations[0].name}</h2>
+                        <p>Add this location?</p>
+                        <button type="button" onClick={saveLocation}>Yes</button>
                     </Popup>
                 )
             }
             {
                 locations.length && locations.map((loc) => (
-                    <Marker key={`loc-${loc.id}`} {...loc} />
+                    <Marker key={`${loc.longitude}-${loc.latitude}`} {...loc} />
                 ))
             }
         </ReactMapGL>

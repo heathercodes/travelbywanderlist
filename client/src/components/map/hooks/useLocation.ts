@@ -1,10 +1,10 @@
 import { useState } from 'react';
-import * as types from '../../../utils/types';
+import { LocationState, Location } from '../../../utils/types';
 
-const useLocation = (overrides: Partial<types.Location[]> = []): types.LocationState => {
+const useLocation = (overrides: Partial<Location[]> = []): LocationState => {
     const defaultLocations = [];
 
-    const [locations, setLocations] = useState<types.Location[] | {}>(
+    const [locations, setLocations] = useState<Location[] | {}>(
       [...defaultLocations, ...overrides],
     );
 

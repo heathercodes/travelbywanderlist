@@ -3,7 +3,7 @@ import { Location } from '../models';
 import { db } from '../db';
 
 export async function createLocation(data): Promise<number | null> {
-    const results: QueryResult = await db('locations').insert(data).returning('id');
+    const results: QueryResult = await db('locations').insert(data).returning('*');
 
     if (results.length === 0) {
         return null;

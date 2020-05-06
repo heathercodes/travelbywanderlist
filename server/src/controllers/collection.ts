@@ -26,6 +26,7 @@ export async function getCollectionById(req, res): Promise<Response> {
 
 export async function updateCollection(req, res): Promise<Response> {
     try {
+        console.log(req.body);
         const data = await collectionService.updateCollection(req.body);
 
         return res.status(200).json({ data });
