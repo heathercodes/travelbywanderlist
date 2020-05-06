@@ -14,5 +14,9 @@ export interface Collection {
     name: string;
     createdAt: Date;
     updatedAt: Date;
+}
+
+export interface Wanderlist {
+    collection: Collection;
     locations?: Location[];
 }

@@ -1,18 +1,18 @@
 import React from 'react';
-import * as constants from '../../utils/constants';
-import * as types from '../../utils/types';
+import { DEFAULT_USER_AUTH } from '../../utils/constants';
+import { UserAuthState, UserAuthHandler } from '../../utils/types';
 
-export function useAuthHandler(initialState: types.UserAuthState): types.UserAuthHandler {
+export function useAuthHandler(initialState: UserAuthState): UserAuthHandler {
     const [auth, setAuth] = React.useState(initialState);
 
-    const setAuthStatus = (userAuth: types.UserAuthState): void => {
+    const setAuthStatus = (userAuth: UserAuthState): void => {
         window.localStorage.setItem('UserAuth', JSON.stringify(userAuth));
         setAuth(userAuth);
     };
 
     const setUnauthStatus = (): void => {
         window.localStorage.clear();
-        setAuth(constants.DEFAULT_USER_AUTH);
+        setAuth(DEFAULT_USER_AUTH);
     };
 
     return {

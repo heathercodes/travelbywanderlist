@@ -1,11 +1,14 @@
 import React, { createContext, useState } from 'react';
-import * as types from '../utils/types';
+import { Wanderlist } from '../utils/types';
 
-export const WanderlistContext = createContext({});
+export const WanderlistContext = createContext({
+    collection: {},
+    locations: [],
+});
 
-export function WanderlistProvider({ children }: React.ReactNode): types.Wanderlist {
-    const [wanderlists, setWanderlists] = useState<types.Wanderlist | {}>({});
-    const wanderlistsContext = {
+export function WanderlistProvider({ children }: React.ReactNode): JSX.Element {
+    const [wanderlists, setWanderlists] = useState<Wanderlist | {}>({});
+    const wanderlistsContext: Wanderlist = {
         wanderlists,
         setWanderlists,
     };

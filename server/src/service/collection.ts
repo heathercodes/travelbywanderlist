@@ -1,5 +1,5 @@
 // TODO refactor into class
-import { Collection, Location } from '../models';
+import { Location, Wanderlist } from '../models';
 import * as collectionRepo from '../repositories/collection';
 import * as locationRepo from '../repositories/location';
 
@@ -17,36 +17,37 @@ export async function createCollection(data): Promise<number> {
     return collectionId;
 }
 
-export async function getCollectionById(data): Promise<Collection> {
+export async function getCollectionById(data): Promise<Wanderlist> {
     const collection = await collectionRepo.getCollectionById(data);
     const locations = await locationRepo.getLocationsByCollectionId(data);
 
     if (locations) {
-        return { ...collection, locations };
+        return { collection, locations };
     }
 
-    return { ...collection };
+    return { collection };
 }
 
-export async function updateCollection(data): Promise<Collection> {
+export async function updateCollection(data): Promise<Wanderlist> {
     const { collection } = data;
     const updatedCollection = await collectionRepo.updateCollection(collection);
-
+    console.log(data.locations);
     const locations: Location[] = await Promise.all(
         data.locations.map((loc) => {
             if (!loc.id) {
+                console.log(loc);
                 return locationRepo.createLocation({ wanderlist_id: collection.id, ...loc });
             }
-
+            console.log(loc);
             return locationRepo.updateLocation({ wanderlist_id: collection.id, ...loc });
         }),
     );
 
     if (locations) {
-        return { ...updatedCollection, locations };
+        return { collection: updatedCollection, locations };
     }
 
-    return { ...updatedCollection };
+    return { collection: updatedCollection };
 }
 
 export async function deleteCollection(data): Promise<number> {

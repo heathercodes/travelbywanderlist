@@ -2,23 +2,25 @@
 import React from 'react';
 import { jsx } from '@emotion/core';
 import { Popup } from 'react-map-gl';
-import * as types from '../../../utils/types';
+import { Location } from '../../../utils/types';
 
 interface PopupProps {
-  location: types.LocationDetails;
+  location: Location;
+  handleClose(open: boolean): void;
 }
 
 export default function MapPopup(
-  { location, children }: React.PropsWithChildren<PopupProps>,
+  { location, handleClose, children }: React.PropsWithChildren<PopupProps>,
 ): JSX.Element {
   return (
       <Popup
+          closeButton={false}
           longitude={location.longitude}
           latitude={location.latitude}
-          closeOnClick
           tipSize={7}
       >
         <div>
+          <button type="button" onClick={(): void => handleClose()}>Close</button>
           { children }
         </div>
       </Popup>

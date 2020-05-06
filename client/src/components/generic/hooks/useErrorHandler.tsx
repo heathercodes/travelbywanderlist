@@ -1,7 +1,7 @@
 import React from 'react';
-import * as types from '../../../utils/types';
+import { ErrorHandler } from '../../../utils/types';
 
-function useErrorHandler(initialState: string | null): types.ErrorHandler {
+function useErrorHandler(initialState: string | null): ErrorHandler {
     const [error, setError] = React.useState(initialState);
 
     const showError = (errorMessage: string | null): void => {
