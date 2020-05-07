@@ -4,9 +4,9 @@ import * as collectionService from '../service/collection';
 
 export async function createCollection(req, res): Promise<Response> {
     try {
-        const collectionId = await collectionService.createCollection(req.body);
+        const data = await collectionService.createCollection(req.body);
 
-        return res.status(200).json({ data: `Wanderlist created ${collectionId}` });
+        return res.status(200).json({ data });
     } catch (error) {
         return res.status(422).json({ error });
     }

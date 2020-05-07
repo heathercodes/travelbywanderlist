@@ -3,7 +3,7 @@ import * as React from 'react';
 import { jsx } from '@emotion/core';
 import { Route, Switch } from 'react-router-dom';
 import { WanderlistProvider } from './provider/wanderlistProvider';
-import { Login } from './components/login';
+import { LandingPage } from './components/login';
 import { InteractiveMap } from './components/map';
 
 export default function App(): JSX.Element {
@@ -17,7 +17,7 @@ export default function App(): JSX.Element {
 
             <Route path="/">
                 <WanderlistProvider>
-                    <Login />
+                    <LandingPage />
                 </WanderlistProvider>
             </Route>
         </Switch>

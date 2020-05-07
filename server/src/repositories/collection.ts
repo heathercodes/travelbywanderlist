@@ -2,8 +2,8 @@ import { QueryResult } from 'pg';
 import { Collection } from '../models';
 import { db } from '../db';
 
-export async function createCollection(data): Promise<number> {
-    const results: QueryResult = await db('wanderlists').insert(data).returning('id');
+export async function createCollection(data): Promise<Collection> {
+    const results: QueryResult = await db('wanderlists').insert(data).returning('*');
 
     if (results.length !== 1) {
         return null;

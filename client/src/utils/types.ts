@@ -47,5 +47,5 @@ export interface Collection {
 
 export interface Wanderlist {
     collection: Collection;
-    locations: Locations[];
+    locations: Location[];
 }
