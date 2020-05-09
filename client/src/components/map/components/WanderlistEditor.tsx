@@ -24,11 +24,10 @@ export function WanderlistEditor({ locations }: WanderlistEditorProps): JSX.Elem
     const { wanderlists, setWanderlists } = useContext(WanderlistContext);
 
     const saveWanderlist = async (): void => {
-        // eslint-disable-line
         try {
             setSaving(true);
 
-            const updatedWanderlist = await fetchAPI('api/collection', 'put', {
+            const updatedWanderlist = await fetchAPI('collection', 'put', {
                 ...wanderlists,
                 locations,
             });

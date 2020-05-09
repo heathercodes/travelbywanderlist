@@ -49,3 +49,7 @@ export interface Wanderlist {
     collection: Collection;
     locations: Location[];
 }
+
+export interface CurrentLocation {
+    location: Location;
+}

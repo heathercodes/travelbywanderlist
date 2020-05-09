@@ -20,7 +20,7 @@ export function LandingPage(): JSX.Element {
     useEffect(() => {
         const loginRequest = {
             method: 'get',
-            url: `/api/collection/${wanderlistId}`,
+            url: `collection/${wanderlistId}`,
         };
 
         setRequest(loginRequest);
@@ -29,7 +29,7 @@ export function LandingPage(): JSX.Element {
     useEffect(() => {
         const registerRequest = {
             method: 'post',
-            url: '/api/collection',
+            url: 'collection',
             body: { collection: { name: wanderlistName } },
         };
 
@@ -37,7 +37,6 @@ export function LandingPage(): JSX.Element {
     }, [wanderlistName]);
 
     const authHandler = async (): void => {
-        // eslint-disable-line
         try {
             setLoading(true);
 
