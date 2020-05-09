@@ -1,32 +1,36 @@
 // handles the joins and business logic for getting the data ready
 // TODO refactor into class
-import { Location } from '../models';
+import { Location, UpdateLocationReq } from '../models';
 import * as locationRepo from '../repositories/location';
 
-export async function createLocation(data): Promise<number> {
-    const id = await locationRepo.createLocation(data);
+export async function createLocation(data: {
+    name: string;
+    latitude: number;
+    longitude: number;
+}): Promise<Location> {
+    const location = await locationRepo.createLocation(data);
 
-    return id;
+    return location;
 }
 
-export async function getLocationById(data): Promise<Location | void> {
+export async function getLocationById(data: { id: number }): Promise<Location | void> {
     const location = await locationRepo.getLocationById(data);
 
     if (!location) {
         // TODO this is not how I'm handling errors
-        new Error('issue!')
+        new Error('issue!');
     }
 
     return location;
 }
 
-export async function updateLocation(data): Promise<Location> {
+export async function updateLocation(data: UpdateLocationReq): Promise<Location> {
     const location = await locationRepo.updateLocation(data);
 
     return location;
 }
 
-export async function deleteLocationById(data): Promise<number> {
+export async function deleteLocationById(data: { id: number }): Promise<number> {
     const id = await locationRepo.deleteLocationById(data);
 
     return id;

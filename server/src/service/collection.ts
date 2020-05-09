@@ -1,24 +1,25 @@
 // TODO refactor into class
-import { Location, Wanderlist } from '../models';
+import { Location, Wanderlist, CollectionUpdateReq } from '../models';
 import * as collectionRepo from '../repositories/collection';
 import * as locationRepo from '../repositories/location';
 
-export async function createCollection(data): Promise<Wanderlist> {
+export async function createCollection(data: CollectionUpdateReq): Promise<Wanderlist> {
     const { collection } = data;
     const newCollection = await collectionRepo.createCollection(collection);
 
-    let locations = []
+    let locations: Location[] = [];
     if (data.locations) {
         locations = await Promise.all(
-            data.locations.map((loc) => locationRepo
-                .updateLocation({ wanderlist_id: newCollection.id, ...loc })),
+            data.locations.map((loc: Location) =>
+                locationRepo.updateLocation({ wanderlist_id: newCollection.id, ...loc })
+            )
         );
     }
 
     return { collection: newCollection, locations };
 }
 
-export async function getCollectionById(data): Promise<Wanderlist> {
+export async function getCollectionById(data: { id: number }): Promise<Wanderlist> {
     const collection = await collectionRepo.getCollectionById(data);
     const locations = await locationRepo.getLocationsByCollectionId(data);
 
@@ -29,17 +30,23 @@ export async function getCollectionById(data): Promise<Wanderlist> {
     return { collection };
 }
 
-export async function updateCollection(data): Promise<Wanderlist> {
+export async function updateCollection(data: CollectionUpdateReq): Promise<Wanderlist> {
     const { collection } = data;
     const updatedCollection = await collectionRepo.updateCollection(collection);
-    const locations: Location[] = await Promise.all(
-        data.locations.map((loc) => {
-            if (!loc.id) {
+
+    let locations: Location[] = [];
+
+    if (data.locations) {
+        locations = await Promise.all(
+            data.locations.map((loc: Location) => {
+                if (loc.id) {
+                    return locationRepo.updateLocation({ wanderlist_id: collection.id, ...loc });
+                }
+
                 return locationRepo.createLocation({ wanderlist_id: collection.id, ...loc });
-            }
-            return locationRepo.updateLocation({ wanderlist_id: collection.id, ...loc });
-        }),
-    );
+            })
+        );
+    }
 
     if (locations) {
         return { collection: updatedCollection, locations };
@@ -48,7 +55,7 @@ export async function updateCollection(data): Promise<Wanderlist> {
     return { collection: updatedCollection };
 }
 
-export async function deleteCollection(data): Promise<number> {
+export async function deleteCollection(data: { id: number }): Promise<number> {
     await locationRepo.deleteLocationByCollectionId({ id: data.id });
 
     const id = await collectionRepo.deleteCollection(data);

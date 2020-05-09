@@ -1,11 +1,13 @@
+import { Request } from 'express';
+
 export interface Location {
     id: number;
-    wanderlist_id: number;
+    wanderlist_id: string;
     name: string;
     latitude: number;
     longitude: number;
     image_url?: string;
-    description?: number;
+    description?: string;
 }
 
 export interface Collection {
@@ -19,4 +21,62 @@ export interface Collection {
 export interface Wanderlist {
     collection: Collection;
     locations?: Location[];
+}
+
+export interface UpdateLocationReq {
+    id: number;
+    name?: string;
+    latitude?: number;
+    longitude?: number;
+    description?: string;
+    image_url?: string;
+}
+
+export interface LocationRequest extends Request {
+    body: {
+        name: string;
+        latitude: number;
+        longitude: number;
+        description?: string;
+        image_url?: string;
+    };
+}
+
+export interface CollectionRequest extends Request {
+    body: {
+        collection: {
+            id: number;
+            name: string;
+        };
+        locations: {
+            id: number;
+            name: string;
+            latitude: number;
+            longitude: number;
+            description?: string;
+            image_url?: string;
+            wanderlist_id: string;
+        }[];
+    };
+}
+
+export interface CollectionUpdateReq {
+    collection: {
+        id: number;
+        name: string;
+    };
+    locations?: {
+        id: number;
+        name: string;
+        latitude: number;
+        longitude: number;
+        description?: string;
+        image_url?: string;
+        wanderlist_id: string;
+    }[];
+}
+
+export interface CollectionUpdate {
+    id: number;
+    name?: string;
 }

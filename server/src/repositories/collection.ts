@@ -1,56 +1,36 @@
-import { QueryResult } from 'pg';
-import { Collection } from '../models';
+// import { QueryResult } from 'pg';
+import { Collection, CollectionUpdate } from '../models';
 import { db } from '../db';
 
-export async function createCollection(data): Promise<Collection> {
-    const results: QueryResult = await db('wanderlists').insert(data).returning('*');
-
-    if (results.length !== 1) {
-        return null;
-    }
-
+export async function createCollection(data: CollectionUpdate): Promise<Collection> {
+    const results = await db('wanderlists').insert(data).returning('*');
     const result = results[0];
 
     return result;
 }
 
-export async function getCollectionById(data): Promise<Collection> {
-    const results: QueryResult = await db('wanderlists').where('id', data.id);
-
-    if (results.length !== 1) {
-        return null;
-    }
-
+export async function getCollectionById(data: { id: number }): Promise<Collection> {
+    const results = await db('wanderlists').where('id', data.id);
     const result = results[0];
 
     return result;
 }
 
-export async function updateCollection(data): Promise<Collection> {
+export async function updateCollection(data: CollectionUpdate): Promise<Collection> {
     const { id } = data;
 
-    const results: QueryResult = await db('wanderlists')
+    const results = await db('wanderlists')
         .where('id', id)
         .update({ ...data })
         .returning('*');
 
-    if (results.length !== 1) {
-        return null;
-    }
-
     const result = results[0];
 
     return result;
 }
 
-export async function deleteCollection(data): Promise<number> {
-    const result: QueryResult = await db('wanderlists')
-        .where('id', data.id)
-        .del();
-
-    if (result !== 1) {
-        return null;
-    }
+export async function deleteCollection(data: { id: number }): Promise<number> {
+    const result = await db('wanderlists').where('id', data.id).del();
 
     return result;
 }

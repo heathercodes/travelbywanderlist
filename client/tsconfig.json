@@ -1,24 +1,20 @@
 {
     "compilerOptions": {
+        "lib": ["es2015", "es2016", "es2017"],
+        "module": "commonjs",
+        "target": "es6",
         "jsx": "react",
-        "rootDir": "./src",
-        "outDir": "./dist",
-        "lib": [ "es2016", "es2017", "dom", "es2017.object" ],
-        // "downlevelIteration": true, // for supporting Object.entries
-        "esModuleInterop": true,
         "moduleResolution": "node",
-        "allowSyntheticDefaultImports": true,
-        "sourceMap": true,          // allow sourcemap support
-        "module": "commonjs",            // specify module code generation
-        "target": "es6",            // specify ECMAScript target version
-        "allowJs": true             // allow a partial TypeScript and JavaScript codebase
+        "esModuleInterop": true,
+        "preserveConstEnums": true,
+        "removeComments": true,
+        "resolveJsonModule": true,
+        "allowJs": true,
+        "preserveWatchOutput": true,
+        "types": ["node"],
+        "outDir": "dist",
+        "baseUrl": "."
     },
-    "include": [
-        "./src/**/*",
-    ],
-    "exclude": [
-        "dist",
-        "node_modules",
-        "__tests__"
-    ]
+    "include": ["./src/**/*"],
+    "exclude": ["dist", "node_modules", "__tests__"]
 }
