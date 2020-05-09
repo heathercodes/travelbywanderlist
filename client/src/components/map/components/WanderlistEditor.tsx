@@ -15,7 +15,7 @@ const editorStyles = css`
 `;
 
 interface WanderlistEditorProps {
-  locations: Location[];
+    locations: Location[];
 }
 
 export function WanderlistEditor({ locations }: WanderlistEditorProps): JSX.Element {
@@ -23,15 +23,15 @@ export function WanderlistEditor({ locations }: WanderlistEditorProps): JSX.Elem
     const { error, showError } = useErrorHandler(null);
     const { wanderlists, setWanderlists } = useContext(WanderlistContext);
 
-    const saveWanderlist = async (): void => { // eslint-disable-line
+    const saveWanderlist = async (): void => {
+        // eslint-disable-line
         try {
             setSaving(true);
 
-            const updatedWanderlist = await fetchAPI(
-                `${process.env.API_URL}/collection`,
-                'put',
-                { ...wanderlists, locations },
-            );
+            const updatedWanderlist = await fetchAPI('api/collection', 'put', {
+                ...wanderlists,
+                locations,
+            });
 
             setWanderlists(updatedWanderlist.data);
 

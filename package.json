@@ -12,6 +12,6 @@
     "start": "concurrently \"cd client && npm run start\" \"cd server && npm run start\"",
     "test": "concurrently \"cd client && npm test\" \"cd server && npm run test\"",
     "lint": "concurrently \"cd client && npm run lint\" \"cd server && npm run lint\"",
-    "setup": "concurrently \"cd client && npm i\" \"cd server && npm i\""
+    "setup": "npm i && concurrently \"cd client && npm i\" \"cd server && npm i\""
   }
 }

@@ -1,5 +1,4 @@
 const webpack = require('webpack');
-
 const paths = require('./paths');
 const rules = require('./rules');
 
@@ -29,8 +28,12 @@ module.exports = {
         compress: true,
         hot: true,
         historyApiFallback: true,
+        proxy: {
+            '/api': {
+                target: 'http://localhost:9000',
+                pathRewrite: { '^/api': '' },
+            },
+        },
     },
-    plugins: [
-        new webpack.HotModuleReplacementPlugin(),
-    ],
+    plugins: [new webpack.HotModuleReplacementPlugin()],
 };

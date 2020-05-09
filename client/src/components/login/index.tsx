@@ -20,7 +20,7 @@ export function LandingPage(): JSX.Element {
     useEffect(() => {
         const loginRequest = {
             method: 'get',
-            url: `${process.env.API_URL}/collection/${wanderlistId}`,
+            url: `/api/collection/${wanderlistId}`,
         };
 
         setRequest(loginRequest);
@@ -29,14 +29,15 @@ export function LandingPage(): JSX.Element {
     useEffect(() => {
         const registerRequest = {
             method: 'post',
-            url: `${process.env.API_URL}/collection`,
+            url: '/api/collection',
             body: { collection: { name: wanderlistName } },
         };
 
         setRequest(registerRequest);
     }, [wanderlistName]);
 
-    const authHandler = async (): void => { // eslint-disable-line
+    const authHandler = async (): void => {
+        // eslint-disable-line
         try {
             setLoading(true);
 
