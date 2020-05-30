@@ -10,16 +10,14 @@ const body = css`
     html,
     body {
         font-family: 'Josefin Sans', sans-serif;
-        background-color: #F8F4ED;
+        background-color: #f8f4ed;
     }
 `;
 
 render(
     <BrowserRouter>
-        <Global
-            styles={body}
-        />
+        <Global styles={body} />
         <App />
     </BrowserRouter>,
-    document.getElementById('root'),
+    document.getElementById('root')
 );

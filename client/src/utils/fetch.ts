@@ -7,7 +7,7 @@ interface RequestBody {
 }
 
 export const fetchAPI = async (request: RequestBody): Promise<any> => {
-    const response = await fetch(request.url, {
+    const response = await fetch(`/api/${request.url}`, {
         method: request.method,
         headers: {
             Accept: 'application/json',

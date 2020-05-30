@@ -3,6 +3,7 @@ import * as React from 'react';
 import { jsx } from '@emotion/core';
 import { Route, Switch } from 'react-router-dom';
 import { WanderlistProvider } from './provider/wanderlistProvider';
+import { CurrentLocationProvider } from './provider/currentLocationProvider';
 import { LandingPage } from './components/login';
 import { InteractiveMap } from './components/map';
 
@@ -11,7 +12,9 @@ export default function App(): JSX.Element {
         <Switch>
             <Route path="/map">
                 <WanderlistProvider>
-                    <InteractiveMap />
+                    <CurrentLocationProvider>
+                        <InteractiveMap />
+                    </CurrentLocationProvider>
                 </WanderlistProvider>
             </Route>
 

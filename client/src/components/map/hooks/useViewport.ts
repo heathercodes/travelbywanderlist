@@ -4,13 +4,13 @@ import { ViewportState, Viewport } from '../../../utils/types';
 const useViewport = (overrides?: Partial<Viewport>): ViewportState => {
     const defaultViewport: Viewport = {
         latitude: 57.2142,
-        longitude: -6.1450,
+        longitude: -6.145,
         zoom: 2,
     };
 
     const [viewport, setViewport] = useState<Viewport>({
-      ...defaultViewport,
-      ...overrides,
+        ...defaultViewport,
+        ...overrides,
     });
 
     return { viewport, setViewport };

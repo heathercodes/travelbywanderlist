@@ -1,15 +1,11 @@
 /** @jsx jsx */
-import {
-    useState,
-    Fragment,
-    useContext,
-    useEffect,
-} from 'react';
+import React, { useState, useContext, useEffect } from 'react';
 import { jsx } from '@emotion/core';
 import ReactMapGL from 'react-map-gl';
 import Marker from './components/Marker';
 import Popup from './components/Popup';
 import { WanderlistEditor } from './components/WanderlistEditor';
+import { EditLocation } from './components/EditLocation';
 import { WanderlistContext } from '../../provider/wanderlistProvider';
 import { useViewport } from './hooks/useViewport';
 import { useLocation } from './hooks/useLocation';
@@ -20,6 +16,7 @@ export function InteractiveMap(): JSX.Element {
     const { wanderlists } = useContext(WanderlistContext);
     const currentLocation = useLocation();
     const [openPopup, handlePopup] = useState(false);
+    const [openEditor, handleEditor] = useState(false);
 
     useEffect(() => {
         if (wanderlists.locations) {
@@ -32,24 +29,29 @@ export function InteractiveMap(): JSX.Element {
         currentLocation.setLocations([]);
     };
 
+    const closeEditor = (): void => {
+        handleEditor(false);
+    };
+
     const getLocationDetails = (e): void => {
-        const featureName = e.features[0].properties?.name ? e.features[0].properties.name : 'Unnamed Location';
+        const featureName = e.features[0].properties?.name
+            ? e.features[0].properties.name
+            : 'Unnamed Location';
         const [longitude, latitude] = e.lngLat;
 
-        currentLocation.setLocations([{
-            name: featureName,
-            latitude,
-            longitude,
-        }]);
+        currentLocation.setLocations([
+            {
+                name: featureName,
+                latitude,
+                longitude,
+            },
+        ]);
 
         handlePopup(!openPopup);
     };
 
     const saveLocation = (): void => {
-        setLocations((prevLocations) => [
-            ...currentLocation.locations,
-            ...prevLocations,
-        ]);
+        setLocations((prevLocations) => [...currentLocation.locations, ...prevLocations]);
 
         closePopup();
     };
@@ -65,20 +67,24 @@ export function InteractiveMap(): JSX.Element {
             onClick={getLocationDetails}
         >
             <WanderlistEditor locations={locations} />
-            {
-                openPopup && (
-                    <Popup location={currentLocation.locations[0]} handleClose={closePopup}>
-                        <h2>{currentLocation.locations[0].name}</h2>
-                        <p>Add this location?</p>
-                        <button type="button" onClick={saveLocation}>Yes</button>
-                    </Popup>
-                )
-            }
-            {
-                locations.length && locations.map((loc) => (
-                    <Marker key={`${loc.longitude}-${loc.latitude}`} {...loc} />
-                ))
-            }
+            {openPopup && (
+                <Popup location={currentLocation.locations[0]} handleClose={closePopup}>
+                    <h2>{currentLocation.locations[0].name}</h2>
+                    <p>Add this location?</p>
+                    <button type="button" onClick={saveLocation}>
+                        Yes
+                    </button>
+                </Popup>
+            )}
+            {locations.length &&
+                locations.map((loc) => (
+                    <Marker
+                        key={`${loc.longitude}-${loc.latitude}`}
+                        location={loc}
+                        openEditor={handleEditor}
+                    />
+                ))}
+            {openEditor && <EditLocation closeEditor={closeEditor} />}
         </ReactMapGL>
     );
 }

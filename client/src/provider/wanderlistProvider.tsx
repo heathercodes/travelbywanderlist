@@ -8,7 +8,7 @@ export const WanderlistContext = createContext({
 
 export function WanderlistProvider({ children }: React.ReactNode): JSX.Element {
     const [wanderlists, setWanderlists] = useState<Wanderlist | {}>({});
-    const wanderlistsContext: Wanderlist = {
+    const wanderlistsContext = {
         wanderlists,
         setWanderlists,
     };
