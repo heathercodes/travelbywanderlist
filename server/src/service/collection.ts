@@ -1,4 +1,3 @@
-// TODO refactor into class
 import { Location, Wanderlist, CollectionUpdateReq } from '../models';
 import * as collectionRepo from '../repositories/collection';
 import * as locationRepo from '../repositories/location';

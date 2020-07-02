@@ -1,8 +1,6 @@
-// const { validationResult } = require('express-validator/check');
 import { Response } from 'express';
 import * as locationService from '../service/location';
 import { LocationRequest } from '../models';
-// const { NotFoundError } = require('../../utils/errors');
 
 export async function getLocationById(req: LocationRequest, res: Response): Promise<Response> {
     const { id } = req.params;
@@ -12,7 +10,7 @@ export async function getLocationById(req: LocationRequest, res: Response): Prom
 
         return res.status(200).json({ data });
     } catch (error) {
-        return res.status(422).json({ error });
+        return res.status(500).json({ error });
     }
 }
 
@@ -24,7 +22,7 @@ export async function updateLocation(req: LocationRequest, res: Response): Promi
 
         return res.status(200).json({ data });
     } catch (error) {
-        return res.status(422).json({ error });
+        return res.status(500).json({ error });
     }
 }
 
@@ -48,6 +46,6 @@ export async function createLocation(req: LocationRequest, res: Response): Promi
 
         return res.status(200).json({ data: 'Location created' });
     } catch (error) {
-        return res.status(422).json({ error });
+        return res.status(500).json({ error });
     }
 }
