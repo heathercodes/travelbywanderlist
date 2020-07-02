@@ -1,5 +1,3 @@
-// handles the joins and business logic for getting the data ready
-// TODO refactor into class
 import { Location, UpdateLocationReq } from '../models';
 import * as locationRepo from '../repositories/location';
 
@@ -15,11 +13,6 @@ export async function createLocation(data: {
 
 export async function getLocationById(data: { id: number }): Promise<Location | void> {
     const location = await locationRepo.getLocationById(data);
-
-    if (!location) {
-        // TODO this is not how I'm handling errors
-        new Error('issue!');
-    }
 
     return location;
 }

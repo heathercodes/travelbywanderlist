@@ -2,3 +2,5 @@
 .DS_Store
 /dist
 .env
+combined.log
+error.log

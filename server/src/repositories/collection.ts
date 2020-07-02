@@ -1,19 +1,24 @@
-// import { QueryResult } from 'pg';
 import { Collection, CollectionUpdate } from '../models';
 import { db } from '../db';
 
 export async function createCollection(data: CollectionUpdate): Promise<Collection> {
     const results = await db('wanderlists').insert(data).returning('*');
-    const result = results[0];
 
-    return result;
+    if (!results) {
+        throw new Error('createCollection error');
+    }
+
+    return results[0];
 }
 
 export async function getCollectionById(data: { id: number }): Promise<Collection> {
     const results = await db('wanderlists').where('id', data.id);
-    const result = results[0];
 
-    return result;
+    if (!results) {
+        throw new Error('getCollectionById error');
+    }
+
+    return results[0];
 }
 
 export async function updateCollection(data: CollectionUpdate): Promise<Collection> {
@@ -24,13 +29,19 @@ export async function updateCollection(data: CollectionUpdate): Promise<Collecti
         .update({ ...data })
         .returning('*');
 
-    const result = results[0];
+    if (!results) {
+        throw new Error('updateCollection error');
+    }
 
-    return result;
+    return results[0];
 }
 
 export async function deleteCollection(data: { id: number }): Promise<number> {
     const result = await db('wanderlists').where('id', data.id).del();
+
+    if (!result) {
+        throw new Error('deleteCollection error');
+    }
 
     return result;
 }
