@@ -1,5 +1,4 @@
 import { Router } from 'express';
-// const { check } = require('express-validator/check');
 import * as locationController from '../controllers/location';
 
 const locationRouter = Router();
