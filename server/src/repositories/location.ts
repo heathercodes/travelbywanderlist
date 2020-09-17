@@ -9,7 +9,7 @@ export async function createLocation(data: {
     const results = await db('locations').insert(data).returning('*');
 
     if (!results) {
-        throw new Error('createLocation error');
+        return Promise.reject(new Error('createLocation error'));
     }
 
     return results[0];
@@ -18,18 +18,8 @@ export async function createLocation(data: {
 export async function getLocationById(data: { id: number }): Promise<Location> {
     const results = await db('locations').where('id', data.id);
 
-    if (!results) {
-        throw new Error('getLocationById error');
-    }
-
-    return results[0];
-}
-
-export async function getLocationsByCollectionId(data: { id: number }): Promise<Location[]> {
-    const results = await db('locations').where('wanderlist_id', data.id);
-
-    if (!results) {
-        throw new Error('getLocationsByCollectionId error');
+    if (!results.length) {
+        return Promise.reject(new Error('getLocationById error'));
     }
 
     return results[0];
@@ -41,8 +31,8 @@ export async function updateLocation(data: UpdateLocationReq): Promise<Location>
         .update({ ...data })
         .returning('*');
 
-    if (!results) {
-        throw new Error('updateLocation error');
+    if (!results.length) {
+        return Promise.reject(new Error('updateLocation error'));
     }
 
     return results[0];
@@ -52,17 +42,28 @@ export async function deleteLocationById(data: { id: number }): Promise<number> 
     const result = await db('locations').where('id', data.id).del();
 
     if (!result) {
-        throw new Error('deleteLocationById error');
+        return Promise.reject(new Error('deleteLocationById error'));
+    }
+
+    return data.id;
+}
+
+// functions used for collections
+export async function deleteLocationByCollectionId(data: { id: number }): Promise<number> {
+    const result = await db('locations').where('wanderlist_id', data.id).del();
+    if (!result) {
+        return Promise.reject(new Error('deleteLocationByCollectionId error'));
     }
 
     return result;
 }
 
-export async function deleteLocationByCollectionId(data: { id: number }): Promise<number> {
-    const result = await db('locations').where('wanderlist_id', data.id).del();
-    if (!result) {
-        throw new Error('deleteLocationByCollectionId error');
+export async function getLocationsByCollectionId(data: { id: number }): Promise<Location[]> {
+    const results = await db('locations').where('wanderlist_id', data.id);
+
+    if (!results.length) {
+        return Promise.reject(new Error('getLocationsByCollectionId error'));
     }
 
-    return result;
+    return results;
 }
