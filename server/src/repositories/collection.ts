@@ -4,8 +4,8 @@ import { db } from '../db';
 export async function createCollection(data: CollectionUpdate): Promise<Collection> {
     const results = await db('wanderlists').insert(data).returning('*');
 
-    if (!results) {
-        throw new Error('createCollection error');
+    if (!results.length) {
+        return Promise.reject(new Error('createCollection error'));
     }
 
     return results[0];
@@ -14,8 +14,8 @@ export async function createCollection(data: CollectionUpdate): Promise<Collecti
 export async function getCollectionById(data: { id: number }): Promise<Collection> {
     const results = await db('wanderlists').where('id', data.id);
 
-    if (!results) {
-        throw new Error('getCollectionById error');
+    if (!results.length) {
+        return Promise.reject(new Error('getCollectionById error'));
     }
 
     return results[0];
@@ -24,13 +24,10 @@ export async function getCollectionById(data: { id: number }): Promise<Collectio
 export async function updateCollection(data: CollectionUpdate): Promise<Collection> {
     const { id } = data;
 
-    const results = await db('wanderlists')
-        .where('id', id)
-        .update({ ...data })
-        .returning('*');
+    const results = await db('wanderlists').where('id', id).update(data).returning('*');
 
-    if (!results) {
-        throw new Error('updateCollection error');
+    if (!results.length) {
+        return Promise.reject(new Error('updateCollection error'));
     }
 
     return results[0];
@@ -40,8 +37,8 @@ export async function deleteCollection(data: { id: number }): Promise<number> {
     const result = await db('wanderlists').where('id', data.id).del();
 
     if (!result) {
-        throw new Error('deleteCollection error');
+        return Promise.reject(new Error('deleteCollection error'));
     }
 
-    return result;
+    return data.id;
 }

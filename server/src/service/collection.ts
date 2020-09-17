@@ -10,12 +10,12 @@ export async function createCollection(data: CollectionUpdateReq): Promise<Wande
     if (data.locations) {
         locations = await Promise.all(
             data.locations.map((loc: Location) =>
-                locationRepo.updateLocation({ wanderlist_id: newCollection.id, ...loc })
+                locationRepo.createLocation({ wanderlist_id: newCollection.id, ...loc })
             )
         );
     }
 
-    return { collection: newCollection, locations };
+    return { collection: newCollection, locations: [...locations] };
 }
 
 export async function getCollectionById(data: { id: number }): Promise<Wanderlist> {

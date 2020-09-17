@@ -27,7 +27,6 @@ export async function getCollectionById(req: CollectionRequest, res: Response): 
 export async function updateCollection(req: CollectionRequest, res: Response): Promise<Response> {
     try {
         const data = await collectionService.updateCollection(req.body);
-
         return res.status(200).json({ data });
     } catch (error) {
         return res.status(500).json({ error });
@@ -40,7 +39,12 @@ export async function deleteCollection(req: CollectionRequest, res: Response): P
     try {
         const collectionId = await collectionService.deleteCollection({ id: Number(id) });
 
-        return res.status(200).json({ data: `Wanderlist deleted ${collectionId}` });
+        return res.status(200).json({
+            data: {
+                message: 'Wanderlist deleted',
+                id: collectionId
+            }
+        });
     } catch (error) {
         return res.status(500).json({ error });
     }

@@ -2,7 +2,7 @@ import { Request } from 'express';
 
 export interface Location {
     id: number;
-    wanderlist_id: string;
+    wanderlist_id: number;
     name: string;
     latitude: number;
     longitude: number;
@@ -55,7 +55,7 @@ export interface CollectionRequest extends Request {
             longitude: number;
             description?: string;
             image_url?: string;
-            wanderlist_id: string;
+            wanderlist_id: number;
         }[];
     };
 }
@@ -72,7 +72,7 @@ export interface CollectionUpdateReq {
         longitude: number;
         description?: string;
         image_url?: string;
-        wanderlist_id: string;
+        wanderlist_id: number;
     }[];
 }
 

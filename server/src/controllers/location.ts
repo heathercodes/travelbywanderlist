@@ -30,21 +30,24 @@ export async function deleteLocationById(req: LocationRequest, res: Response): P
     const { id } = req.params;
 
     try {
-        await locationService.deleteLocationById({ id: Number(id) });
+        const locationId = await locationService.deleteLocationById({ id: Number(id) });
 
-        return res.status(200).json({ data: 'Location deleted' });
+        return res.status(200).json({
+            data: {
+                message: 'Location deleted',
+                id: locationId
+            }
+        });
     } catch (error) {
         return res.status(422).json({ error });
     }
 }
 
 export async function createLocation(req: LocationRequest, res: Response): Promise<Response> {
-    const { name, latitude, longitude } = req.body;
-
     try {
-        await locationService.createLocation({ name, latitude, longitude });
+        const data = await locationService.createLocation(req.body);
 
-        return res.status(200).json({ data: 'Location created' });
+        return res.status(200).json({ data });
     } catch (error) {
         return res.status(500).json({ error });
     }

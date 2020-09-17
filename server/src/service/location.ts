@@ -6,21 +6,21 @@ export async function createLocation(data: {
     latitude: number;
     longitude: number;
 }): Promise<Location> {
-    const location = await locationRepo.createLocation(data);
+    const locations = await locationRepo.createLocation(data);
 
-    return location;
+    return locations;
 }
 
 export async function getLocationById(data: { id: number }): Promise<Location | void> {
-    const location = await locationRepo.getLocationById(data);
+    const locations = await locationRepo.getLocationById(data);
 
-    return location;
+    return locations;
 }
 
 export async function updateLocation(data: UpdateLocationReq): Promise<Location> {
-    const location = await locationRepo.updateLocation(data);
+    const locations = await locationRepo.updateLocation(data);
 
-    return location;
+    return locations;
 }
 
 export async function deleteLocationById(data: { id: number }): Promise<number> {
