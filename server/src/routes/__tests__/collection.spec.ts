@@ -1,48 +1,40 @@
 import request from 'supertest';
-import { db } from '../../db';
-import server from '../../index';
+import { app as server } from '../../index';
 
 const requestBody = {
     collection: {
-        id: 6,
         name: 'Korea'
     },
     locations: [
         {
-            id: '123',
             name: 'Seoul',
             latitude: '213',
             longitude: '12312',
             description: 'Great place',
-            image_url: 'url',
-            wanderlist_id: 6
+            image_url: 'url'
         },
         {
-            id: '2123',
             name: 'Seoul2',
             latitude: '213',
             longitude: '12312',
             description: 'Great place',
-            image_url: 'url',
-            wanderlist_id: 6
+            image_url: 'url'
         }
     ]
 };
 
 describe('collection routes', () => {
     beforeAll(async (done) => {
-        await db.migrate.latest();
         done();
     });
     afterAll(async (done) => {
-        await db.migrate.rollback().then(() => db.destroy());
-        server.close();
         done();
     });
 
     it('POST /collection create a collection', async (done) => {
         const response = await request(server).post('/collection').send(requestBody);
-        expect(response.status).toBe(200);
+
+        expect(response.status).toBe(201);
         expect(response.body.data).toStrictEqual({
             collection: {
                 id: expect.any(Number),
@@ -76,8 +68,10 @@ describe('collection routes', () => {
     });
 
     it('GET /collection get a collection', async (done) => {
-        await request(server).post('/collection').send(requestBody);
-        const response = await request(server).get('/collection/6');
+        const collectionResp = await request(server).post('/collection').send(requestBody);
+        const response = await request(server).get(
+            `/collection/${collectionResp.body.data.collection.id}`
+        );
         expect(response.status).toBe(200);
         expect(response.body.data).toStrictEqual({
             collection: {
@@ -112,18 +106,27 @@ describe('collection routes', () => {
     });
 
     it('DELETE /collection deletes a collection', async (done) => {
-        await request(server).post('/collection').send(requestBody);
-        const response = await request(server).delete('/collection/6');
+        const collectionResp = await request(server).post('/collection').send(requestBody);
+
+        const response = await request(server).delete(
+            `/collection/${collectionResp.body.data.collection.id}`
+        );
+
         expect(response.status).toBe(200);
-        expect(response.body.data).toStrictEqual({ id: 6, message: 'Wanderlist deleted' });
+        expect(response.body.data).toStrictEqual({
+            id: collectionResp.body.data.collection.id,
+            message: 'Wanderlist deleted'
+        });
         done();
     });
 
     it('UPDATE /collection updates a collection', async (done) => {
+        const collectionResp = await request(server).post('/collection').send(requestBody);
+
         const updateBody = {
             collection: {
                 name: 'South Korea',
-                id: 6
+                id: collectionResp.body.data.collection.id
             },
             locations: [
                 {
@@ -133,12 +136,11 @@ describe('collection routes', () => {
                 }
             ]
         };
-        await request(server).post('/collection').send(requestBody);
         const response = await request(server).put('/collection').send(updateBody);
-        expect(response.status).toBe(200);
+        expect(response.status).toBe(201);
         expect(response.body.data).toStrictEqual({
             collection: {
-                id: 6,
+                id: collectionResp.body.data.collection.id,
                 name: 'South Korea',
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
@@ -150,7 +152,7 @@ describe('collection routes', () => {
                     description: 'an ok place',
                     name: 'Seoul',
                     image_url: 'url.com',
-                    wanderlist_id: 6,
+                    wanderlist_id: collectionResp.body.data.collection.id,
                     latitude: 213,
                     longitude: 12312
                 }

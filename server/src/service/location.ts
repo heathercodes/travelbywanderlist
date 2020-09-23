@@ -5,26 +5,43 @@ export async function createLocation(data: {
     name: string;
     latitude: number;
     longitude: number;
+    wanderlist_id?: number;
 }): Promise<Location> {
-    const locations = await locationRepo.createLocation(data);
+    const location = await locationRepo.createLocation(data);
 
-    return locations;
+    if (!location) {
+        return Promise.reject(new Error('createLocation error'));
+    }
+
+    return location;
 }
 
 export async function getLocationById(data: { id: number }): Promise<Location | void> {
-    const locations = await locationRepo.getLocationById(data);
+    const location = await locationRepo.getLocationById(data);
 
-    return locations;
+    if (!location) {
+        return Promise.reject(new Error('getLocationById error: location not found'));
+    }
+
+    return location;
 }
 
 export async function updateLocation(data: UpdateLocationReq): Promise<Location> {
-    const locations = await locationRepo.updateLocation(data);
+    const location = await locationRepo.updateLocation(data);
 
-    return locations;
+    if (!location) {
+        return Promise.reject(new Error('updateLocation error'));
+    }
+
+    return location;
 }
 
 export async function deleteLocationById(data: { id: number }): Promise<number> {
     const id = await locationRepo.deleteLocationById(data);
+
+    if (!id) {
+        return Promise.reject(new Error('deleteLocationById error'));
+    }
 
     return id;
 }

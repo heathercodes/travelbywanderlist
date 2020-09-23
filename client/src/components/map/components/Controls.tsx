@@ -18,7 +18,7 @@ interface WanderlistEditorProps {
     locations: Location[];
 }
 
-export function WanderlistEditor({ locations }: WanderlistEditorProps): JSX.Element {
+export function Controls({ locations }: WanderlistEditorProps): JSX.Element {
     const [saving, setSaving] = useState(false);
     const { error, showError } = useErrorHandler(null);
     const { wanderlists, setWanderlists } = useContext(WanderlistContext);

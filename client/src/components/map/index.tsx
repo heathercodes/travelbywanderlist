@@ -4,8 +4,8 @@ import { jsx } from '@emotion/core';
 import ReactMapGL from 'react-map-gl';
 import Marker from './components/Marker';
 import Popup from './components/Popup';
-import { WanderlistEditor } from './components/WanderlistEditor';
-import { EditLocation } from './components/EditLocation';
+import { Controls } from './components/Controls';
+import { LocationEditor } from './components/LocationEditor';
 import { WanderlistContext } from '../../provider/wanderlistProvider';
 import { useViewport } from './hooks/useViewport';
 import { useLocation } from './hooks/useLocation';
@@ -66,7 +66,7 @@ export function InteractiveMap(): JSX.Element {
             mapboxApiAccessToken={process.env.MAPBOX_TOKEN}
             onClick={getLocationDetails}
         >
-            <WanderlistEditor locations={locations} />
+            <Controls locations={locations} />
             {openPopup && (
                 <Popup location={currentLocation.locations[0]} handleClose={closePopup}>
                     <h2>{currentLocation.locations[0].name}</h2>
@@ -84,7 +84,7 @@ export function InteractiveMap(): JSX.Element {
                         openEditor={handleEditor}
                     />
                 ))}
-            {openEditor && <EditLocation closeEditor={closeEditor} />}
+            {openEditor && <LocationEditor closeEditor={closeEditor} />}
         </ReactMapGL>
     );
 }

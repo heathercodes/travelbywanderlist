@@ -18,11 +18,11 @@ const editLocationStyles = css`
     margin: 20px;
 `;
 
-interface EditLocationProps {
+interface LocationEditorProps {
     closeEditor(): void;
 }
 
-export function EditLocation({ closeEditor }: EditLocationProps): JSX.Element {
+export function LocationEditor({ closeEditor }: EditLocationProps): JSX.Element {
     const [saving, setSaving] = useState(false);
     const [editedLocation, setLocation] = useState<Location | {}>({});
     const { error, showError } = useErrorHandler(null);
@@ -88,12 +88,12 @@ export function EditLocation({ closeEditor }: EditLocationProps): JSX.Element {
                 />
             </label>
 
-            {/* <label htmlFor="location-description">
+            <label htmlFor="location-description">
                 <span>Add details:</span>
                 <textarea id="location-description" type="text" />
             </label>
 
-            <label htmlFor="location-photo">
+            {/* <label htmlFor="location-photo">
                 <span>Add photo:</span>
                 <input id="location-photo" type="file" />
             </label> */}

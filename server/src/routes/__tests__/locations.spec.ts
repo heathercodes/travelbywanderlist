@@ -1,6 +1,5 @@
 import request from 'supertest';
-import { db } from '../../db';
-import server from '../../index';
+import { app as server } from '../../index';
 
 const requestBody = {
     name: 'Portland',
@@ -12,18 +11,15 @@ const requestBody = {
 
 describe('location routes', () => {
     beforeAll(async (done) => {
-        await db.migrate.latest();
         done();
     });
     afterAll(async (done) => {
-        await db.migrate.rollback().then(() => db.destroy());
-        server.close();
         done();
     });
 
     it('POST /location create a location', async (done) => {
         const response = await request(server).post('/location').send(requestBody);
-        expect(response.status).toBe(200);
+        expect(response.status).toBe(201);
         expect(response.body.data).toStrictEqual({
             id: expect.any(Number),
             description: expect.any(String),
@@ -39,6 +35,7 @@ describe('location routes', () => {
     it('GET /location get a location by ID', async (done) => {
         const locationResponse = await request(server).post('/location').send(requestBody);
         const response = await request(server).get(`/location/${locationResponse.body.data.id}`);
+
         expect(response.status).toBe(200);
         expect(response.body.data).toStrictEqual({
             id: expect.any(Number),
@@ -72,7 +69,7 @@ describe('location routes', () => {
         const response = await request(server)
             .put(`/location/${locationResponse.body.data.id}`)
             .send(updateBody);
-        expect(response.status).toBe(200);
+        expect(response.status).toBe(201);
         expect(response.body.data).toStrictEqual({
             id: locationResponse.body.data.id,
             description: 'middling place at best',

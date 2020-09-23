@@ -1,18 +1,28 @@
-import { Response } from 'express';
+import { Response, NextFunction } from 'express';
 import * as collectionService from '../service/collection';
 import { CollectionRequest } from '../models';
 
-export async function createCollection(req: CollectionRequest, res: Response): Promise<Response> {
+export async function createCollection(
+    req: CollectionRequest,
+    res: Response,
+    next: NextFunction
+): Promise<any> {
     try {
         const data = await collectionService.createCollection(req.body);
-
-        return res.status(200).json({ data });
+        return res.status(201).json({ data });
     } catch (error) {
-        return res.status(500).json({ error });
+        return next({
+            message: error,
+            statusCode: 500
+        });
     }
 }
 
-export async function getCollectionById(req: CollectionRequest, res: Response): Promise<Response> {
+export async function getCollectionById(
+    req: CollectionRequest,
+    res: Response,
+    next: NextFunction
+): Promise<any> {
     const { id } = req.params;
 
     try {
@@ -20,25 +30,38 @@ export async function getCollectionById(req: CollectionRequest, res: Response): 
 
         return res.status(200).json({ data });
     } catch (error) {
-        return res.status(500).json({ error });
+        return next({
+            message: error,
+            statusCode: 404
+        });
     }
 }
 
-export async function updateCollection(req: CollectionRequest, res: Response): Promise<Response> {
+export async function updateCollection(
+    req: CollectionRequest,
+    res: Response,
+    next: NextFunction
+): Promise<any> {
     try {
         const data = await collectionService.updateCollection(req.body);
-        return res.status(200).json({ data });
+        return res.status(201).json({ data });
     } catch (error) {
-        return res.status(500).json({ error });
+        return next({
+            message: error,
+            statusCode: 404
+        });
     }
 }
 
-export async function deleteCollection(req: CollectionRequest, res: Response): Promise<Response> {
+export async function deleteCollection(
+    req: CollectionRequest,
+    res: Response,
+    next: NextFunction
+): Promise<any> {
     const { id } = req.params;
 
     try {
         const collectionId = await collectionService.deleteCollection({ id: Number(id) });
-
         return res.status(200).json({
             data: {
                 message: 'Wanderlist deleted',
@@ -46,6 +69,9 @@ export async function deleteCollection(req: CollectionRequest, res: Response): P
             }
         });
     } catch (error) {
-        return res.status(500).json({ error });
+        return next({
+            message: error,
+            statusCode: 500
+        });
     }
 }
