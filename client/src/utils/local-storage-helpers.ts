@@ -1,5 +1,5 @@
 import { DEFAULT_USER_AUTH } from './constants';
-import { UserAuthState } from './types';
+import { UserAuthState } from '../types';
 
 export const getStoredUserAuth = (): UserAuthState => {
     const auth = window.localStorage.getItem('UserAuth');

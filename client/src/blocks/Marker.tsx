@@ -1,29 +1,20 @@
 /** @jsx jsx */
 import React, { useContext } from 'react';
+import { jsx } from '@emotion/core';
 import { Marker } from 'react-map-gl';
-import { jsx, css } from '@emotion/core';
-import { Location } from '../../../utils/types';
-import { CurrentLocationContext } from '../../../provider/currentLocationProvider';
-
-const markerStyles = css`
-    width: 30px;
-    height: 30px;
-`;
-
-const buttonsStyles = css`
-    all: initial;
-`;
+import { Location } from '../types';
+import { GlobalContext } from '../provider/GlobalProvider';
+import { buttonStyles, markerStyles } from './Marker.styles';
 
 interface MarkerProps {
-    openEditor(): void;
+    openEditor(value: boolean): void;
     location: Location;
 }
 
-export default function MapMarker({ location, openEditor }: MarkerProps): JSX.Element {
-    const { setCurrentLocation } = useContext(CurrentLocationContext);
-
+export default function MapMarker({ location, openEditor }: MarkerProps): React.ReactElement {
+    const { updateCurrentLocation } = useContext(GlobalContext);
     const onClick = (): void => {
-        setCurrentLocation(location);
+        updateCurrentLocation(location);
         openEditor(true);
     };
 
@@ -35,7 +26,7 @@ export default function MapMarker({ location, openEditor }: MarkerProps): JSX.El
             offsetTop={-33}
             captureClick
         >
-            <button onClick={onClick} type="button" css={buttonsStyles}>
+            <button onClick={onClick} type="button" css={buttonStyles}>
                 <svg
                     version="1.1"
                     id="Layer_1"

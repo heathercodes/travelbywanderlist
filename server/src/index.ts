@@ -1,11 +1,10 @@
 import express from 'express';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import morgan from 'morgan';
 import { router } from './routes';
 import { logger } from './utils/logger';
 
 dotenv.config();
-const PORT = 9000;
 const app = express();
 
 app.use(express.json());
@@ -21,19 +20,26 @@ app.use(
 );
 app.use(router);
 
-// app.use((err, req, res) => {
-//     err.statusCode = err.statusCode || 500;
-//     err.status = err.status || 'error';
+// development error handler
+// will print stacktrace
+if (app.get('env') === 'development') {
+    app.use((err: any, _: any, res: any) => {
+        res.status(err.status || 500);
+        res.render('error.ejs', {
+            message: err.message,
+            error: err
+        });
+    });
+}
 
-//     res.status(err.statusCode).json({
-//         status: err.status,
-//         message: err.message
-//     });
-// });
-
-const server = app.listen(PORT, () => {
-    console.info(`Server started on port ${PORT}`);
+// production error handler
+// no stacktraces leaked to user
+app.use((err: any, _: any, res: any) => {
+    res.status(err.status || 500);
+    res.render('error', {
+        message: err.message,
+        error: {}
+    });
 });
 
 export { app };
-export default server;

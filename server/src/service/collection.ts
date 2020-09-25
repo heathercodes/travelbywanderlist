@@ -6,23 +6,35 @@ export async function createCollection(data: CollectionUpdateReq): Promise<Wande
     const { collection } = data;
     const newCollection = await collectionRepo.createCollection(collection);
 
-    let locations: Location[] = [];
+    if (!newCollection) {
+        return Promise.reject(new Error('createCollection error'));
+    }
+
     if (data.locations) {
+        let locations: Location[] = [];
+
         locations = await Promise.all(
             data.locations.map((loc: Location) =>
                 locationRepo.createLocation({ wanderlist_id: newCollection.id, ...loc })
             )
         );
+
+        return { collection: newCollection, locations: [...locations] };
     }
 
-    return { collection: newCollection, locations: [...locations] };
+    return { collection: newCollection };
 }
 
 export async function getCollectionById(data: { id: number }): Promise<Wanderlist> {
     const collection = await collectionRepo.getCollectionById(data);
+
+    if (!collection) {
+        return Promise.reject(new Error('getCollectionById error'));
+    }
+
     const locations = await locationRepo.getLocationsByCollectionId(data);
 
-    if (locations) {
+    if (locations.length) {
         return { collection, locations };
     }
 
@@ -33,9 +45,13 @@ export async function updateCollection(data: CollectionUpdateReq): Promise<Wande
     const { collection } = data;
     const updatedCollection = await collectionRepo.updateCollection(collection);
 
-    let locations: Location[] = [];
+    if (!updatedCollection) {
+        return Promise.reject(new Error('updateCollection error'));
+    }
 
     if (data.locations) {
+        let locations: Location[] = [];
+
         locations = await Promise.all(
             data.locations.map((loc: Location) => {
                 if (loc.id) {
@@ -45,10 +61,10 @@ export async function updateCollection(data: CollectionUpdateReq): Promise<Wande
                 return locationRepo.createLocation({ wanderlist_id: collection.id, ...loc });
             })
         );
-    }
 
-    if (locations) {
-        return { collection: updatedCollection, locations };
+        if (locations.length) {
+            return { collection: updatedCollection, locations };
+        }
     }
 
     return { collection: updatedCollection };
@@ -58,6 +74,10 @@ export async function deleteCollection(data: { id: number }): Promise<number> {
     await locationRepo.deleteLocationByCollectionId({ id: data.id });
 
     const id = await collectionRepo.deleteCollection(data);
+
+    if (!id) {
+        return Promise.reject(new Error('deleteCollection error'));
+    }
 
     return id;
 }

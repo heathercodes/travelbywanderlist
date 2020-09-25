@@ -1,7 +1,6 @@
 const BrotliPlugin = require('brotli-webpack-plugin');
 
 const paths = require('./paths');
-const rules = require('./rules');
 
 module.exports = {
     mode: 'production',
@@ -10,9 +9,6 @@ module.exports = {
         filename: '[name].[hash].js',
         path: paths.outputPath,
         chunkFilename: '[name].[chunkhash].js',
-    },
-    module: {
-        rules,
     },
     externals: {
         mapbox: 'mapbox-gl',

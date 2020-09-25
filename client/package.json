@@ -45,7 +45,7 @@
         "webpack-node-externals": "^1.7.2"
     },
     "dependencies": {
-        "@emotion/core": "^10.0.22",
+        "@emotion/core": "^10.0.35",
         "@types/validator": "^13.0.0",
         "cross-env": "^6.0.3",
         "dotenv": "^8.2.0",

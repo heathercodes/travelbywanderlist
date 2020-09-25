@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const paths = require('./paths');
-const rules = require('./rules');
 
 module.exports = {
     mode: 'development',
@@ -9,9 +8,6 @@ module.exports = {
         filename: '[name].bundle.js',
         path: paths.outputPath,
         chunkFilename: '[name].js',
-    },
-    module: {
-        rules,
     },
     performance: {
         hints: 'warning',

@@ -1,6 +1,6 @@
 import React from 'react';
 import { DEFAULT_USER_AUTH } from '../../utils/constants';
-import { UserAuthState, UserAuthHandler } from '../../utils/types';
+import { UserAuthState, UserAuthHandler } from '../../types';
 
 export function useAuthHandler(initialState: UserAuthState): UserAuthHandler {
     const [auth, setAuth] = React.useState(initialState);

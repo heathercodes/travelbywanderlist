@@ -39,6 +39,7 @@ export interface LocationRequest extends Request {
         longitude: number;
         description?: string;
         image_url?: string;
+        wanderlist_id?: number;
     };
 }
 

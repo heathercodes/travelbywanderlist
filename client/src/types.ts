@@ -1,5 +1,20 @@
 import { Dispatch, SetStateAction } from 'react';
 
+export interface GlobalState {
+    wanderlist: Wanderlist;
+    currentLocation: Location;
+    ui: {
+        isFetching: boolean;
+        isError: boolean;
+    };
+}
+
+export interface GlobalContextTypes extends GlobalState {
+    setIsFetching(value: boolean): void;
+    updateWanderlist(wanderlist: Wanderlist): void;
+    updateCurrentLocation(location: Location): void;
+}
+
 export interface UserAuthState {
     id: number;
     email: string;
@@ -17,9 +32,10 @@ export interface ErrorHandler {
 }
 
 export interface Location {
-	name: string;
-    lat: number;
-    lng: number;
+    id?: number;
+    name: string;
+    latitude: number;
+    longitude: number;
     imageUrl?: string;
     description?: string;
 }
@@ -47,9 +63,5 @@ export interface Collection {
 
 export interface Wanderlist {
     collection: Collection;
-    locations: Location[];
-}
-
-export interface CurrentLocation {
-    location: Location;
+    locations?: Location[];
 }

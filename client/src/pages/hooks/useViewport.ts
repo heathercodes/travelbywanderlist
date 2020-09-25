@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { ViewportState, Viewport } from '../../../utils/types';
+import { ViewportState, Viewport } from '../../types';
 
 const useViewport = (overrides?: Partial<Viewport>): ViewportState => {
     const defaultViewport: Viewport = {
@@ -8,7 +8,7 @@ const useViewport = (overrides?: Partial<Viewport>): ViewportState => {
         zoom: 2,
     };
 
-    const [viewport, setViewport] = useState<Viewport>({
+    const [viewport, setViewport] = useState<Viewport | null>({
         ...defaultViewport,
         ...overrides,
     });

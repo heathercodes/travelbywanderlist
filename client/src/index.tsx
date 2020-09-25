@@ -1,23 +1,17 @@
 import React from 'react';
 import { render } from 'react-dom';
-import { Global, css } from '@emotion/core';
 import { BrowserRouter } from 'react-router-dom';
-import emotionNormalize from 'emotion-normalize';
+import { Global } from '@emotion/core';
+import { GlobalProvider } from './provider/GlobalProvider';
+import { bodyStyles } from './index.styles';
 import App from './App';
-
-const body = css`
-    ${emotionNormalize}
-    html,
-    body {
-        font-family: 'Josefin Sans', sans-serif;
-        background-color: #f8f4ed;
-    }
-`;
 
 render(
     <BrowserRouter>
-        <Global styles={body} />
-        <App />
+        <GlobalProvider>
+            <Global styles={bodyStyles} />
+            <App />
+        </GlobalProvider>
     </BrowserRouter>,
     document.getElementById('root')
 );
