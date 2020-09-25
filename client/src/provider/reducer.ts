@@ -46,7 +46,7 @@ export const reducer = (state: GlobalState, action) => {
                 ...state,
                 currentLocation: {
                     ...state.currentLocation,
-                    ...action.payload.currentLocation,
+                    ...action.payload.location,
                 },
             };
 

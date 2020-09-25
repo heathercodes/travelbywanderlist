@@ -1,6 +1,5 @@
 const webpack = require('webpack');
 const paths = require('./paths');
-const rules = require('./rules');
 
 module.exports = {
     mode: 'development',

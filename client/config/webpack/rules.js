@@ -27,15 +27,4 @@ module.exports = [
         exclude: /node_modules/,
         loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
     },
-    {
-        test: /\.scss$/i,
-        use: [
-            'style-loader',
-            {
-                loader: 'css-loader',
-                options: { modules: true },
-            },
-            'sass-loader',
-        ],
-    },
 ];

@@ -1,9 +1,10 @@
+/** @jsx jsx */
 import React, { useContext } from 'react';
+import { jsx } from '@emotion/core';
 import { Marker } from 'react-map-gl';
 import { Location } from '../types';
 import { GlobalContext } from '../provider/GlobalProvider';
-
-import './Marker.scss';
+import { buttonStyles, markerStyles } from './Marker.styles';
 
 interface MarkerProps {
     openEditor(value: boolean): void;
@@ -12,7 +13,6 @@ interface MarkerProps {
 
 export default function MapMarker({ location, openEditor }: MarkerProps): React.ReactElement {
     const { updateCurrentLocation } = useContext(GlobalContext);
-
     const onClick = (): void => {
         updateCurrentLocation(location);
         openEditor(true);
@@ -26,7 +26,7 @@ export default function MapMarker({ location, openEditor }: MarkerProps): React.
             offsetTop={-33}
             captureClick
         >
-            <button onClick={onClick} type="button" className="button">
+            <button onClick={onClick} type="button" css={buttonStyles}>
                 <svg
                     version="1.1"
                     id="Layer_1"
@@ -35,7 +35,7 @@ export default function MapMarker({ location, openEditor }: MarkerProps): React.
                     y="0px"
                     viewBox="0 0 365 560"
                     enableBackground="new 0 0 365 560"
-                    className="marker"
+                    css={markerStyles}
                 >
                     <g>
                         <path

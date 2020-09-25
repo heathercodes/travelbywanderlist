@@ -1,7 +1,6 @@
 const BrotliPlugin = require('brotli-webpack-plugin');
 
 const paths = require('./paths');
-const rules = require('./rules');
 
 module.exports = {
     mode: 'production',

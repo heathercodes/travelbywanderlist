@@ -1,14 +1,15 @@
 import React from 'react';
 import { render } from 'react-dom';
 import { BrowserRouter } from 'react-router-dom';
+import { Global } from '@emotion/core';
 import { GlobalProvider } from './provider/GlobalProvider';
+import { bodyStyles } from './index.styles';
 import App from './App';
-
-import './index.scss';
 
 render(
     <BrowserRouter>
         <GlobalProvider>
+            <Global styles={bodyStyles} />
             <App />
         </GlobalProvider>
     </BrowserRouter>,

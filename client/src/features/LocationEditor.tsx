@@ -1,18 +1,18 @@
+/** @jsx jsx */
 import React, { useState, useContext, useEffect } from 'react';
+import { jsx } from '@emotion/core';
 import { GlobalContext } from '../provider/GlobalProvider';
 import { ErrorMessage } from '../blocks/ErrorMessage';
 import { useErrorHandler } from '../blocks/hooks/useErrorHandler';
 import { fetchAPI } from '../utils/fetch';
 import { Location } from '../types';
-
-import './LocationEditor.scss';
+import { editorStyles } from './LocationEditor.styles';
 
 interface LocationEditorProps {
     closeEditor(): void;
 }
 
 export function LocationEditor({ closeEditor }: LocationEditorProps): React.ReactElement {
-    const [editedLocation, setLocation] = useState<Location | null>(null);
     const { error, showError } = useErrorHandler(null);
     const {
         updateWanderlist,
@@ -21,10 +21,11 @@ export function LocationEditor({ closeEditor }: LocationEditorProps): React.Reac
         ui: { isFetching },
         setIsFetching,
     } = useContext(GlobalContext);
+    const [editedLocation, setLocation] = useState<Location>(currentLocation);
 
     useEffect(() => {
         setLocation(currentLocation);
-    }, [currentLocation]);
+    }, [currentLocation, setLocation]);
 
     const onChangeName = (name): void => {
         setLocation((prevState) => {
@@ -65,7 +66,7 @@ export function LocationEditor({ closeEditor }: LocationEditorProps): React.Reac
     };
 
     return (
-        <div className="locationEditor">
+        <div css={editorStyles}>
             <button type="button" onClick={closeEditor}>
                 X
             </button>

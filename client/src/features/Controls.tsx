@@ -1,11 +1,12 @@
+/** @jsx jsx */
 import React, { useContext } from 'react';
+import { jsx } from '@emotion/core';
 import { GlobalContext } from '../provider/GlobalProvider';
 import { ErrorMessage } from '../blocks/ErrorMessage';
 import { useErrorHandler } from '../blocks/hooks/useErrorHandler';
 import { fetchAPI } from '../utils/fetch';
 import { Location } from '../types';
-
-import './Controls.scss';
+import { controlStyles } from './Controls.styles';
 
 interface WanderlistEditorProps {
     locations: Location[];
@@ -48,7 +49,7 @@ export function Controls({ locations }: WanderlistEditorProps): React.ReactEleme
     };
 
     return (
-        <div className="controls">
+        <div css={controlStyles}>
             <button type="button" onClick={handleSubmit} disabled={isFetching}>
                 Save Wanderlist
             </button>
