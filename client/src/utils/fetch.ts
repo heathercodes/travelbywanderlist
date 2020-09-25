@@ -2,7 +2,7 @@ interface RequestBody {
     url: string;
     method: string;
     body: {
-        [key: string]: string;
+        [key: string]: any;
     };
 }
 

@@ -1,20 +1,21 @@
-/** @jsx jsx */
 import React, { useState, useContext, useEffect } from 'react';
 import { useHistory } from 'react-router-dom';
-import { jsx } from '@emotion/core';
-import { ErrorMessage } from '../generic/ErrorMessage';
-import { useErrorHandler } from '../generic/hooks/useErrorHandler';
-import { WanderlistContext } from '../../provider/wanderlistProvider';
-import { fetchAPI } from '../../utils/fetch';
-import { validateRegisterForm, validateLoginForm } from '../../utils/login-validation';
+import { ErrorMessage } from '../blocks/ErrorMessage';
+import { useErrorHandler } from '../blocks/hooks/useErrorHandler';
+import { GlobalContext } from '../provider/GlobalProvider';
+import { fetchAPI } from '../utils/fetch';
+import { validateRegisterForm, validateLoginForm } from '../utils/login-validation';
 
-export function LandingPage(): JSX.Element {
-    const [loading, setLoading] = useState(false);
+export function Login(): React.ReactElement {
     const [request, setRequest] = useState({});
     const [wanderlistId, setWanderlistId] = useState('');
     const [wanderlistName, setWanderlistName] = useState('');
     const { error, showError } = useErrorHandler(null);
-    const { setWanderlists } = useContext(WanderlistContext);
+    const {
+        updateWanderlist,
+        setIsFetching,
+        ui: { isFetching },
+    } = useContext(GlobalContext);
     const history = useHistory();
 
     useEffect(() => {
@@ -36,18 +37,18 @@ export function LandingPage(): JSX.Element {
         setRequest(registerRequest);
     }, [wanderlistName]);
 
-    const authHandler = async (): void => {
+    const authHandler = async (req): Promise<() => void> => {
         try {
-            setLoading(true);
+            setIsFetching(true);
 
-            const wanderlist = await fetchAPI(request);
-            history.push(`/map/${wanderlist.data.collection.id}`);
-            setWanderlists(wanderlist.data);
+            const wanderlist = await fetchAPI(req);
+            updateWanderlist(wanderlist.data);
 
-            return (): void => setLoading(false);
+            history.push(`/map/${wanderlistId}`);
+            return (): void => setIsFetching(false);
         } catch (err) {
-            setLoading(false);
             showError(err.message);
+            return (): void => setIsFetching(false);
         }
     };
 
@@ -55,11 +56,11 @@ export function LandingPage(): JSX.Element {
         e.preventDefault();
 
         if (wanderlistId && validateLoginForm(wanderlistId, showError)) {
-            authHandler();
+            authHandler(request);
         }
 
         if (wanderlistName && validateRegisterForm(wanderlistName, showError)) {
-            authHandler();
+            authHandler(request);
         }
     };
 
@@ -76,7 +77,7 @@ export function LandingPage(): JSX.Element {
                             type="number"
                             onChange={(e): void => setWanderlistId(e.target.value)}
                             value={wanderlistId}
-                            disabled={wanderlistName}
+                            disabled={Boolean(wanderlistName)}
                         />
                     </label>
                 </div>
@@ -90,12 +91,14 @@ export function LandingPage(): JSX.Element {
                             type="text"
                             onChange={(e): void => setWanderlistName(e.target.value)}
                             value={wanderlistName}
-                            disabled={wanderlistId}
+                            disabled={Boolean(wanderlistId)}
                         />
                     </label>
                 </div>
 
-                {loading ? null : <input type="submit" disabled={loading || error} />}
+                {isFetching ? null : (
+                    <input type="submit" disabled={Boolean(isFetching || error)} />
+                )}
             </form>
 
             {error && <ErrorMessage errorMessage={error} />}

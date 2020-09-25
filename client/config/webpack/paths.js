@@ -5,4 +5,5 @@ module.exports = {
     entryPath: path.resolve('src/index.tsx'),
     templatePath: path.resolve('src/index.html'),
     imagesFolder: 'images',
+    styles: path.resolve('src/index.scss'),
 };

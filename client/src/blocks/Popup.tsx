@@ -1,19 +1,17 @@
-/** @jsx jsx */
 import React from 'react';
-import { jsx } from '@emotion/core';
 import { Popup } from 'react-map-gl';
-import { Location } from '../../../utils/types';
+import { Location } from '../types';
 
 interface PopupProps {
     location: Location;
-    handleClose(open: boolean): void;
+    handleClose(): void;
 }
 
 export default function MapPopup({
     location,
     handleClose,
     children,
-}: React.PropsWithChildren<PopupProps>): JSX.Element {
+}: React.PropsWithChildren<PopupProps>): React.ReactElement {
     return (
         <Popup
             closeButton={false}

@@ -1,27 +1,17 @@
-/** @jsx jsx */
 import * as React from 'react';
-import { jsx } from '@emotion/core';
 import { Route, Switch } from 'react-router-dom';
-import { WanderlistProvider } from './provider/wanderlistProvider';
-import { CurrentLocationProvider } from './provider/currentLocationProvider';
-import { LandingPage } from './components/login';
-import { InteractiveMap } from './components/map';
+import { Login } from './pages/Login';
+import { InteractiveMap } from './pages/Map';
 
 export default function App(): JSX.Element {
     return (
         <Switch>
             <Route path="/map">
-                <WanderlistProvider>
-                    <CurrentLocationProvider>
-                        <InteractiveMap />
-                    </CurrentLocationProvider>
-                </WanderlistProvider>
+                <InteractiveMap />
             </Route>
 
             <Route path="/">
-                <WanderlistProvider>
-                    <LandingPage />
-                </WanderlistProvider>
+                <Login />
             </Route>
         </Switch>
     );

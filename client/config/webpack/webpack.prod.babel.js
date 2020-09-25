@@ -11,9 +11,6 @@ module.exports = {
         path: paths.outputPath,
         chunkFilename: '[name].[chunkhash].js',
     },
-    module: {
-        rules,
-    },
     externals: {
         mapbox: 'mapbox-gl',
         react: 'React',

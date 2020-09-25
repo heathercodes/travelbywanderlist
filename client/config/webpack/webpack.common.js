@@ -14,7 +14,7 @@ module.exports = {
         rules,
     },
     resolve: {
-        extensions: ['.ts', '.tsx', '.js', '.png'],
+        extensions: ['.ts', '.tsx', '.js'],
     },
     plugins: [
         // new BundleAnalyzerPlugin(),

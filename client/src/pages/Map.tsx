@@ -1,28 +1,27 @@
-/** @jsx jsx */
 import React, { useState, useContext, useEffect } from 'react';
-import { jsx } from '@emotion/core';
 import ReactMapGL from 'react-map-gl';
-import Marker from './components/Marker';
-import Popup from './components/Popup';
-import { Controls } from './components/Controls';
-import { LocationEditor } from './components/LocationEditor';
-import { WanderlistContext } from '../../provider/wanderlistProvider';
+import Marker from '../blocks/Marker';
+import Popup from '../blocks/Popup';
+import { Controls } from '../features/Controls';
+import { LocationEditor } from '../features/LocationEditor';
+import { GlobalContext } from '../provider/GlobalProvider';
 import { useViewport } from './hooks/useViewport';
 import { useLocation } from './hooks/useLocation';
+import { Location } from '../types';
 
-export function InteractiveMap(): JSX.Element {
+export function InteractiveMap(): React.ReactElement {
     const { viewport, setViewport } = useViewport();
     const { locations, setLocations } = useLocation();
-    const { wanderlists } = useContext(WanderlistContext);
+    const { wanderlist } = useContext(GlobalContext);
     const currentLocation = useLocation();
     const [openPopup, handlePopup] = useState(false);
     const [openEditor, handleEditor] = useState(false);
 
     useEffect(() => {
-        if (wanderlists.locations) {
-            setLocations(wanderlists.locations);
+        if (wanderlist.locations) {
+            setLocations(wanderlist.locations);
         }
-    }, [wanderlists.locations]);
+    }, [wanderlist.locations]);
 
     const closePopup = (): void => {
         handlePopup(false);
@@ -77,13 +76,15 @@ export function InteractiveMap(): JSX.Element {
                 </Popup>
             )}
             {locations.length &&
-                locations.map((loc) => (
-                    <Marker
-                        key={`${loc.longitude}-${loc.latitude}`}
-                        location={loc}
-                        openEditor={handleEditor}
-                    />
-                ))}
+                locations.map(
+                    (loc: Location): JSX.Element => (
+                        <Marker
+                            key={`${loc.longitude}-${loc.latitude}`}
+                            location={loc}
+                            openEditor={handleEditor}
+                        />
+                    )
+                )}
             {openEditor && <LocationEditor closeEditor={closeEditor} />}
         </ReactMapGL>
     );
