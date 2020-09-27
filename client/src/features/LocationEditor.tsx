@@ -2,11 +2,18 @@
 import React, { useState, useContext, useEffect } from 'react';
 import { jsx } from '@emotion/core';
 import { GlobalContext } from '../provider/GlobalProvider';
-import { ErrorMessage } from '../blocks/ErrorMessage';
-import { useErrorHandler } from '../blocks/hooks/useErrorHandler';
+import { ErrorMessage, useErrorHandler, Button, Input, TextArea } from '../blocks';
 import { fetchAPI } from '../utils/fetch';
 import { Location } from '../types';
-import { editorStyles } from './LocationEditor.styles';
+import {
+    editorOverlayStyles,
+    editorStyles,
+    labelContainerStyles,
+    upperLabelStyles,
+    lowerLabelStyles,
+} from './LocationEditor.styles';
+
+import { modalButtonStyles, topButtonStyles, bottomButtonStyles } from '../index.styles';
 
 interface LocationEditorProps {
     closeEditor(): void;
@@ -32,6 +39,15 @@ export function LocationEditor({ closeEditor }: LocationEditorProps): React.Reac
             return {
                 ...prevState,
                 name,
+            };
+        });
+    };
+
+    const onChangeDetails = (details): void => {
+        setLocation((prevState) => {
+            return {
+                ...prevState,
+                description: details,
             };
         });
     };
@@ -66,35 +82,44 @@ export function LocationEditor({ closeEditor }: LocationEditorProps): React.Reac
     };
 
     return (
-        <div css={editorStyles}>
-            <button type="button" onClick={closeEditor}>
-                X
-            </button>
-
-            <label htmlFor="location-name">
-                <span>Edit location name:</span>
-                <input
-                    id="location-name"
-                    type="text"
-                    value={editedLocation.name || ''}
-                    onChange={(e): void => onChangeName(e.target.value)}
+        <div css={editorOverlayStyles}>
+            <section css={editorStyles}>
+                <Button
+                    type="button"
+                    onClick={closeEditor}
+                    text="X"
+                    styles={[modalButtonStyles, topButtonStyles]}
                 />
-            </label>
 
-            <label htmlFor="location-description">
-                <span>Add details:</span>
-                <textarea id="location-description" />
-            </label>
+                <Input
+                    id="location-name"
+                    labelText="Edit location name"
+                    type="text"
+                    onChange={(e): void => onChangeName(e.target.value)}
+                    value={editedLocation.name || ''}
+                    styles={[labelContainerStyles, upperLabelStyles]}
+                />
 
-            {/* <label htmlFor="location-photo">
-                <span>Add photo:</span>
-                <input id="location-photo" type="file" />
-            </label> */}
+                <TextArea
+                    id="location-description"
+                    labelText="Add Details"
+                    onChange={(e): void => onChangeDetails(e.target.value)}
+                    value={editedLocation.description || ''}
+                    styles={[labelContainerStyles, lowerLabelStyles]}
+                    placeholder="Tell us about this location"
+                    rows={5}
+                />
 
-            <button type="button" onClick={handleSubmit} disabled={isFetching}>
-                Save Location
-            </button>
-            {error && <ErrorMessage errorMessage={error} />}
+                <Button
+                    type="button"
+                    onClick={handleSubmit}
+                    disabled={isFetching}
+                    text="Save Location"
+                    styles={[modalButtonStyles, bottomButtonStyles]}
+                />
+
+                {error && <ErrorMessage errorMessage={error} />}
+            </section>
         </div>
     );
 }
