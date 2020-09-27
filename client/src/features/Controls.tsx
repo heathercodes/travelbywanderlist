@@ -2,8 +2,7 @@
 import React, { useContext } from 'react';
 import { jsx } from '@emotion/core';
 import { GlobalContext } from '../provider/GlobalProvider';
-import { ErrorMessage } from '../blocks/ErrorMessage';
-import { useErrorHandler } from '../blocks/hooks/useErrorHandler';
+import { ErrorMessage, useErrorHandler, Button } from '../blocks';
 import { fetchAPI } from '../utils/fetch';
 import { Location } from '../types';
 import { controlStyles } from './Controls.styles';
@@ -50,9 +49,12 @@ export function Controls({ locations }: WanderlistEditorProps): React.ReactEleme
 
     return (
         <div css={controlStyles}>
-            <button type="button" onClick={handleSubmit} disabled={isFetching}>
-                Save Wanderlist
-            </button>
+            <Button
+                type="button"
+                onClick={handleSubmit}
+                disabled={!isFetching}
+                text="Save Wanderlist"
+            />
             {error && <ErrorMessage errorMessage={error} />}
         </div>
     );

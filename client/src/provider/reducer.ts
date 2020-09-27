@@ -8,17 +8,8 @@ export enum ACTIONS {
 
 export const initialState: GlobalState = {
     wanderlist: {
-        collection: {
-            id: null,
-            name: null,
-        },
-        locations: [
-            {
-                name: null,
-                latitude: null,
-                longitude: null,
-            },
-        ],
+        collection: null,
+        locations: null,
     },
     currentLocation: {
         name: null,

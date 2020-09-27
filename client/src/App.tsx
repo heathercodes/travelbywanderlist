@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { Route, Switch } from 'react-router-dom';
-import { Login } from './pages/Login';
+import { LandingPage } from './pages/Landing';
 import { InteractiveMap } from './pages/Map';
 
 export default function App(): JSX.Element {
@@ -11,7 +11,7 @@ export default function App(): JSX.Element {
             </Route>
 
             <Route path="/">
-                <Login />
+                <LandingPage />
             </Route>
         </Switch>
     );

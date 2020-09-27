@@ -1,13 +1,13 @@
 import React, { useState, useContext, useEffect } from 'react';
 import ReactMapGL from 'react-map-gl';
-import Marker from '../blocks/Marker';
-import Popup from '../blocks/Popup';
-import { Controls } from '../features/Controls';
-import { LocationEditor } from '../features/LocationEditor';
+import { Button } from '../blocks';
+import { Controls, LocationEditor, Marker, Popup } from '../features';
 import { GlobalContext } from '../provider/GlobalProvider';
 import { useViewport } from './hooks/useViewport';
 import { useLocation } from './hooks/useLocation';
 import { Location } from '../types';
+
+import { modalButtonStyles, bottomButtonStyles } from '../index.styles';
 
 export function InteractiveMap(): React.ReactElement {
     const { viewport, setViewport } = useViewport();
@@ -55,6 +55,8 @@ export function InteractiveMap(): React.ReactElement {
         closePopup();
     };
 
+    console.log(locations);
+
     return (
         <ReactMapGL
             {...viewport}
@@ -68,11 +70,14 @@ export function InteractiveMap(): React.ReactElement {
             <Controls locations={locations} />
             {openPopup && (
                 <Popup location={currentLocation.locations[0]} handleClose={closePopup}>
-                    <h2>{currentLocation.locations[0].name}</h2>
+                    <h3>{currentLocation.locations[0].name}</h3>
                     <p>Add this location?</p>
-                    <button type="button" onClick={saveLocation}>
-                        Yes
-                    </button>
+                    <Button
+                        type="button"
+                        onClick={saveLocation}
+                        text="Yes"
+                        styles={[modalButtonStyles, bottomButtonStyles]}
+                    />
                 </Popup>
             )}
             {locations.length &&

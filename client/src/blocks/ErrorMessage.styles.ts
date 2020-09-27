@@ -1,7 +1,8 @@
 import { css } from '@emotion/core';
+import { COLOURS } from '../constants';
 
 export const errorMessageStyles = css`
     text-align: center;
     margin-top: 10px;
-    color: #ff0000;
+    color: ${COLOURS.RED};
 `;
