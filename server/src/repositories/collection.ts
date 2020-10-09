@@ -1,30 +1,38 @@
-import { Collection, CollectionUpdate } from '../models';
+import { Collection, CollectionUpdate, KnexResponse } from '../models';
 import { db } from '../db';
 
 export async function createCollection(data: CollectionUpdate): Promise<Collection> {
-    const results = await db('wanderlists').insert(data).returning('*');
+    const results: KnexResponse = await db.raw(
+        'insert into "wanderlists" ("name") values (?) returning *',
+        [data.name]
+    );
 
-    return results[0];
+    return results.rows[0];
 }
 
 export async function getCollectionById(data: { id: number }): Promise<Collection> {
-    const results = await db('wanderlists').where('id', data.id);
+    const results: KnexResponse = await db.raw('select * from "wanderlists" where "id" = ?', [
+        data.id
+    ]);
 
-    return results[0];
+    return results.rows[0];
 }
 
 export async function updateCollection(data: CollectionUpdate): Promise<Collection> {
-    const { id } = data;
+    const results: KnexResponse = await db.raw(
+        'update "wanderlists" set "name" = ? where "id" = ? returning *',
+        [data.name, data.id]
+    );
 
-    const results = await db('wanderlists').where('id', id).update(data).returning('*');
-
-    return results[0];
+    return results.rows[0];
 }
 
 export async function deleteCollection(data: { id: number }): Promise<number> {
-    const result = await db('wanderlists').where('id', data.id).del();
+    const result = await db.raw('delete from "wanderlists" where "id" = ? returning "id"', [
+        data.id
+    ]);
 
-    if (!result) {
+    if (!result.rows[0]) {
         return 0;
     }
 

@@ -1,5 +1,9 @@
 import { Request } from 'express';
 
+export interface KnexResponse {
+    rows: any[];
+}
+
 export interface Location {
     id: number;
     wanderlist_id: number;
@@ -25,6 +29,7 @@ export interface Wanderlist {
 
 export interface UpdateLocationReq {
     id: number;
+    wanderlist_id: number;
     name?: string;
     latitude?: number;
     longitude?: number;
@@ -79,5 +84,5 @@ export interface CollectionUpdateReq {
 
 export interface CollectionUpdate {
     id: number;
-    name?: string;
+    name: string;
 }
