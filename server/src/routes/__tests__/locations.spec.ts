@@ -6,7 +6,8 @@ const requestBody = {
     latitude: '3454',
     longitude: '787',
     description: 'Great place',
-    image_url: 'url'
+    image_url: 'url',
+    wanderlist_id: 3
 };
 
 describe('location routes', () => {
@@ -25,7 +26,7 @@ describe('location routes', () => {
             description: expect.any(String),
             name: expect.any(String),
             image_url: expect.any(String),
-            wanderlist_id: null,
+            wanderlist_id: expect.any(Number),
             latitude: expect.any(Number),
             longitude: expect.any(Number)
         });
@@ -42,7 +43,7 @@ describe('location routes', () => {
             description: expect.any(String),
             name: expect.any(String),
             image_url: expect.any(String),
-            wanderlist_id: null,
+            wanderlist_id: expect.any(Number),
             latitude: expect.any(Number),
             longitude: expect.any(Number)
         });
@@ -56,28 +57,6 @@ describe('location routes', () => {
         expect(response.body.data).toStrictEqual({
             message: 'Location deleted',
             id: locationResponse.body.data.id
-        });
-        done();
-    });
-
-    it('UPDATE /location updates a location', async (done) => {
-        const locationResponse = await request(server).post('/location').send(requestBody);
-        const updateBody = {
-            description: 'middling place at best',
-            id: locationResponse.body.data.id
-        };
-        const response = await request(server)
-            .put(`/location/${locationResponse.body.data.id}`)
-            .send(updateBody);
-        expect(response.status).toBe(201);
-        expect(response.body.data).toStrictEqual({
-            id: locationResponse.body.data.id,
-            description: 'middling place at best',
-            name: 'Portland',
-            image_url: 'url',
-            wanderlist_id: null,
-            latitude: 3454,
-            longitude: 787
         });
         done();
     });

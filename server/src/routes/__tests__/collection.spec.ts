@@ -72,6 +72,7 @@ describe('collection routes', () => {
         const response = await request(server).get(
             `/collection/${collectionResp.body.data.collection.id}`
         );
+
         expect(response.status).toBe(200);
         expect(response.body.data).toStrictEqual({
             collection: {
@@ -130,13 +131,14 @@ describe('collection routes', () => {
             },
             locations: [
                 {
-                    id: '123',
+                    id: collectionResp.body.data.locations[0].id,
                     description: 'an ok place',
                     image_url: 'url.com'
                 }
             ]
         };
         const response = await request(server).put('/collection').send(updateBody);
+
         expect(response.status).toBe(201);
         expect(response.body.data).toStrictEqual({
             collection: {
@@ -148,7 +150,7 @@ describe('collection routes', () => {
             },
             locations: [
                 {
-                    id: 123,
+                    id: collectionResp.body.data.locations[0].id,
                     description: 'an ok place',
                     name: 'Seoul',
                     image_url: 'url.com',
