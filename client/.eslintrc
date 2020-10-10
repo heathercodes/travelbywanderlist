@@ -1,60 +1,61 @@
 {
-    "extends": [
-        "airbnb",
-        "plugin:@typescript-eslint/recommended",
-        "plugin:import/typescript",
-        "prettier"
-    ],
-    "parser": "@typescript-eslint/parser",
-    "plugins": ["@typescript-eslint"],
-    "settings": {
-        "import/parsers": {
-            "@typescript-eslint/parser": [".ts", ".tsx"]
-        }
-    },
-    "env": {
-        "browser": true,
-        "node": true,
-        "mocha": true,
-        "es6": true
-    },
-    "parserOptions": {
-        "ecmaFeatures": {
-            "jsx": true
-        },
-        "ecmaVersion": 2018, // Allows for the parsing of modern ECMAScript features
-        "sourceType": "module" // Allows for the use of imports
-    },
-    "rules": {
-        "indent": "off",
-        "no-tabs": "off",
-        "arrow-body-style": "off",
-        "import/prefer-default-export": "off",
-        "react/jsx-indent": "off",
-        "react/jsx-indent-props": "off",
-        "react/jsx-fragments": "off",
-        "@typescript-eslint/no-explicit-any": "off",
-        "react/jsx-props-no-spreading": "off",
-        "@typescript-eslint/no-angle-bracket-type-assertion": "off",
-        "@typescript-eslint/no-object-literal-type-assertion": "off",
-        "react/jsx-filename-extension": [2, { "extensions": [".js", ".ts", ".tsx"] }],
-        "import/no-extraneous-dependencies": [
-            "error",
-            {
-                "devDependencies": ["**/test/**/**", "**/__tests__/**/**"],
-                "optionalDependencies": false,
-                "peerDependencies": false
-            }
-        ],
-        "comma-dangle": [
-            2,
-            {
-                "arrays": "always-multiline",
-                "objects": "always-multiline",
-                "imports": "always-multiline",
-                "exports": "always-multiline",
-                "functions": "ignore"
-            }
-        ]
+  "extends": [
+    "airbnb",
+    "plugin:@typescript-eslint/recommended",
+    "plugin:import/typescript",
+    "prettier"
+  ],
+  "parser": "@typescript-eslint/parser",
+  "plugins": ["@typescript-eslint"],
+  "settings": {
+    "import/parsers": {
+      "@typescript-eslint/parser": [".ts", ".tsx"]
     }
+  },
+  "env": {
+    "browser": true,
+    "node": true,
+    "mocha": true,
+    "es6": true
+  },
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
+    },
+    "ecmaVersion": 2018, // Allows for the parsing of modern ECMAScript features
+    "sourceType": "module" // Allows for the use of imports
+  },
+  "rules": {
+    "indent": "off",
+    "no-tabs": "off",
+    "arrow-body-style": "off",
+    "import/prefer-default-export": "off",
+    "react/jsx-indent": "off",
+    "react/jsx-indent-props": "off",
+    "react/jsx-fragments": "off",
+    "@typescript-eslint/no-explicit-any": "off",
+    "react/jsx-props-no-spreading": "off",
+    "@typescript-eslint/no-angle-bracket-type-assertion": "off",
+    "@typescript-eslint/no-object-literal-type-assertion": "off",
+    "import/extensions": "off",
+    "react/jsx-filename-extension": [2, { "extensions": [".js", ".ts", ".tsx"] }],
+    "import/no-extraneous-dependencies": [
+      "error",
+      {
+        "devDependencies": ["**/test/**/**", "**/__tests__/**/**"],
+        "optionalDependencies": false,
+        "peerDependencies": false
+      }
+    ],
+    "comma-dangle": [
+      2,
+      {
+        "arrays": "always-multiline",
+        "objects": "always-multiline",
+        "imports": "always-multiline",
+        "exports": "always-multiline",
+        "functions": "ignore"
+      }
+    ]
+  }
 }

@@ -1,24 +1,70 @@
-interface RequestBody {
-    url: string;
-    method: string;
-    body: {
-        [key: string]: any;
-    };
+export async function get(url: string): Promise<any> {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}${url}`, {
+      method: "get",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+    });
+
+    return response.json();
+  } catch (err) {
+    return Promise.reject(new Error(err));
+  }
 }
 
-export const fetchAPI = async (request: RequestBody): Promise<any> => {
-    try {
-        const response = await fetch(`/api/${request.url}`, {
-            method: request.method,
-            headers: {
-                Accept: 'application/json',
-                'Content-Type': 'application/json',
-            },
-            body: request.body ? JSON.stringify(request.body) : null,
-        });
+export async function post(url: string, payload: {}): Promise<any> {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}${url}`, {
+      method: "post",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
 
-        return response.json();
-    } catch (err) {
-        return Promise.reject(new Error(err));
-    }
-};
+    return response.json();
+  } catch (err) {
+    return Promise.reject(new Error(err));
+  }
+}
+
+export async function put(url: string, payload: {}): Promise<any> {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}${url}`, {
+      method: "put",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    return response.json();
+  } catch (err) {
+    return Promise.reject(new Error(err));
+  }
+}
+
+export async function remove(url: string, payload: {}): Promise<any> {
+  try {
+    const response = await fetch(`${process.env.REACT_APP_API_URL}${url}`, {
+      method: "delete",
+      credentials: "same-origin",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify(payload),
+    });
+
+    return response.json();
+  } catch (err) {
+    return Promise.reject(new Error(err));
+  }
+}

@@ -1,19 +1,19 @@
-import { useState } from 'react';
-import { ViewportState, Viewport } from '../../types';
+import { useState } from "react";
+import { ViewportState, Viewport } from "../../types";
 
 const useViewport = (overrides?: Partial<Viewport>): ViewportState => {
-    const defaultViewport: Viewport = {
-        latitude: 57.2142,
-        longitude: -6.145,
-        zoom: 2,
-    };
+  const defaultViewport: Viewport = {
+    latitude: 57.2142,
+    longitude: -6.145,
+    zoom: 2,
+  };
 
-    const [viewport, setViewport] = useState<Viewport | null>({
-        ...defaultViewport,
-        ...overrides,
-    });
+  const [viewport, setViewport] = useState<Viewport>({
+    ...defaultViewport,
+    ...overrides,
+  });
 
-    return { viewport, setViewport };
+  return { viewport, setViewport };
 };
 
 export { useViewport };

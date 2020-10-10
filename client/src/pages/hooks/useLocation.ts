@@ -1,15 +1,15 @@
-import { useState } from 'react';
-import { LocationState, Location } from '../../types';
+import { useState } from "react";
+import { LocationState, Location } from "../../types";
 
 const useLocation = (overrides: Partial<Location[]> = []): LocationState => {
-    const defaultLocations = [];
+  const defaultLocations: any = [];
 
-    const [locations, setLocations] = useState<Location[] | null>([
-        ...defaultLocations,
-        ...overrides,
-    ]);
+  const [locations, setLocations] = useState<Location[]>([
+    ...defaultLocations,
+    ...overrides,
+  ]);
 
-    return { locations, setLocations };
+  return { locations, setLocations };
 };
 
 export { useLocation };

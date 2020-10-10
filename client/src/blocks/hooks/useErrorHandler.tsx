@@ -1,18 +1,18 @@
-import React from 'react';
-import { ErrorHandler } from '../../types';
+import React from "react";
+import { ErrorHandler } from "../../types";
 
-function useErrorHandler(initialState: string | null): ErrorHandler {
-    const [error, setError] = React.useState(initialState);
+function useErrorHandler(initialState: string): ErrorHandler {
+  const [error, setError] = React.useState(initialState);
 
-    const showError = (errorMessage: string | null): void => {
-        setError(errorMessage);
+  const showError = (errorMessage: string): void => {
+    setError(errorMessage);
 
-        window.setTimeout(() => {
-            setError(null);
-        }, 3000);
-    };
+    window.setTimeout(() => {
+      setError("");
+    }, 3000);
+  };
 
-    return { error, showError };
+  return { error, showError };
 }
 
 export { useErrorHandler };
