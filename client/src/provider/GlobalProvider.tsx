@@ -1,51 +1,61 @@
 import React, { createContext, useReducer } from 'react';
 import { reducer, initialState, ACTIONS } from './reducer';
-import { GlobalContextTypes } from '../types';
+import { GlobalContextTypes, Wanderlist, Location } from '../types';
 
-export const GlobalContext = createContext<Partial<GlobalContextTypes> | null>(initialState);
+export const GlobalContext = createContext<GlobalContextTypes>(initialState as GlobalContextTypes);
 
 export function GlobalProvider({ children }: any): JSX.Element {
-    const [state, dispatch] = useReducer(reducer, initialState);
+  const [state, dispatch] = useReducer(reducer, initialState);
 
-    function updateWanderlist(wanderlist) {
-        dispatch({
-            type: ACTIONS.UPDATE_WANDERLIST,
-            payload: {
-                wanderlist,
-            },
-        });
-    }
+  function updateWanderlist(wanderlist: Wanderlist): void {
+    dispatch({
+      type: ACTIONS.UPDATE_WANDERLIST,
+      payload: {
+        wanderlist,
+      },
+    });
+  }
 
-    function updateCurrentLocation(location) {
-        dispatch({
-            type: ACTIONS.UPDATE_CURRENT_LOCATION,
-            payload: {
-                location,
-            },
-        });
-    }
+  function updateLocation(location: Location): void {
+    dispatch({
+      type: ACTIONS.UPDATE_LOCATION,
+      payload: {
+        location,
+      },
+    });
+  }
 
-    function setIsFetching(isFetching) {
-        dispatch({
-            type: ACTIONS.SET_IS_FETCHING,
-            payload: {
-                isFetching,
-            },
-        });
-    }
+  function updateCurrentLocation(location: Location | null): void {
+    dispatch({
+      type: ACTIONS.UPDATE_CURRENT_LOCATION,
+      payload: {
+        location,
+      },
+    });
+  }
 
-    return (
-        <GlobalContext.Provider
-            value={{
-                wanderlist: state.wanderlist,
-                currentLocation: state.currentLocation,
-                ui: state.ui,
-                updateWanderlist,
-                updateCurrentLocation,
-                setIsFetching,
-            }}
-        >
-            {children}
-        </GlobalContext.Provider>
-    );
+  function setIsFetching(isFetching: boolean): void {
+    dispatch({
+      type: ACTIONS.SET_IS_FETCHING,
+      payload: {
+        isFetching,
+      },
+    });
+  }
+
+  return (
+    <GlobalContext.Provider
+      value={{
+        wanderlist: state.wanderlist,
+        currentLocation: state.currentLocation,
+        ui: state.ui,
+        updateWanderlist,
+        updateCurrentLocation,
+        updateLocation,
+        setIsFetching,
+      }}
+    >
+      {children}
+    </GlobalContext.Provider>
+  );
 }

@@ -1,61 +1,52 @@
 {
-    "name": "travelbywanderlist-client",
-    "version": "1.0.0",
-    "main": "src/index.tsx",
-    "scripts": {
-        "build": "cross-env NODE_ENV=production webpack -p",
-        "start": "cross-env NODE_ENV=development webpack-dev-server --content-base ./dist --hot --inline --colors --port 3000 --open",
-        "lint": "eslint ./src/**/**.tsx",
-        "lint:fix": "eslint ./src/**/**.tsx --fix",
-        "test": "mocha -r test/env"
-    },
-    "devDependencies": {
-        "@testing-library/react": "^10.4.3",
-        "@types/core-js": "^2.5.2",
-        "@types/react": "^16.9.16",
-        "@types/react-dom": "^16.9.4",
-        "@types/react-map-gl": "^5.0.3",
-        "@types/react-router-dom": "^5.1.5",
-        "@typescript-eslint/eslint-plugin": "^2.11.0",
-        "@typescript-eslint/parser": "^2.11.0",
-        "brotli-webpack-plugin": "^1.1.0",
-        "clean-webpack-plugin": "^3.0.0",
-        "concurrently": "^5.0.2",
-        "eslint": "^6.8.0",
-        "eslint-config-airbnb": "^18.0.1",
-        "eslint-config-prettier": "^6.11.0",
-        "eslint-loader": "^3.0.2",
-        "eslint-plugin-babel": "^5.3.0",
-        "eslint-plugin-import": "^2.18.2",
-        "eslint-plugin-jsx-a11y": "^6.2.3",
-        "eslint-plugin-react": "^7.16.0",
-        "file-loader": "^4.3.0",
-        "html-webpack-plugin": "^3.2.0",
-        "img-loader": "^3.0.1",
-        "jest": "^26.1.0",
-        "prettier": "^2.0.5",
-        "source-map-loader": "^0.2.4",
-        "terser-webpack-plugin": "^2.2.2",
-        "ts-loader": "^6.2.1",
-        "typescript": "^3.8.3",
-        "url-loader": "^2.2.0",
-        "webpack-cli": "^3.3.10",
-        "webpack-dev-server": "^3.9.0",
-        "webpack-merge": "^4.2.2",
-        "webpack-node-externals": "^1.7.2"
-    },
-    "dependencies": {
-        "@emotion/core": "^10.0.35",
-        "@types/validator": "^13.0.0",
-        "cross-env": "^6.0.3",
-        "dotenv": "^8.2.0",
-        "emotion-normalize": "^10.1.0",
-        "react": "^16.11.0",
-        "react-dom": "^16.11.0",
-        "react-map-gl": "^5.1.3",
-        "react-router-dom": "^5.1.2",
-        "validator": "^13.0.0",
-        "webpack": "^4.41.2",
-        "webpack-bundle-analyzer": "^3.6.1"
-    }
+  "name": "travelbywanderlist-client",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@emotion/core": "^10.0.35",
+    "@testing-library/jest-dom": "^4.2.4",
+    "@testing-library/react": "^9.3.2",
+    "@testing-library/user-event": "^7.1.2",
+    "@types/jest": "^24.0.0",
+    "@types/node": "^12.0.0",
+    "@types/react": "^16.9.0",
+    "@types/react-dom": "^16.9.0",
+    "@types/react-map-gl": "^5.2.7",
+    "@types/react-router-dom": "^5.1.6",
+    "@types/validator": "^13.1.0",
+    "emotion-normalize": "^10.1.0",
+    "eslint-config-airbnb": "^18.2.0",
+    "eslint-config-prettier": "^6.12.0",
+    "prettier": "^2.1.2",
+    "react": "^16.13.1",
+    "react-dom": "^16.13.1",
+    "react-map-gl": "^5.2.9",
+    "react-router-dom": "^5.2.0",
+    "react-scripts": "3.4.3",
+    "typescript": "~3.7.2",
+    "validator": "^13.1.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint ./src/**/**.tsx ./src/**/**.ts"
+  },
+  "eslintConfig": {
+    "extends": "react-app"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "proxy": "http://localhost:9000/"
 }

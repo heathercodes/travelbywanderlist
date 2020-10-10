@@ -5,7 +5,7 @@ export async function createLocation(data: {
     name: string;
     latitude: number;
     longitude: number;
-    wanderlist_id?: number;
+    wanderlist_id: number;
 }): Promise<Location> {
     const location = await locationRepo.createLocation(data);
 

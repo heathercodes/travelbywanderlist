@@ -22,24 +22,24 @@ app.use(router);
 
 // development error handler
 // will print stacktrace
-if (app.get('env') === 'development') {
-    app.use((err: any, _: any, res: any) => {
-        res.status(err.status || 500);
-        res.render('error.ejs', {
-            message: err.message,
-            error: err
-        });
-    });
-}
+// if (app.get('env') === 'development') {
+//     app.use('*', (err: any, _: any, res: Response) => {
+//         res.status(err.status || 500);
+//         res.render('error.ejs', {
+//             message: err.message,
+//             error: err
+//         });
+//     });
+// }
 
-// production error handler
-// no stacktraces leaked to user
-app.use((err: any, _: any, res: any) => {
-    res.status(err.status || 500);
-    res.render('error', {
-        message: err.message,
-        error: {}
-    });
-});
+// // production error handler
+// // no stacktraces leaked to user
+// app.use('*', (err: any, _: any, res: Response) => {
+//     res.status(err.status || 500);
+//     res.render('error', {
+//         message: err.message,
+//         error: {}
+//     });
+// });
 
 export { app };

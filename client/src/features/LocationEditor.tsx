@@ -1,125 +1,123 @@
 /** @jsx jsx */
-import React, { useState, useContext, useEffect } from 'react';
-import { jsx } from '@emotion/core';
-import { GlobalContext } from '../provider/GlobalProvider';
-import { ErrorMessage, useErrorHandler, Button, Input, TextArea } from '../blocks';
-import { fetchAPI } from '../utils/fetch';
-import { Location } from '../types';
+import React, { useContext, useEffect, useState } from "react";
+import { jsx } from "@emotion/core";
+import { GlobalContext } from "../provider/GlobalProvider";
 import {
-    editorOverlayStyles,
-    editorStyles,
-    labelContainerStyles,
-    upperLabelStyles,
-    lowerLabelStyles,
-} from './LocationEditor.styles';
+  ErrorMessage,
+  useErrorHandler,
+  Button,
+  Input,
+  TextArea,
+} from "../blocks";
+import { put } from "../utils/fetch";
+import {
+  editorOverlayStyles,
+  editorStyles,
+  labelContainerStyles,
+  upperLabelStyles,
+  lowerLabelStyles,
+} from "./LocationEditor.styles";
 
-import { modalButtonStyles, topButtonStyles, bottomButtonStyles } from '../index.styles';
+import {
+  modalButtonStyles,
+  topButtonStyles,
+  bottomButtonStyles,
+} from "../index.styles";
 
 interface LocationEditorProps {
-    closeEditor(): void;
+  closeEditor(): void;
 }
 
-export function LocationEditor({ closeEditor }: LocationEditorProps): React.ReactElement {
-    const { error, showError } = useErrorHandler(null);
-    const {
-        updateWanderlist,
-        updateCurrentLocation,
-        currentLocation,
-        ui: { isFetching },
-        setIsFetching,
-    } = useContext(GlobalContext);
-    const [editedLocation, setLocation] = useState<Location>(currentLocation);
+export function LocationEditor({
+  closeEditor,
+}: LocationEditorProps): React.ReactElement {
+  const { error, showError } = useErrorHandler("");
+  const {
+    currentLocation,
+    updateLocation,
+    ui: { isFetching },
+    setIsFetching,
+  } = useContext(GlobalContext);
+  const [location, setLocation] = useState<any>(currentLocation);
 
-    useEffect(() => {
-        setLocation(currentLocation);
-    }, [currentLocation, setLocation]);
+  useEffect(() => {
+    setLocation(currentLocation);
+  }, [currentLocation, setLocation]);
 
-    const onChangeName = (name): void => {
-        setLocation((prevState) => {
-            return {
-                ...prevState,
-                name,
-            };
-        });
-    };
+  const onChangeName = (name: string): void => {
+    setLocation({
+      ...location,
+      name,
+    });
+  };
 
-    const onChangeDetails = (details): void => {
-        setLocation((prevState) => {
-            return {
-                ...prevState,
-                description: details,
-            };
-        });
-    };
+  const onChangeDetails = (details: string): void => {
+    setLocation({
+      ...location,
+      description: details,
+    });
+  };
 
-    const saveLocation = async (): Promise<void> => {
-        try {
-            setIsFetching(true);
+  const saveLocationDetails = async (): Promise<void> => {
+    try {
+      setIsFetching(true);
 
-            const updatedLocations = await fetchAPI({
-                url: `location/${editedLocation.id}`,
-                method: 'put',
-                body: { editedLocation },
-            });
+      const updatedLocation = await put(`location/${location.id}`, location);
 
-            updateWanderlist(updatedLocations.data);
+      updateLocation(updatedLocation.data);
 
-            setIsFetching(false);
-        } catch (err) {
-            setIsFetching(false);
-            showError(err.message);
-        }
-    };
+      setIsFetching(false);
+    } catch (err) {
+      setIsFetching(false);
+      showError(err.message);
+    }
+  };
 
-    const handleSubmit = (e): void => {
-        e.preventDefault();
-        saveLocation();
-        updateCurrentLocation({
-            name: null,
-            latitude: null,
-            longitude: null,
-        });
-    };
+  const handleSubmit = async (e: any): Promise<void> => {
+    e.preventDefault();
+    await saveLocationDetails();
+    closeEditor();
+  };
 
-    return (
-        <div css={editorOverlayStyles}>
-            <section css={editorStyles}>
-                <Button
-                    type="button"
-                    onClick={closeEditor}
-                    text="X"
-                    styles={[modalButtonStyles, topButtonStyles]}
-                />
+  return (
+    <div css={editorOverlayStyles}>
+      <section css={editorStyles}>
+        <Button
+          type="button"
+          onClick={closeEditor}
+          text="X"
+          styles={[modalButtonStyles, topButtonStyles]}
+        />
 
-                <Input
-                    id="location-name"
-                    labelText="Edit location name"
-                    type="text"
-                    onChange={(e): void => onChangeName(e.target.value)}
-                    value={editedLocation.name || ''}
-                    styles={[labelContainerStyles, upperLabelStyles]}
-                />
+        <Input
+          id="location-name"
+          labelText="Edit location name"
+          type="text"
+          onChange={(e: any): void => onChangeName(e.target.value)}
+          value={location.name || ""}
+          styles={[labelContainerStyles, upperLabelStyles]}
+        />
 
-                <TextArea
-                    id="location-description"
-                    labelText="Add Details"
-                    onChange={(e): void => onChangeDetails(e.target.value)}
-                    value={editedLocation.description || ''}
-                    styles={[labelContainerStyles, lowerLabelStyles]}
-                    placeholder="Tell us about this location"
-                    rows={5}
-                />
+        <TextArea
+          id="location-description"
+          labelText="Add Details"
+          onChange={(e: any): void => onChangeDetails(e.target.value)}
+          value={location.description || ""}
+          styles={[labelContainerStyles, lowerLabelStyles]}
+          placeholder="Tell us about this location"
+          rows={5}
+        />
 
-                <Button
-                    type="button"
-                    onClick={handleSubmit}
-                    disabled={isFetching}
-                    text="Save Location"
-                    styles={[modalButtonStyles, bottomButtonStyles]}
-                />
+        <Button
+          type="button"
+          onClick={handleSubmit}
+          disabled={isFetching}
+          text="Save Location"
+          styles={[modalButtonStyles, bottomButtonStyles]}
+        />
 
-                {error && <ErrorMessage errorMessage={error} />}
-            </section>
-        </div>
-    );
+        {error && <ErrorMessage errorMessage={error} />}
+      </section>
+    </div>
+  );
 }
