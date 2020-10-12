@@ -23,6 +23,9 @@ export function Popup({
             longitude={location.longitude}
             latitude={location.latitude}
             tipSize={7}
+            captureDrag
+            captureScroll
+            captureClick
         >
             <div css={popupStyles}>
                 <Button
