@@ -1,20 +1,18 @@
 /** @jsx jsx */
-import React, { useContext } from "react";
-import { jsx } from "@emotion/core";
-import { GlobalContext } from "../provider/GlobalProvider";
-import { ErrorMessage, useErrorHandler, Button } from "../blocks";
-import { put } from "../utils/fetch";
-import { Location } from "../types";
-import { controlStyles } from "./Controls.styles";
+import React, { useContext } from 'react';
+import { jsx } from '@emotion/core';
+import { GlobalContext } from '../provider/GlobalProvider';
+import { ErrorMessage, useErrorHandler, Button } from '../blocks';
+import { put } from '../utils/fetch';
+import { Location } from '../types';
+import { controlStyles } from './Controls.styles';
 
 interface WanderlistEditorProps {
   locations: Location[];
 }
 
-export function Controls({
-  locations,
-}: WanderlistEditorProps): React.ReactElement {
-  const { error, showError } = useErrorHandler("");
+export function Controls({ locations }: WanderlistEditorProps): React.ReactElement {
+  const { error, showError } = useErrorHandler('');
   const {
     wanderlist,
     updateWanderlist,
@@ -26,7 +24,7 @@ export function Controls({
     try {
       setIsFetching(true);
 
-      const updatedWanderlist = await put("collection", {
+      const updatedWanderlist = await put('collection', {
         ...wanderlist,
         locations,
       });
@@ -47,12 +45,7 @@ export function Controls({
 
   return (
     <div css={controlStyles}>
-      <Button
-        type="button"
-        onClick={handleSubmit}
-        disabled={!isFetching}
-        text="Save Wanderlist"
-      />
+      <Button type="button" onClick={handleSubmit} disabled={isFetching} text="Save Wanderlist" />
       {error && <ErrorMessage errorMessage={error} />}
     </div>
   );

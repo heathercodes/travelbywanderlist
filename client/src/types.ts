@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from 'react';
 
 export interface GlobalState {
   wanderlist: Wanderlist;
@@ -55,6 +55,21 @@ export interface Viewport {
 export interface ViewportState {
   viewport: Viewport;
   setViewport: Dispatch<SetStateAction<Viewport>>;
+}
+
+export interface MapSettings {
+  dragPan?: boolean;
+  dragRotate?: boolean;
+  scrollZoom?: boolean;
+  touchZoom?: boolean;
+  touchRotate?: boolean;
+  keyboard?: boolean;
+  doubleClickZoom?: boolean;
+}
+
+export interface SettingsState {
+  settings: MapSettings;
+  setSettings: Dispatch<SetStateAction<MapSettings>>;
 }
 
 export interface Collection {

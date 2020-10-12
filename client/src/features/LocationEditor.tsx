@@ -1,37 +1,25 @@
 /** @jsx jsx */
-import React, { useContext, useEffect, useState } from "react";
-import { jsx } from "@emotion/core";
-import { GlobalContext } from "../provider/GlobalProvider";
-import {
-  ErrorMessage,
-  useErrorHandler,
-  Button,
-  Input,
-  TextArea,
-} from "../blocks";
-import { put } from "../utils/fetch";
+import React, { useContext, useEffect, useState } from 'react';
+import { jsx } from '@emotion/core';
+import { GlobalContext } from '../provider/GlobalProvider';
+import { ErrorMessage, useErrorHandler, Button, Input, TextArea } from '../blocks';
+import { put } from '../utils/fetch';
 import {
   editorOverlayStyles,
   editorStyles,
   labelContainerStyles,
   upperLabelStyles,
   lowerLabelStyles,
-} from "./LocationEditor.styles";
+} from './LocationEditor.styles';
 
-import {
-  modalButtonStyles,
-  topButtonStyles,
-  bottomButtonStyles,
-} from "../index.styles";
+import { modalButtonStyles, topButtonStyles, bottomButtonStyles } from '../index.styles';
 
 interface LocationEditorProps {
   closeEditor(): void;
 }
 
-export function LocationEditor({
-  closeEditor,
-}: LocationEditorProps): React.ReactElement {
-  const { error, showError } = useErrorHandler("");
+export function LocationEditor({ closeEditor }: LocationEditorProps): React.ReactElement {
+  const { error, showError } = useErrorHandler('');
   const {
     currentLocation,
     updateLocation,
@@ -73,8 +61,7 @@ export function LocationEditor({
     }
   };
 
-  const handleSubmit = async (e: any): Promise<void> => {
-    e.preventDefault();
+  const handleSubmit = async (): Promise<void> => {
     await saveLocationDetails();
     closeEditor();
   };
@@ -94,7 +81,7 @@ export function LocationEditor({
           labelText="Edit location name"
           type="text"
           onChange={(e: any): void => onChangeName(e.target.value)}
-          value={location.name || ""}
+          value={location.name || ''}
           styles={[labelContainerStyles, upperLabelStyles]}
         />
 
@@ -102,7 +89,7 @@ export function LocationEditor({
           id="location-description"
           labelText="Add Details"
           onChange={(e: any): void => onChangeDetails(e.target.value)}
-          value={location.description || ""}
+          value={location.description || ''}
           styles={[labelContainerStyles, lowerLabelStyles]}
           placeholder="Tell us about this location"
           rows={5}
