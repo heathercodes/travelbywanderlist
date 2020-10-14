@@ -13,7 +13,7 @@
   },
   "scripts": {
     "start": "NODE_ENV=development concurrently \"cd client && yarn start\" \"cd server && npm run start\"",
-    "test": "concurrently \"cd client && yarn test\" \"cd server && npm run test\"",
+    "test": "concurrently \"cd client && yarn test\" \"cd server && npm run test:ci\"",
     "setup": "npm i && concurrently \"cd client && yarn install\" \"cd server && npm i\""
   },
   "dependencies": {}

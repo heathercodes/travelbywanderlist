@@ -19,7 +19,8 @@ const createLocations = (array) => ({
     wanderlist_id: faker.random.arrayElement(array),
     name: faker.address.city(),
     latitude: faker.address.latitude(),
-    longitude: faker.address.longitude()
+    longitude: faker.address.longitude(),
+    id: faker.random.number()
 });
 
 const createNLocations = (n, arr) => {
@@ -27,14 +28,18 @@ const createNLocations = (n, arr) => {
 };
 
 exports.seed = (knex) => {
-    return knex('wanderlists')
+    return knex('locations')
         .del()
         .then(() => {
             return knex('wanderlists')
-                .returning('id')
-                .insert(wanderlists)
-                .then((wanderlist_ids) => {
-                    return knex('locations').insert(createNLocations(20, wanderlist_ids));
+                .del()
+                .then(() => {
+                    return knex('wanderlists')
+                        .returning('id')
+                        .insert(wanderlists)
+                        .then((wanderlist_ids) => {
+                            return knex('locations').insert(createNLocations(20, wanderlist_ids));
+                        });
                 });
         });
 };

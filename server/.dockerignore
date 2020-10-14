@@ -1,0 +1,13 @@
+.git
+.gitignore
+.editorconfig
+.vscode
+server/dist
+client/build
+test/*
+test.*
+cypress/*
+cypress.json
+node_modules
+server/node_modules
+client/node_modules
