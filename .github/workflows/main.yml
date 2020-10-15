@@ -1,6 +1,9 @@
 name: CI
 
-on: [push]
+on:
+  pull_request:
+    branches:
+      - main
 
 jobs:
   client_lint:
@@ -28,3 +31,19 @@ jobs:
 
     - name: run lint
       run: cd server && npm run lint
+
+  server_test:
+    runs-on: ubuntu-latest
+    name: Server Test
+    steps:
+    - name: Checkout
+      uses: actions/checkout@v2
+
+    - name: run tests
+      run: cd server && npm run test:ci
+      env:
+        DATABASE_HOST: 'postgresdb'
+        POSTGRES_DB: 'test'
+        POSTGRES_USER: 'postgres'
+        DATABASE_PORT: 5432
+        POSTGRES_PASSWORD: 'postgres'

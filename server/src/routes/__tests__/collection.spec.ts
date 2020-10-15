@@ -1,4 +1,5 @@
 import request from 'supertest';
+import { db } from '../../db';
 import { app as server } from '../../index';
 
 const requestBody = {
@@ -25,9 +26,12 @@ const requestBody = {
 
 describe('collection routes', () => {
     beforeAll(async (done) => {
+        await db.migrate.latest();
+        await db.seed.run();
         done();
     });
     afterAll(async (done) => {
+        await db.destroy();
         done();
     });
 
