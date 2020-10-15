@@ -26,10 +26,10 @@ const connections = {
         client: 'pg',
         connection: {
             host: 'postgresdb',
-            user: process.env.DATABASE_USER,
-            password: process.env.DATABASE_PASSWORD,
-            database: process.env.DATABASE_NAME,
-            port: Number(process.env.DATABASE_PORT)
+            user: 'postgres',
+            password: 'postgres',
+            database: 'test',
+            port: 5432
         },
         migrations: {
             directory: './db/migrations',

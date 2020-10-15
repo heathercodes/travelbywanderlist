@@ -6,11 +6,11 @@ services:
         ports:
             - '9000:9000'
         environment:
-            - DATABASE_HOST=${DATABASE_HOST}
-            - POSTGRES_DB=${POSTGRES_DB}
-            - POSTGRES_USER=${POSTGRES_USER}
-            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
-            - DATABASE_PORT=${DATABASE_PORT}
+            - DATABASE_HOST=postgresdb
+            - POSTGRES_DB=test
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
+            - DATABASE_PORT=5432
         depends_on:
             - postgresdb
 
@@ -18,13 +18,13 @@ services:
         image: postgres
         restart: always
         environment:
-            - POSTGRES_DB=${POSTGRES_DB}
-            - POSTGRES_USER=${POSTGRES_USER}
-            - POSTGRES_PASSWORD=${POSTGRES_PASSWORD}
+            - POSTGRES_DB=test
+            - POSTGRES_USER=postgres
+            - POSTGRES_PASSWORD=postgres
         ports:
             - '5432:5432'
         volumes:
             - ./data/postgres:/var/lib/postgresql/data
 
-# volumes:
-#     server_node_modules:
+volumes:
+    server_node_modules:
