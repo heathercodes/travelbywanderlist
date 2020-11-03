@@ -72,7 +72,8 @@ export function LocationEditor({ closeEditor }: LocationEditorProps): React.Reac
         <Button
           type="button"
           onClick={closeEditor}
-          text="X"
+          text="x"
+          isSecondary
           styles={[modalButtonStyles, topButtonStyles]}
         />
 
@@ -80,6 +81,8 @@ export function LocationEditor({ closeEditor }: LocationEditorProps): React.Reac
           id="location-name"
           labelText="Edit location name"
           type="text"
+          isSecondary
+          labelIsHidden
           onChange={(e: any): void => onChangeName(e.target.value)}
           value={location.name || ''}
           styles={[labelContainerStyles, upperLabelStyles]}
@@ -88,6 +91,8 @@ export function LocationEditor({ closeEditor }: LocationEditorProps): React.Reac
         <TextArea
           id="location-description"
           labelText="Add Details"
+          isSecondary
+          labelIsHidden
           onChange={(e: any): void => onChangeDetails(e.target.value)}
           value={location.description || ''}
           styles={[labelContainerStyles, lowerLabelStyles]}

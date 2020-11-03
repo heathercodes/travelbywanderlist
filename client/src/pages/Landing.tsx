@@ -11,7 +11,7 @@ export function LandingPage(): React.ReactElement {
       <header css={sectionStyles}>
         <h1 css={headerStyles}>Wanderlist</h1>
         <img src={globe} alt="" />
-        <p css={subTitleStyles}>Welcome to travel, by Wanderlist</p>
+        <p css={subTitleStyles}>Plan your trip with Wanderlist</p>
       </header>
 
       <Login />
