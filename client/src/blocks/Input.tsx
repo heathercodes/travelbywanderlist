@@ -2,28 +2,57 @@
 /** @jsx jsx */
 import React from 'react';
 import { jsx } from '@emotion/core';
+import {
+  inputStyles,
+  labelStyles,
+  primaryInputStyles,
+  secondaryInputStyles,
+  fieldsetStyles,
+  accessiblyHiddenStyles,
+} from './Input.styles';
 
 interface InputProps {
-    labelText?: string;
-    id: string;
-    type: string;
-    value: any;
-    onChange(val: any): void;
-    styles?: any;
+  labelText?: string;
+  labelIsHidden?: boolean;
+  id: string;
+  type: string;
+  value: any;
+  disabled?: boolean;
+  onChange(val: any): void;
+  styles?: any;
+  placeholder?: string;
+  isSecondary?: boolean;
 }
 
 export function Input({
-    labelText,
-    id,
-    type,
-    value,
-    onChange,
-    styles,
+  disabled,
+  labelText,
+  type,
+  id,
+  onChange,
+  labelIsHidden,
+  value,
+  styles,
+  placeholder,
+  isSecondary,
 }: InputProps): React.ReactElement {
-    return (
-        <label htmlFor={id} css={styles}>
-            {labelText && <span>{labelText}</span>}
-            <input id={id} type={type} value={value} onChange={onChange} />
-        </label>
-    );
+  const isHidden = labelIsHidden ? accessiblyHiddenStyles : labelStyles;
+  const inputClasses = isSecondary ? secondaryInputStyles : primaryInputStyles;
+
+  return (
+    <fieldset disabled={disabled} css={[fieldsetStyles, styles]}>
+      <label htmlFor={id} css={isHidden}>
+        {labelText}
+      </label>
+      <input
+        type={type}
+        id={id}
+        name={id}
+        onChange={onChange}
+        css={[inputStyles, inputClasses]}
+        value={value}
+        placeholder={placeholder}
+      />
+    </fieldset>
+  );
 }

@@ -1,27 +1,19 @@
 /** @jsx jsx */
-import React, { useState, useContext } from "react";
-import { useHistory } from "react-router-dom";
-import { jsx } from "@emotion/core";
-import { ErrorMessage, useErrorHandler, Button, Input } from "../blocks";
-import { GlobalContext } from "../provider/GlobalProvider";
-import { post, get } from "../utils/fetch";
-import {
-  validateRegisterForm,
-  validateLoginForm,
-} from "../utils/login-validation";
-import {
-  labelStyles,
-  formStyles,
-  inputContainer,
-  submitContainer,
-} from "./Login.styles";
+import React, { useState, useContext } from 'react';
+import { useHistory } from 'react-router-dom';
+import { jsx } from '@emotion/core';
+import { ErrorMessage, useErrorHandler, Button, Input } from '../blocks';
+import { GlobalContext } from '../provider/GlobalProvider';
+import { post, get } from '../utils/fetch';
+import { validateRegisterForm, validateLoginForm } from '../utils/login-validation';
+import { labelStyles, formStyles, inputContainer, buttonContainer } from './Login.styles';
 
 export function Login(): React.ReactElement {
-  const [wanderlistId, setWanderlistId] = useState("");
-  const [wanderlistName, setWanderlistName] = useState("");
+  const [wanderlistId, setWanderlistId] = useState('');
+  const [wanderlistName, setWanderlistName] = useState('');
   const [openLogin, toggleOpenLogin] = useState(false);
   const [openSignUp, toggleOpenSignUp] = useState(false);
-  const { error, showError } = useErrorHandler("");
+  const { error, showError } = useErrorHandler('');
   const {
     updateWanderlist,
     setIsFetching,
@@ -33,7 +25,7 @@ export function Login(): React.ReactElement {
     try {
       setIsFetching(true);
 
-      const wanderlist = await post("collection", {
+      const wanderlist = await post('collection', {
         collection: { name: wanderlistName },
       });
       updateWanderlist(wanderlist.data);
@@ -82,18 +74,13 @@ export function Login(): React.ReactElement {
           {openLogin && !openSignUp && (
             <Input
               id="wanderlist-id"
+              placeholder="Enter Wanderlist ID"
+              labelIsHidden
               styles={labelStyles}
               labelText="Please enter your Wanderlist ID"
               type="number"
               onChange={(e: any): void => setWanderlistId(e.target.value)}
               value={wanderlistId}
-            />
-          )}
-          {!openSignUp && !openLogin && (
-            <Button
-              type="button"
-              text="Login"
-              onClick={(): void => toggleOpenLogin(true)}
             />
           )}
         </div>
@@ -102,6 +89,8 @@ export function Login(): React.ReactElement {
           {openSignUp && !openLogin && (
             <Input
               id="wanderlist-name"
+              placeholder="Enter trip name"
+              labelIsHidden
               styles={labelStyles}
               labelText="Enter the name of your next trip"
               type="text"
@@ -109,16 +98,23 @@ export function Login(): React.ReactElement {
               value={wanderlistName}
             />
           )}
+        </div>
+
+        <div css={[inputContainer, buttonContainer]}>
+          {!openSignUp && !openLogin && (
+            <Button type="button" text="Login" onClick={(): void => toggleOpenLogin(true)} />
+          )}
           {!openLogin && !openSignUp && (
             <Button
               type="button"
               text="Sign up"
+              isSecondary
               onClick={(): void => toggleOpenSignUp(true)}
             />
           )}
         </div>
 
-        <div css={[inputContainer, submitContainer]}>
+        <div css={[inputContainer, buttonContainer]}>
           {(openSignUp || openLogin) && (
             <React.Fragment>
               <Button

@@ -1,13 +1,13 @@
-import { css } from "@emotion/core";
-import emotionNormalize from "emotion-normalize";
-import { COLOURS } from "./constants";
+import { css } from '@emotion/core';
+import emotionNormalize from 'emotion-normalize';
+import { COLOURS } from './constants';
 
 export const bodyStyles = css`
   ${emotionNormalize}
   html,
     body {
     background-color: ${COLOURS.BASE_SECONDARY};
-    font-family: "Catamaran", sans-serif;
+    font-family: 'Catamaran', sans-serif;
     font-size: 62.5%;
   }
 
@@ -21,13 +21,6 @@ export const bodyStyles = css`
   label,
   button {
     font-size: 1.6rem;
-  }
-
-  input {
-    border: none;
-    background-color: transparent;
-    border-bottom: 1px solid ${COLOURS.BLACK};
-    padding: 0.5rem;
   }
 
   textarea {
