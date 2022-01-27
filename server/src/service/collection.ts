@@ -15,7 +15,7 @@ export async function createCollection(data: CollectionUpdateReq): Promise<Wande
 
         locations = await Promise.all(
             data.locations.map((loc: Location) =>
-                locationRepo.createLocation({ wanderlist_id: newCollection.id, ...loc })
+                locationRepo.createLocation({ ...loc, wanderlist_id: newCollection.id })
             )
         );
 
@@ -55,10 +55,10 @@ export async function updateCollection(data: CollectionUpdateReq): Promise<Wande
         locations = await Promise.all(
             data.locations.map((loc: Location) => {
                 if (loc.id) {
-                    return locationRepo.updateLocation({ wanderlist_id: collection.id, ...loc });
+                    return locationRepo.updateLocation({ ...loc, wanderlist_id: collection.id });
                 }
 
-                return locationRepo.createLocation({ wanderlist_id: collection.id, ...loc });
+                return locationRepo.createLocation({ ...loc, wanderlist_id: collection.id });
             })
         );
 
