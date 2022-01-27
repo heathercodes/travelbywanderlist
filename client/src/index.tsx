@@ -1,10 +1,10 @@
-import React from "react";
-import { render } from "react-dom";
-import { BrowserRouter } from "react-router-dom";
-import { Global } from "@emotion/core";
-import { GlobalProvider } from "./provider/GlobalProvider";
-import { bodyStyles } from "./index.styles";
-import App from "./App";
+import React from 'react';
+import { render } from 'react-dom';
+import { BrowserRouter } from 'react-router-dom';
+import { Global } from '@emotion/react';
+import { GlobalProvider } from './provider/GlobalProvider';
+import { bodyStyles } from './index.styles';
+import App from './App';
 // import * as serviceWorker from "./serviceWorker";
 
 render(
@@ -16,7 +16,7 @@ render(
       </GlobalProvider>
     </BrowserRouter>
   </React.StrictMode>,
-  document.getElementById("root"),
+  document.getElementById('root')
 );
 
 // If you want your app to work offline and load faster, you can change

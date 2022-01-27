@@ -1,6 +1,5 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React, { useContext } from 'react';
-import { jsx } from '@emotion/core';
 import { Marker as MapGLMarker } from 'react-map-gl';
 import { COLOURS } from '../constants';
 import { Location } from '../types';

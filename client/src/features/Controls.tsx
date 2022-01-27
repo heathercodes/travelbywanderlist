@@ -1,6 +1,5 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React, { useContext } from 'react';
-import { jsx } from '@emotion/core';
 import { GlobalContext } from '../provider/GlobalProvider';
 import { ErrorMessage, useErrorHandler, Button } from '../blocks';
 import { put } from '../utils/fetch';
@@ -32,7 +31,7 @@ export function Controls({ locations }: WanderlistEditorProps): React.ReactEleme
       updateWanderlist(updatedWanderlist.data);
 
       setIsFetching(false);
-    } catch (err) {
+    } catch (err: any) {
       setIsFetching(false);
       showError(err.message);
     }

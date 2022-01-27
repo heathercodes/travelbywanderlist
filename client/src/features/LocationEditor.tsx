@@ -1,6 +1,5 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React, { useContext, useEffect, useState } from 'react';
-import { jsx } from '@emotion/core';
 import { GlobalContext } from '../provider/GlobalProvider';
 import { ErrorMessage, useErrorHandler, Button, Input, TextArea } from '../blocks';
 import { put } from '../utils/fetch';
@@ -55,7 +54,7 @@ export function LocationEditor({ closeEditor }: LocationEditorProps): React.Reac
       updateLocation(updatedLocation.data);
 
       setIsFetching(false);
-    } catch (err) {
+    } catch (err: any) {
       setIsFetching(false);
       showError(err.message);
     }

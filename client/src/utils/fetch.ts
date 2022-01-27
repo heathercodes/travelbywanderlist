@@ -1,70 +1,70 @@
 export async function get(url: string): Promise<any> {
   try {
     const response = await fetch(`${process.env.REACT_APP_API_URL}${url}`, {
-      method: "get",
-      credentials: "same-origin",
+      method: 'get',
+      credentials: 'same-origin',
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
     });
 
     return response.json();
-  } catch (err) {
+  } catch (err: any) {
     return Promise.reject(new Error(err));
   }
 }
 
-export async function post(url: string, payload: {}): Promise<any> {
+export async function post(url: string, payload: Record<string, unknown>): Promise<any> {
   try {
     const response = await fetch(`${process.env.REACT_APP_API_URL}${url}`, {
-      method: "post",
-      credentials: "same-origin",
+      method: 'post',
+      credentials: 'same-origin',
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
       body: JSON.stringify(payload),
     });
 
     return response.json();
-  } catch (err) {
+  } catch (err: any) {
     return Promise.reject(new Error(err));
   }
 }
 
-export async function put(url: string, payload: {}): Promise<any> {
+export async function put(url: string, payload: Record<string, unknown>): Promise<any> {
   try {
     const response = await fetch(`${process.env.REACT_APP_API_URL}${url}`, {
-      method: "put",
-      credentials: "same-origin",
+      method: 'put',
+      credentials: 'same-origin',
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
       body: JSON.stringify(payload),
     });
 
     return response.json();
-  } catch (err) {
+  } catch (err: any) {
     return Promise.reject(new Error(err));
   }
 }
 
-export async function remove(url: string, payload: {}): Promise<any> {
+export async function remove(url: string, payload: Record<string, unknown>): Promise<any> {
   try {
     const response = await fetch(`${process.env.REACT_APP_API_URL}${url}`, {
-      method: "delete",
-      credentials: "same-origin",
+      method: 'delete',
+      credentials: 'same-origin',
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
       },
       body: JSON.stringify(payload),
     });
 
     return response.json();
-  } catch (err) {
+  } catch (err: any) {
     return Promise.reject(new Error(err));
   }
 }

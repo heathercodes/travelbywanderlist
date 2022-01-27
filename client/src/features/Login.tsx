@@ -1,7 +1,6 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React, { useState, useContext } from 'react';
-import { useHistory } from 'react-router-dom';
-import { jsx } from '@emotion/core';
+import { useNavigate } from 'react-router-dom';
 import { ErrorMessage, useErrorHandler, Button, Input } from '../blocks';
 import { GlobalContext } from '../provider/GlobalProvider';
 import { post, get } from '../utils/fetch';
@@ -19,7 +18,7 @@ export function Login(): React.ReactElement {
     setIsFetching,
     ui: { isFetching },
   } = useContext(GlobalContext);
-  const history = useHistory();
+  const navigate = useNavigate();
 
   const registerHandler = async (): Promise<void> => {
     try {
@@ -30,9 +29,9 @@ export function Login(): React.ReactElement {
       });
       updateWanderlist(wanderlist.data);
 
-      history.push(`/map/${wanderlistId}`);
+      navigate(`/map/${wanderlistId}`);
       setIsFetching(false);
-    } catch (err) {
+    } catch (err: any) {
       showError(err.message);
       setIsFetching(false);
     }
@@ -45,10 +44,10 @@ export function Login(): React.ReactElement {
       const wanderlist = await get(`collection/${wanderlistId}`);
       updateWanderlist(wanderlist.data);
 
-      history.push(`/map/${wanderlistId}`);
+      navigate(`/map/${wanderlistId}`);
 
       setIsFetching(false);
-    } catch (err) {
+    } catch (err: any) {
       showError(err.message);
       setIsFetching(false);
     }

@@ -1,7 +1,5 @@
-/* eslint-disable react/button-has-type */
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react';
-import { jsx } from '@emotion/core';
 import { buttonStyles, primaryButtonStyles, secondaryButtonStyles } from './Button.styles';
 
 interface ButtonProps {
@@ -14,7 +12,7 @@ interface ButtonProps {
 }
 
 export function Button({
-  type,
+  type = 'button',
   text,
   onClick,
   disabled,
@@ -24,6 +22,7 @@ export function Button({
   const classes = isSecondary ? secondaryButtonStyles : primaryButtonStyles;
 
   return (
+    // eslint-disable-next-line react/button-has-type
     <button type={type} onClick={onClick} css={[buttonStyles, classes, styles]} disabled={disabled}>
       {text}
     </button>

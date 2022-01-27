@@ -1,10 +1,10 @@
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 
 export const buttonStyles = css`
-    all: initial;
+  all: initial;
 `;
 
 export const markerStyles = css`
-    width: 30px;
-    height: 30px;
+  width: 30px;
+  height: 30px;
 `;

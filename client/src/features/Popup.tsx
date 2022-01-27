@@ -1,6 +1,5 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react';
-import { jsx } from '@emotion/core';
 import { Popup as MapGLPopup } from 'react-map-gl';
 import { Button } from '../blocks';
 import { Location } from '../types';

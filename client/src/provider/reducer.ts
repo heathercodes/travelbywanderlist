@@ -1,5 +1,6 @@
 import { GlobalState } from '../types';
 
+// eslint-disable-next-line no-shadow
 export enum ACTIONS {
   UPDATE_WANDERLIST = 'UPDATE_WANDERLIST',
   UPDATE_LOCATION = 'UPDATE_LOCATION',

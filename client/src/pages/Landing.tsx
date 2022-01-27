@@ -1,6 +1,5 @@
-/** @jsx jsx */
+/** @jsxImportSource @emotion/react */
 import React from 'react';
-import { jsx } from '@emotion/core';
 import { Login } from '../features';
 import globe from './globe.gif';
 import { sectionStyles, headerStyles, subTitleStyles } from './Landing.styles';

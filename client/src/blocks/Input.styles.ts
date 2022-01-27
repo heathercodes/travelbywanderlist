@@ -1,4 +1,4 @@
-import { css } from '@emotion/core';
+import { css } from '@emotion/react';
 import { COLOURS } from '../constants';
 
 export const inputStyles = css`

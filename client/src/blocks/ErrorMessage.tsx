@@ -1,10 +1,9 @@
-/** @jsx jsx */
-import React from "react";
-import { jsx } from "@emotion/core";
-import { errorMessageStyles } from "./ErrorMessage.styles";
+/** @jsxImportSource @emotion/react */
+import React from 'react';
+import { errorMessageStyles } from './ErrorMessage.styles';
 
-function ErrorMessage(message: { errorMessage: string }): React.ReactElement {
-  return <p css={errorMessageStyles}>{message.errorMessage}</p>;
+function ErrorMessage({ errorMessage }: { errorMessage: string }): React.ReactElement {
+  return <p css={errorMessageStyles}>{errorMessage}</p>;
 }
 
 export { ErrorMessage };
