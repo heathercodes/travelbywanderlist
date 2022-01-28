@@ -6,13 +6,8 @@ import { InteractiveMap } from './pages/Map';
 export default function App(): JSX.Element {
   return (
     <Routes>
-      <Route path="/map">
-        <InteractiveMap />
-      </Route>
-
-      <Route path="/">
-        <LandingPage />
-      </Route>
+      <Route path="/map/:id" element={<InteractiveMap />} />
+      <Route path="/" element={<LandingPage />} />
     </Routes>
   );
 }

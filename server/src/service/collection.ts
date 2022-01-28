@@ -27,7 +27,7 @@ export async function createCollection(data: CollectionUpdateReq): Promise<Wande
 
 export async function getCollectionById(data: { id: number }): Promise<Wanderlist> {
     const collection = await collectionRepo.getCollectionById(data);
-
+    console.log('HUHHHHHH', data);
     if (!collection) {
         return Promise.reject(new Error('getCollectionById error'));
     }

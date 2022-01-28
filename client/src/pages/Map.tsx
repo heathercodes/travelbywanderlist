@@ -1,14 +1,14 @@
-import React, { useState, useContext, useEffect } from "react";
-import ReactMapGL from "react-map-gl";
-import { Button } from "../blocks";
-import { Controls, LocationEditor, Marker, Popup } from "../features";
-import { GlobalContext } from "../provider/GlobalProvider";
-import { useViewport } from "./hooks/useViewport";
-import { useLocation } from "./hooks/useLocation";
-import { useSettings } from "./hooks/useSettings";
-import { Location } from "../types";
+import React, { useState, useContext, useEffect } from 'react';
+import ReactMapGL from 'react-map-gl';
+import { Button } from '../blocks';
+import { Controls, LocationEditor, Marker, Popup } from '../features';
+import { GlobalContext } from '../provider/GlobalProvider';
+import { useViewport } from './hooks/useViewport';
+import { useLocation } from './hooks/useLocation';
+import { useSettings } from './hooks/useSettings';
+import { Location } from '../types';
 
-import { modalButtonStyles, bottomButtonStyles } from "../index.styles";
+import { modalButtonStyles, bottomButtonStyles } from '../index.styles';
 
 export function InteractiveMap(): React.ReactElement {
   const { viewport, setViewport } = useViewport();
@@ -56,7 +56,7 @@ export function InteractiveMap(): React.ReactElement {
   const getLocationDetails = (e: any): void => {
     const featureName = e.features[0].properties?.name_en
       ? e.features[0].properties.name_en
-      : "Unknown Location";
+      : 'Unknown Location';
     const [longitude, latitude] = e.lngLat;
 
     setTempLocation({ name: featureName, latitude, longitude });
@@ -90,7 +90,7 @@ export function InteractiveMap(): React.ReactElement {
                 location={loc}
                 openEditor={handleEditor}
               />
-            ),
+            )
           )}
         {openPopup && (
           <Popup location={tempLocation} handleClose={closePopup}>
@@ -107,7 +107,7 @@ export function InteractiveMap(): React.ReactElement {
       </ReactMapGL>
 
       <Controls locations={locations} />
-      {openEditor && (<LocationEditor closeEditor={closeEditor} />)}
+      {openEditor && <LocationEditor closeEditor={closeEditor} />}
     </React.Fragment>
   );
 }
