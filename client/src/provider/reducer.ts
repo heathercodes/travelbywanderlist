@@ -7,6 +7,7 @@ export enum ACTIONS {
   UPDATE_COLLECTION = 'UPDATE_COLLECTION',
   UPDATE_CURRENT_LOCATION = 'UPDATE_CURRENT_LOCATION',
   SET_IS_FETCHING = 'SET_IS_FETCHING',
+  SET_USER = 'SET_USER',
 }
 
 export const initialState: GlobalState = {
@@ -26,6 +27,11 @@ export const initialState: GlobalState = {
   ui: {
     isFetching: false,
     isError: false,
+  },
+  user: {
+    id: 0,
+    name: '',
+    email: '',
   },
 };
 
@@ -76,6 +82,14 @@ export const reducer = (state: GlobalState, action: any) => {
         ui: {
           ...state.ui,
           isFetching: action.payload.isFetching,
+        },
+      };
+
+    case ACTIONS.SET_USER:
+      return {
+        ...state,
+        user: {
+          ...action.payload.userInfo,
         },
       };
 

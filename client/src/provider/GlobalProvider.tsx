@@ -1,6 +1,6 @@
 import React, { createContext, useReducer } from 'react';
 import { reducer, initialState, ACTIONS } from './reducer';
-import { GlobalContextTypes, Wanderlist, Location } from '../types';
+import { GlobalContextTypes, Wanderlist, Location, UserState } from '../types';
 
 export const GlobalContext = createContext<GlobalContextTypes>(initialState as GlobalContextTypes);
 
@@ -43,16 +43,27 @@ export function GlobalProvider({ children }: any): JSX.Element {
     });
   }
 
+  function setUser(userInfo: UserState): void {
+    dispatch({
+      type: ACTIONS.SET_USER,
+      payload: {
+        userInfo,
+      },
+    });
+  }
+
   return (
     <GlobalContext.Provider
       value={{
         wanderlist: state.wanderlist,
         currentLocation: state.currentLocation,
         ui: state.ui,
+        user: state.user,
         updateWanderlist,
         updateCurrentLocation,
         updateLocation,
         setIsFetching,
+        setUser,
       }}
     >
       {children}

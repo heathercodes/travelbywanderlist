@@ -1,10 +1,9 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
-import { Login } from '../features';
-import globe from './globe.gif';
+import globe from '../globe.gif';
 import { sectionStyles, headerStyles, subTitleStyles } from './Landing.styles';
 
-export function LandingPage(): React.ReactElement {
+export function LandingHeader({ children }: any): React.ReactElement {
   return (
     <section css={sectionStyles}>
       <header css={sectionStyles}>
@@ -13,7 +12,7 @@ export function LandingPage(): React.ReactElement {
         <p css={subTitleStyles}>Plan your trip with Wanderlist</p>
       </header>
 
-      <Login />
+      {children}
     </section>
   );
 }
