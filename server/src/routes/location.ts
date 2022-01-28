@@ -3,9 +3,11 @@ import * as locationController from '../controllers/location';
 
 const locationRouter = Router();
 
-locationRouter.get('/:id', locationController.getLocationById);
 locationRouter.post('', locationController.createLocation);
-locationRouter.put('/:id', locationController.updateLocation);
-locationRouter.delete('/:id', locationController.deleteLocationById);
+
+locationRouter
+    .get('/:id', locationController.getLocationById)
+    .put('/:id', locationController.updateLocation)
+    .delete('/:id', locationController.deleteLocationById);
 
 export { locationRouter };

@@ -28,7 +28,7 @@ export async function updateLocation(
     const { id } = req.params;
 
     try {
-        const data = await locationService.updateLocation({ id: Number(id), ...req.body });
+        const data = await locationService.updateLocation({ ...req.body, id: Number(id) });
         return res.status(201).json({ data });
     } catch (error) {
         return next({
