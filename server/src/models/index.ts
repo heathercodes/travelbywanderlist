@@ -86,3 +86,21 @@ export interface CollectionUpdate {
     id: number;
     name: string;
 }
+
+export interface User {
+    id: number;
+    name: string;
+    email: string;
+    password: string;
+    wanderlists: Wanderlist[];
+}
+
+export interface UserRequest extends Request {
+    body: {
+        id: number;
+        name: string;
+        email: string;
+        password: string;
+        wanderlists: Wanderlist[];
+    };
+}
