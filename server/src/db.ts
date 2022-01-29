@@ -24,3 +24,4 @@ switch (env) {
 const db = Knex(config);
 
 export { db };
+export const secret = process.env.JWT_SECRET || 'jwttokendev';

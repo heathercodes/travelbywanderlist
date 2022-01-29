@@ -38,7 +38,7 @@ export async function getUser(req: UserRequest, res: Response, next: NextFunctio
             return res.status(401).send(invalid);
         }
 
-        const match = await checkPassword(req.body.password);
+        const match = await checkPassword(req.body.password, user.password);
 
         if (!match) {
             return res.status(401).send(invalid);

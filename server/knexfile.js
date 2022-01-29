@@ -18,9 +18,6 @@ module.exports = {
         },
         seeds: {
             directory: './db/seeds'
-        },
-        secrets: {
-            jwt: 'learneverything'
         }
     },
 
@@ -39,16 +36,8 @@ module.exports = {
         },
         seeds: {
             directory: './db/seeds'
-        },
-        secrets: {
-            jwt: 'learneverything'
         }
     },
 
-    production: {
-        secrets: {
-            jwt: process.env.JWT_SECRET,
-            jwtExp: '100d'
-        }
-    }
+    production: {}
 };
