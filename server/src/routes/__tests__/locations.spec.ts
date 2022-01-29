@@ -1,3 +1,4 @@
+// @ts-nocheck
 import request from 'supertest';
 import { app as server } from '../../index';
 import { db } from '../../db';
@@ -28,10 +29,10 @@ describe('location routes', () => {
     });
 
     it('POST /location create a location', async (done) => {
-        const collectionResp = await request(server).post('/collection').send(collectionBody);
+        const collectionResp = await request(server).post('/api/collection').send(collectionBody);
         const response = await request(server)
-            .post('/location')
-            .send({ wanderlist_id: collectionResp.body.data.collection.id, ...requestBody });
+            .post('/api/location')
+            .send({ ...requestBody, wanderlist_id: collectionResp.body.data.collection.id });
 
         expect(response.status).toBe(201);
         expect(response.body.data).toStrictEqual({
@@ -47,12 +48,14 @@ describe('location routes', () => {
     });
 
     it('GET /location get a location by ID', async (done) => {
-        const collectionResp = await request(server).post('/collection').send(collectionBody);
+        const collectionResp = await request(server).post('/api/collection').send(collectionBody);
         const locationResponse = await request(server)
-            .post('/location')
-            .send({ wanderlist_id: collectionResp.body.data.collection.id, ...requestBody });
+            .post('/api/location')
+            .send({ ...requestBody, wanderlist_id: collectionResp.body.data.collection.id });
 
-        const response = await request(server).get(`/location/${locationResponse.body.data.id}`);
+        const response = await request(server).get(
+            `/api/location/${locationResponse.body.data.id}`
+        );
         expect(response.status).toBe(200);
         expect(response.body.data).toStrictEqual({
             id: expect.any(Number),
@@ -67,11 +70,13 @@ describe('location routes', () => {
     });
 
     it('DELETE /location deletes a location', async (done) => {
-        const collectionResp = await request(server).post('/collection').send(collectionBody);
+        const collectionResp = await request(server).post('/api/collection').send(collectionBody);
         const locationResponse = await request(server)
-            .post('/location')
-            .send({ wanderlist_id: collectionResp.body.data.collection.id, ...requestBody });
-        const response = await request(server).delete(`/location/${locationResponse.body.data.id}`);
+            .post('/api/location')
+            .send({ ...requestBody, wanderlist_id: collectionResp.body.data.collection.id });
+        const response = await request(server).delete(
+            `/api/location/${locationResponse.body.data.id}`
+        );
 
         expect(response.status).toBe(200);
         expect(response.body.data).toStrictEqual({

@@ -1,3 +1,4 @@
+// @ts-nocheck
 import request from 'supertest';
 import { db } from '../../db';
 import { app as server } from '../../index';
@@ -36,7 +37,7 @@ describe('collection routes', () => {
     });
 
     it('POST /collection create a collection', async (done) => {
-        const response = await request(server).post('/collection').send(requestBody);
+        const response = await request(server).post('/api/collection').send(requestBody);
 
         expect(response.status).toBe(201);
         expect(response.body.data).toStrictEqual({
@@ -72,9 +73,9 @@ describe('collection routes', () => {
     });
 
     it('GET /collection get a collection', async (done) => {
-        const collectionResp = await request(server).post('/collection').send(requestBody);
+        const collectionResp = await request(server).post('/api/collection').send(requestBody);
         const response = await request(server).get(
-            `/collection/${collectionResp.body.data.collection.id}`
+            `/api/collection/${collectionResp.body.data.collection.id}`
         );
 
         expect(response.status).toBe(200);
@@ -111,10 +112,10 @@ describe('collection routes', () => {
     });
 
     it('DELETE /collection deletes a collection', async (done) => {
-        const collectionResp = await request(server).post('/collection').send(requestBody);
+        const collectionResp = await request(server).post('/api/collection').send(requestBody);
 
         const response = await request(server).delete(
-            `/collection/${collectionResp.body.data.collection.id}`
+            `/api/collection/${collectionResp.body.data.collection.id}`
         );
 
         expect(response.status).toBe(200);
@@ -126,7 +127,7 @@ describe('collection routes', () => {
     });
 
     it('UPDATE /collection updates a collection', async (done) => {
-        const collectionResp = await request(server).post('/collection').send(requestBody);
+        const collectionResp = await request(server).post('/api/collection').send(requestBody);
 
         const updateBody = {
             collection: {
@@ -141,7 +142,7 @@ describe('collection routes', () => {
                 }
             ]
         };
-        const response = await request(server).put('/collection').send(updateBody);
+        const response = await request(server).put('/api/collection').send(updateBody);
 
         expect(response.status).toBe(201);
         expect(response.body.data).toStrictEqual({
