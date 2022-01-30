@@ -1,17 +1,23 @@
 import { KnexResponse, User } from '../models';
 import { db } from '../db';
 
-export async function createUser(data: { email: string; password: string }): Promise<any> {
+export async function createUser({
+    email,
+    password
+}: {
+    email: string;
+    password: string;
+}): Promise<any> {
     const results: KnexResponse = await db.raw(
-        'insert into "users" ("email", "password") values (?), (?) returning *',
-        [data.email, data.password]
+        'insert into "users" ("email", "password") values (?, ?) returning *',
+        [email, password]
     );
 
     return results.rows[0];
 }
 
 export async function getUser(data: { email: string }): Promise<any> {
-    const results: KnexResponse = await db.raw('select * from "user" where "email" = ?', [
+    const results: KnexResponse = await db.raw('select * from "users" where "email" = ?', [
         data.email
     ]);
 

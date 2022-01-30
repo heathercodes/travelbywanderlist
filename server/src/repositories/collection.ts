@@ -18,6 +18,14 @@ export async function getCollectionById(data: { id: number }): Promise<Collectio
     return results.rows[0];
 }
 
+export async function getCollectionByUserId(data: { id: number }): Promise<Collection> {
+    const results: KnexResponse = await db.raw('select * from "wanderlists" where "user_id" = ?', [
+        data.id
+    ]);
+
+    return results.rows[0];
+}
+
 export async function updateCollection(data: CollectionUpdate): Promise<Collection> {
     const results: KnexResponse = await db.raw(
         'update "wanderlists" set "name" = ? where "id" = ? returning *',

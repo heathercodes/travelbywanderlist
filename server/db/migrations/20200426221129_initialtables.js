@@ -3,8 +3,8 @@ exports.up = function (knex) {
         .createTable('users', (table) => {
             table.increments();
             table.string('name');
-            table.string('password');
-            table.string('email');
+            table.string('password').notNullable();
+            table.string('email').notNullable().unique();
             table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now());
             table.timestamp('updatedAt').notNullable().defaultTo(knex.fn.now());
         })

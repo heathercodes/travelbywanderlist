@@ -1,8 +1,18 @@
 import { User } from '../models';
 import * as userRepo from '../repositories/user';
+import * as collectionRepo from '../repositories/collection';
+import bcrypt from 'bcrypt';
 
-export async function createUser(data: { email: string; password: string }): Promise<User> {
-    const user = await userRepo.createUser(data);
+export async function createUser({
+    email,
+    password
+}: {
+    email: string;
+    password: string;
+}): Promise<User> {
+    const hashedPassword = await bcrypt.hash(password, 10);
+
+    const user = await userRepo.createUser({ email, password: hashedPassword });
 
     if (!user) {
         return Promise.reject(new Error('createUser error'));
@@ -13,12 +23,13 @@ export async function createUser(data: { email: string; password: string }): Pro
 
 export async function getUser(data: { email: string }): Promise<User> {
     const user = await userRepo.getUser(data);
+    const wanderlists = await collectionRepo.getCollectionByUserId({ id: user.id });
 
     if (!user) {
         return Promise.reject(new Error('getUser error: user not found'));
     }
 
-    return user;
+    return { ...user, wanderlists };
 }
 
 export async function updateUser(data: User): Promise<User> {

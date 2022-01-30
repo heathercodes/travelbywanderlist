@@ -92,7 +92,7 @@ export interface User {
     name: string;
     email: string;
     password: string;
-    wanderlists: Wanderlist[];
+    wanderlists?: Wanderlist[];
 }
 
 export interface UserRequest extends Request {
