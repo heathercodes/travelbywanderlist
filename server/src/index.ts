@@ -5,6 +5,7 @@ import cors from 'cors';
 import passport from 'passport';
 import { router, secureRouter } from './routes';
 import { logger } from './utils/logger';
+// import { protect } from './utils/auth';
 
 require('./utils/auth')(passport); // eslint-disable-line
 
@@ -28,5 +29,6 @@ app.use(passport.initialize());
 
 app.use(router);
 app.use('/map/:id', passport.authenticate('jwt', { session: false }), secureRouter);
+// app.use('/api', protect);
 
 export { app };

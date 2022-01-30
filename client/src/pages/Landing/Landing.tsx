@@ -7,7 +7,7 @@ import { inputContainer, buttonContainer } from './Form.styles';
 
 export function LandingPage({ setToken }: any) {
   const navigate = useNavigate();
-  console.log(setToken);
+
   return (
     <LandingHeader>
       <div css={[inputContainer, buttonContainer]}>

@@ -8,7 +8,6 @@ import { secureRouter } from './secure';
 
 const router = Router();
 
-// app.use('/api', protect)
 router.use('/api/health', healthRouter);
 router.use('/api/location', locationRouter);
 router.use('/api/collection', collectionRouter);

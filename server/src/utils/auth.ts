@@ -17,33 +17,30 @@ const LocalStrategy = require('passport-local'); // eslint-disable-line
 //     });
 // }
 
-// export const protect = async (req, res, next) => {
-//     const bearer = req.headers.authorization
+// export const protect = async (req: CollectionRequest, res: Response, next: NextFunction): void => {
+//     const bearer = req.headers.authorization;
 
 //     if (!bearer || !bearer.startsWith('Bearer ')) {
-//       return res.status(401).end()
+//         return res.status(401).end();
 //     }
 
-//     const token = bearer.split('Bearer ')[1].trim()
-//     let payload
+//     const token = bearer.split('Bearer ')[1].trim();
+//     let payload;
 //     try {
-//       payload = await verifyToken(token)
+//         payload = await verifyToken(token);
 //     } catch (e) {
-//       return res.status(401).end()
+//         return res.status(401).end();
 //     }
 
-//     const user = await User.findById(payload.id)
-//       .select('-password')
-//       .lean()
-//       .exec()
+//     const user = await User.findById(payload.id).select('-password').lean().exec();
 
 //     if (!user) {
-//       return res.status(401).end()
+//         return res.status(401).end();
 //     }
 
-//     req.user = user
-//     next()
-//   }
+//     req.user = user;
+//     next();
+// };
 
 function newToken(user: { id: number }): string {
     return jwt.sign({ id: user.id }, secret, {
