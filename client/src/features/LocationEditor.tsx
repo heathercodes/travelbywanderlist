@@ -1,30 +1,18 @@
 /** @jsxImportSource @emotion/react */
 import React, { useContext, useEffect, useState } from 'react';
+import { Modal, Input } from 'antd';
 import { GlobalContext } from '../provider/GlobalProvider';
-import { ErrorMessage, useErrorHandler, Button, Input, TextArea } from '../blocks';
+import { ErrorMessage, useErrorHandler } from '../blocks';
 import { put } from '../utils/fetch';
-import {
-  editorOverlayStyles,
-  editorStyles,
-  labelContainerStyles,
-  upperLabelStyles,
-  lowerLabelStyles,
-} from './LocationEditor.styles';
-
-import { modalButtonStyles, topButtonStyles, bottomButtonStyles } from '../index.styles';
 
 interface LocationEditorProps {
   closeEditor(): void;
+  visible: boolean;
 }
 
-export function LocationEditor({ closeEditor }: LocationEditorProps): React.ReactElement {
+export function LocationEditor({ closeEditor, visible }: LocationEditorProps): React.ReactElement {
   const { error, showError } = useErrorHandler('');
-  const {
-    currentLocation,
-    updateLocation,
-    ui: { isFetching },
-    setIsFetching,
-  } = useContext(GlobalContext);
+  const { currentLocation, updateLocation, setIsFetching } = useContext(GlobalContext);
   const [location, setLocation] = useState<any>(currentLocation);
 
   useEffect(() => {
@@ -49,7 +37,7 @@ export function LocationEditor({ closeEditor }: LocationEditorProps): React.Reac
     try {
       setIsFetching(true);
 
-      const updatedLocation = await put(`location/${location.id}`, location);
+      const updatedLocation = await put(`/api/location/${location.id}`, location);
 
       updateLocation(updatedLocation.data);
 
@@ -66,49 +54,32 @@ export function LocationEditor({ closeEditor }: LocationEditorProps): React.Reac
   };
 
   return (
-    <div css={editorOverlayStyles}>
-      <section css={editorStyles}>
-        <Button
-          type="button"
-          onClick={closeEditor}
-          text="x"
-          isSecondary
-          styles={[modalButtonStyles, topButtonStyles]}
-        />
+    <Modal
+      okText="Save Location"
+      onOk={handleSubmit}
+      destroyOnClose
+      visible={visible}
+      onCancel={closeEditor}
+    >
+      <Input
+        allowClear
+        id="location-name"
+        onChange={(e: any): void => onChangeName(e.target.value)}
+        value={location.name || ''}
+      />
+      <label htmlFor="location-name">Edit location name</label>
 
-        <Input
-          id="location-name"
-          labelText="Edit location name"
-          type="text"
-          isSecondary
-          labelIsHidden
-          onChange={(e: any): void => onChangeName(e.target.value)}
-          value={location.name || ''}
-          styles={[labelContainerStyles, upperLabelStyles]}
-        />
+      <Input.TextArea
+        allowClear
+        id="location-description"
+        onChange={(e: any): void => onChangeDetails(e.target.value)}
+        value={location.description || ''}
+        placeholder="Tell us about this location"
+        rows={5}
+      />
+      <label htmlFor="location-description">Add Details</label>
 
-        <TextArea
-          id="location-description"
-          labelText="Add Details"
-          isSecondary
-          labelIsHidden
-          onChange={(e: any): void => onChangeDetails(e.target.value)}
-          value={location.description || ''}
-          styles={[labelContainerStyles, lowerLabelStyles]}
-          placeholder="Tell us about this location"
-          rows={5}
-        />
-
-        <Button
-          type="button"
-          onClick={handleSubmit}
-          disabled={isFetching}
-          text="Save Location"
-          styles={[modalButtonStyles, bottomButtonStyles]}
-        />
-
-        {error && <ErrorMessage errorMessage={error} />}
-      </section>
-    </div>
+      {error && <ErrorMessage errorMessage={error} />}
+    </Modal>
   );
 }

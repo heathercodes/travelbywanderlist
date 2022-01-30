@@ -1,19 +1,26 @@
 import { Collection, CollectionUpdate, KnexResponse } from '../models';
 import { db } from '../db';
 
-export async function createCollection(data: CollectionUpdate): Promise<Collection> {
+export async function createCollection({
+    name,
+    userId
+}: {
+    name: string;
+    userId: number;
+}): Promise<Collection> {
     const results: KnexResponse = await db.raw(
-        'insert into "wanderlists" ("name") values (?) returning *',
-        [data.name]
+        'insert into "wanderlists" ("name", "user_id") values (?, ?) returning *',
+        [name, userId]
     );
 
     return results.rows[0];
 }
 
 export async function getCollectionById(data: { id: number }): Promise<Collection> {
-    const results: KnexResponse = await db.raw('select * from "wanderlists" where "id" = ?', [
-        data.id
-    ]);
+    const results: KnexResponse = await db.raw(
+        'select * from "wanderlists" where "id" = ? order by "updatedAt" asc',
+        [data.id]
+    );
 
     return results.rows[0];
 }

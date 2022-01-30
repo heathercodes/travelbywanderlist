@@ -8,10 +8,6 @@ export const formStyles = css`
   justify-content: center;
 `;
 
-export const labelStyles = css`
-  display: flex;
-`;
-
 export const inputContainer = css`
   display: flex;
   justify-content: center;

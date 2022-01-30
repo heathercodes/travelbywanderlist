@@ -1,10 +1,12 @@
 /** @jsxImportSource @emotion/react */
 import React from 'react';
+import { css } from '@emotion/react';
 import { Popup as MapGLPopup } from 'react-map-gl';
-import { Button } from '../blocks';
 import { Location } from '../types';
-import { popupStyles } from './Popup.styles';
-import { modalButtonStyles, topButtonStyles } from '../index.styles';
+
+export const popupStyles = css`
+  width: 200px;
+`;
 
 interface PopupProps {
   location: Location;
@@ -18,24 +20,14 @@ export function Popup({
 }: React.PropsWithChildren<PopupProps>): React.ReactElement {
   return (
     <MapGLPopup
-      closeButton={false}
+      closeOnClick={false}
+      captureClick
+      onClose={handleClose}
       longitude={location.longitude}
       latitude={location.latitude}
       tipSize={7}
-      captureDrag
-      captureScroll
-      captureClick
     >
-      <div css={popupStyles}>
-        <Button
-          type="button"
-          isSecondary
-          onClick={handleClose}
-          text="x"
-          styles={[modalButtonStyles, topButtonStyles]}
-        />
-        {children}
-      </div>
+      {children}
     </MapGLPopup>
   );
 }

@@ -18,16 +18,22 @@ export async function createUser({
         return Promise.reject(new Error('createUser error'));
     }
 
-    return user;
+    const collection = await collectionRepo.createCollection({
+        name: 'My First Wanderlist',
+        userId: user.id
+    });
+
+    return { ...user, wanderlists: collection };
 }
 
 export async function getUser(data: { email: string }): Promise<User> {
     const user = await userRepo.getUser(data);
-    const wanderlists = await collectionRepo.getCollectionByUserId({ id: user.id });
 
     if (!user) {
         return Promise.reject(new Error('getUser error: user not found'));
     }
+
+    const wanderlists = await collectionRepo.getCollectionByUserId({ id: user.id });
 
     return { ...user, wanderlists };
 }

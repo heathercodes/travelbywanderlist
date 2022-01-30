@@ -1,10 +1,13 @@
-import { Location, Wanderlist, CollectionUpdateReq } from '../models';
+import { Location, Wanderlist, CollectionUpdateReq, CollectionCreateReq } from '../models';
 import * as collectionRepo from '../repositories/collection';
 import * as locationRepo from '../repositories/location';
 
-export async function createCollection(data: CollectionUpdateReq): Promise<Wanderlist> {
-    const { collection } = data;
-    const newCollection = await collectionRepo.createCollection(collection);
+export async function createCollection(data: CollectionCreateReq): Promise<Wanderlist> {
+    const { collection, user } = data;
+    const newCollection = await collectionRepo.createCollection({
+        name: collection.name,
+        userId: user.id
+    });
 
     if (!newCollection) {
         return Promise.reject(new Error('createCollection error'));

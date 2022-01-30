@@ -1,10 +1,19 @@
 /** @jsxImportSource @emotion/react */
 import React, { useContext } from 'react';
 import { Marker as MapGLMarker } from 'react-map-gl';
+import { css } from '@emotion/react';
 import { COLOURS } from '../constants';
 import { Location } from '../types';
 import { GlobalContext } from '../provider/GlobalProvider';
-import { buttonStyles, markerStyles } from './Marker.styles';
+
+export const markerStyles = css`
+  width: 30px;
+  height: 30px;
+`;
+
+export const buttonStyles = css`
+  all: initial;
+`;
 
 interface MarkerProps {
   openEditor(value: boolean): void;

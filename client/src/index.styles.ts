@@ -28,16 +28,3 @@ export const bodyStyles = css`
     border-radius: 3px;
   }
 `;
-
-export const modalButtonStyles = css`
-  position: absolute;
-  right: 10px;
-`;
-
-export const topButtonStyles = css`
-  top: 10px;
-`;
-
-export const bottomButtonStyles = css`
-  bottom: 15px;
-`;
