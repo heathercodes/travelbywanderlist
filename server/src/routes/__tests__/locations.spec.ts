@@ -12,9 +12,8 @@ const requestBody = {
 };
 
 const collectionBody = {
-    collection: {
-        name: 'Colorado'
-    }
+    name: 'Colorado',
+    id: 123
 };
 
 describe('location routes', () => {
@@ -24,12 +23,14 @@ describe('location routes', () => {
         done();
     });
     afterAll(async (done) => {
+        await db.end();
         await db.destroy();
         done();
     });
 
     it('POST /location create a location', async (done) => {
         const collectionResp = await request(server).post('/api/collection').send(collectionBody);
+
         const response = await request(server)
             .post('/api/location')
             .send({ ...requestBody, wanderlist_id: collectionResp.body.data.collection.id });

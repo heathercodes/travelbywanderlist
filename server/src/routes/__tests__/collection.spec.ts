@@ -22,7 +22,10 @@ const requestBody = {
             description: 'Great place',
             image_url: 'url'
         }
-    ]
+    ],
+    user: {
+        id: 123
+    }
 };
 
 describe('collection routes', () => {
