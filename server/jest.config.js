@@ -8,5 +8,7 @@ module.exports = {
     setupFiles: ['dotenv/config'],
     coveragePathIgnorePatterns: ['/node_modules/'],
     watchPathIgnorePatterns: ['/node_modules/', '/dist/'],
-    testRunner: 'jest-jasmine2'
+    testRunner: 'jest-jasmine2',
+    globalSetup: './src/utils/setup.ts',
+    globalTeardown: './src/utils/teardown.ts'
 };
