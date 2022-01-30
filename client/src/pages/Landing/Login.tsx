@@ -1,11 +1,10 @@
-/** @jsxImportSource @emotion/react */
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { Input, Button } from 'antd';
 import { LandingHeader } from './Header';
-import { ErrorMessage, useErrorHandler, Button, Input } from '../../blocks';
+import { ErrorMessage, useErrorHandler } from '../../blocks';
 import { GlobalContext } from '../../provider/GlobalProvider';
 import { loginUser, validateLoginForm } from '../../utils';
-import { labelStyles, formStyles, inputContainer, buttonContainer } from './Form.styles';
 
 export function Login(): React.ReactElement {
   const [userSettings, setUserSettings] = useState<any>({
@@ -48,39 +47,35 @@ export function Login(): React.ReactElement {
 
   return (
     <LandingHeader>
-      <form css={formStyles} name="login">
-        <fieldset css={inputContainer}>
+      <form className="flex justify-center items-center flex-col" name="login">
+        <fieldset className="block">
           <Input
             id="wanderlist-email"
-            placeholder="Enter email"
-            labelIsHidden
-            styles={labelStyles}
-            labelText="Please enter your email"
-            type="text"
+            placeholder="Enter your email"
             onChange={(e: any): void => setUserSettings({ email: e.target.value })}
             value={userSettings.email}
           />
-          <Input
+          <label className="sr-only" htmlFor="wanderlist-email">
+            Enter your email
+          </label>
+
+          <Input.Password
             id="wanderlist-password"
-            placeholder="Enter password"
-            labelIsHidden
-            styles={labelStyles}
-            labelText="Please enter your password"
-            type="password"
+            placeholder="Enter your password"
             onChange={(e: any): void => setUserSettings({ password: e.target.value })}
             value={userSettings.password}
           />
+          <label className="sr-only" htmlFor="wanderlist-password">
+            Enter your password
+          </label>
         </fieldset>
 
-        <fieldset css={[inputContainer, buttonContainer]}>
-          <Button type="button" text="Back" onClick={(): void => navigate('/')} />
+        <fieldset className="flex justify-center justify-between mt-40 w-full">
+          <Button type="primary" disabled={Boolean(isFetching || error)} onClick={handleSubmit}>
+            Submit
+          </Button>
 
-          <Button
-            type="submit"
-            disabled={Boolean(isFetching || error)}
-            text="Submit"
-            onClick={handleSubmit}
-          />
+          <Button onClick={(): void => navigate('/')}>Back</Button>
 
           {error && <ErrorMessage errorMessage={error} />}
         </fieldset>

@@ -63,7 +63,28 @@ export interface CollectionRequest extends Request {
             image_url?: string;
             wanderlist_id: number;
         }[];
+        user: {
+            id: number;
+        };
     };
+}
+
+export interface CollectionCreateReq {
+    user: {
+        id: number;
+    };
+    collection: {
+        name: string;
+    };
+    locations?: {
+        id: number;
+        name: string;
+        latitude: number;
+        longitude: number;
+        description?: string;
+        image_url?: string;
+        wanderlist_id: number;
+    }[];
 }
 
 export interface CollectionUpdateReq {

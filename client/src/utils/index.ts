@@ -1,3 +1,3 @@
 export * from './fetch';
-export { validateLoginForm, validateRegisterForm } from './login-validation';
-export { loginUser } from './auth';
+export { validateLoginForm } from './login-validation';
+export { loginUser, signupUser } from './auth';

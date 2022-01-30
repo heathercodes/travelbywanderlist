@@ -1,10 +1,9 @@
-/** @jsxImportSource @emotion/react */
 import React, { useContext } from 'react';
+import { Button } from 'antd';
 import { GlobalContext } from '../provider/GlobalProvider';
-import { ErrorMessage, useErrorHandler, Button } from '../blocks';
+import { ErrorMessage, useErrorHandler } from '../blocks';
 import { put } from '../utils/fetch';
 import { Location } from '../types';
-import { controlStyles } from './Controls.styles';
 
 interface WanderlistEditorProps {
   locations: Location[];
@@ -23,7 +22,7 @@ export function Controls({ locations }: WanderlistEditorProps): React.ReactEleme
     try {
       setIsFetching(true);
 
-      const updatedWanderlist = await put('collection', {
+      const updatedWanderlist = await put('/api/collection', {
         ...wanderlist,
         locations,
       });
@@ -43,8 +42,10 @@ export function Controls({ locations }: WanderlistEditorProps): React.ReactEleme
   };
 
   return (
-    <div css={controlStyles}>
-      <Button type="button" onClick={handleSubmit} disabled={isFetching} text="Save Wanderlist" />
+    <div className="fixed top-0 right-0 m-20">
+      <Button type="primary" onClick={handleSubmit} disabled={isFetching}>
+        Save Wanderlist
+      </Button>
       {error && <ErrorMessage errorMessage={error} />}
     </div>
   );

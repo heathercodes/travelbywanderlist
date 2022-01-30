@@ -1,15 +1,10 @@
-/** @jsxImportSource @emotion/react */
 import React from 'react';
-import globe from '../globe.gif';
-import { sectionStyles, headerStyles, subTitleStyles } from './Landing.styles';
 
 export function LandingHeader({ children }: any): React.ReactElement {
   return (
-    <section css={sectionStyles}>
-      <header css={sectionStyles}>
-        <h1 css={headerStyles}>Wanderlist</h1>
-        <img src={globe} alt="" />
-        <p css={subTitleStyles}>Plan your trip with Wanderlist</p>
+    <section className="flex items-center justify-center flex-col h-screen">
+      <header className="flex items-center justify-center flex-col mt-32">
+        <h1 className="font-display text-9xl font-bold">Wanderlist</h1>
       </header>
 
       {children}

@@ -3,6 +3,8 @@ import { Route, Routes, Navigate } from 'react-router-dom';
 import { LandingPage, Login, Register } from './pages/Landing';
 import { InteractiveMap } from './pages/Map';
 
+import './App.css';
+
 // eslint-disable-next-line react/prop-types
 function PrivateRoute({ children }: any) {
   const auth = true;
@@ -21,7 +23,7 @@ export default function App(): JSX.Element {
       <Route path="/" element={<LandingPage />} />
       <Route path="/login" element={<Login />} />
       <Route path="/signup" element={<Register />} />
-      <Route
+      {/* <Route
         path="/map/:id"
         element={
           // eslint-disable-next-line react/jsx-wrap-multilines
@@ -29,7 +31,8 @@ export default function App(): JSX.Element {
             <InteractiveMap />
           </PrivateRoute>
         }
-      />
+      /> */}
+      <Route path="/map/:id" element={<InteractiveMap />} />
     </Routes>
   );
 }

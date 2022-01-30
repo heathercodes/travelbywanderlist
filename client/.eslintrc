@@ -48,6 +48,8 @@
         "peerDependencies": false
       }
     ],
+    "jsx-a11y/label-has-associated-control": "off",
+    "react/jsx-curly-newline": "off",
     "comma-dangle": [
       2,
       {
