@@ -1,0 +1,30 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  h1 {
+    @apply text-2xl;
+  }
+  h2 {
+    @apply text-xl;
+  }
+
+  html,
+  body {
+    @apply bg-cyan-400;
+    @apply text-xs;
+  }
+
+  h3 {
+    @apply text-4xl;
+  }
+
+  p,
+  span,
+  input,
+  label,
+  button {
+    @apply text-xl;
+  }
+}

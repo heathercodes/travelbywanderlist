@@ -1,18 +1,9 @@
-/** @jsxImportSource @emotion/react */
 import React, { useContext } from 'react';
 import { Button } from 'antd';
-import { css } from '@emotion/react';
 import { GlobalContext } from '../provider/GlobalProvider';
 import { ErrorMessage, useErrorHandler } from '../blocks';
 import { put } from '../utils/fetch';
 import { Location } from '../types';
-
-export const controlStyles = css`
-  position: fixed;
-  top: 0;
-  right: 0;
-  margin: 20px;
-`;
 
 interface WanderlistEditorProps {
   locations: Location[];
@@ -51,7 +42,7 @@ export function Controls({ locations }: WanderlistEditorProps): React.ReactEleme
   };
 
   return (
-    <div css={controlStyles}>
+    <div className="fixed top-0 right-0 m-20">
       <Button type="primary" onClick={handleSubmit} disabled={isFetching}>
         Save Wanderlist
       </Button>

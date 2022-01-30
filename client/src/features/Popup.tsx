@@ -1,12 +1,6 @@
-/** @jsxImportSource @emotion/react */
 import React from 'react';
-import { css } from '@emotion/react';
 import { Popup as MapGLPopup } from 'react-map-gl';
 import { Location } from '../types';
-
-export const popupStyles = css`
-  width: 200px;
-`;
 
 interface PopupProps {
   location: Location;

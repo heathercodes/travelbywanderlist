@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import React, { useState, useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button, Input } from 'antd';
@@ -6,7 +5,6 @@ import { LandingHeader } from './Header';
 import { ErrorMessage, useErrorHandler } from '../../blocks';
 import { GlobalContext } from '../../provider/GlobalProvider';
 import { signupUser, validateLoginForm } from '../../utils';
-import { formStyles, inputContainer, buttonContainer } from './Form.styles';
 
 export function Register(): React.ReactElement {
   const [userSettings, setUserSettings] = useState<any>({
@@ -50,8 +48,8 @@ export function Register(): React.ReactElement {
 
   return (
     <LandingHeader>
-      <form css={formStyles} name="register">
-        <fieldset css={inputContainer}>
+      <form className="flex justify-center items-center flex-col" name="register">
+        <fieldset className="block">
           <Input
             id="user-email"
             placeholder="Enter your email"
@@ -60,7 +58,9 @@ export function Register(): React.ReactElement {
             }
             value={userSettings.email}
           />
-          <label htmlFor="user-email">Enter your email</label>
+          <label className="sr-only" htmlFor="user-email">
+            Enter your email
+          </label>
 
           <Input.Password
             id="user-password"
@@ -70,15 +70,17 @@ export function Register(): React.ReactElement {
             }
             value={userSettings.password}
           />
-          <label htmlFor="user-password">Enter a password</label>
+          <label className="sr-only" htmlFor="user-password">
+            Enter a password
+          </label>
         </fieldset>
 
-        <fieldset css={[inputContainer, buttonContainer]}>
-          <Button onClick={(): void => navigate('/')}>Back</Button>
-
+        <fieldset className="flex justify-center justify-between mt-40 w-full">
           <Button type="primary" disabled={Boolean(isFetching || error)} onClick={handleSubmit}>
             Submit
           </Button>
+
+          <Button onClick={(): void => navigate('/')}>Back</Button>
 
           {error && <ErrorMessage errorMessage={error} />}
         </fieldset>

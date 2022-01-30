@@ -1,4 +1,3 @@
-/** @jsxImportSource @emotion/react */
 import React, { useContext, useEffect, useState } from 'react';
 import { Modal, Input } from 'antd';
 import { GlobalContext } from '../provider/GlobalProvider';

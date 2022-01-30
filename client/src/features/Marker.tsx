@@ -1,19 +1,8 @@
-/** @jsxImportSource @emotion/react */
 import React, { useContext } from 'react';
 import { Marker as MapGLMarker } from 'react-map-gl';
-import { css } from '@emotion/react';
 import { COLOURS } from '../constants';
 import { Location } from '../types';
 import { GlobalContext } from '../provider/GlobalProvider';
-
-export const markerStyles = css`
-  width: 30px;
-  height: 30px;
-`;
-
-export const buttonStyles = css`
-  all: initial;
-`;
 
 interface MarkerProps {
   openEditor(value: boolean): void;
@@ -35,7 +24,7 @@ export function Marker({ location, openEditor }: MarkerProps): React.ReactElemen
       offsetTop={-33}
       captureClick
     >
-      <button onClick={onClick} type="button" css={buttonStyles}>
+      <button onClick={onClick} type="button" style={{ all: 'initial' }}>
         <svg
           version="1.1"
           id="Layer_1"
@@ -44,7 +33,7 @@ export function Marker({ location, openEditor }: MarkerProps): React.ReactElemen
           y="0px"
           viewBox="0 0 365 560"
           enableBackground="new 0 0 365 560"
-          css={markerStyles}
+          className="w-30 h-30"
         >
           <g>
             <path
