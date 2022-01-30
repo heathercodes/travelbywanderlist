@@ -1,7 +1,6 @@
 // @ts-nocheck
 import request from 'supertest';
 import { app as server } from '../../index';
-// import { db } from '../../db';
 
 const requestBody = {
     name: 'Portland',
@@ -12,8 +11,12 @@ const requestBody = {
 };
 
 const collectionBody = {
-    name: 'Colorado',
-    id: 123
+    collection: {
+        name: 'Colorado'
+    },
+    user: {
+        id: 123
+    }
 };
 
 describe('location routes', () => {
@@ -37,9 +40,10 @@ describe('location routes', () => {
                 latitude: expect.any(Number),
                 longitude: expect.any(Number)
             });
-            done();
         } catch (err) {
             throw err;
+        } finally {
+            done();
         }
     });
 
@@ -65,9 +69,10 @@ describe('location routes', () => {
                 latitude: expect.any(Number),
                 longitude: expect.any(Number)
             });
-            done();
         } catch (err) {
             throw err;
+        } finally {
+            done();
         }
     });
 
@@ -88,9 +93,10 @@ describe('location routes', () => {
                 message: 'Location deleted',
                 id: locationResponse.body.data.id
             });
-            done();
         } catch (err) {
             throw err;
+        } finally {
+            done();
         }
     });
 });

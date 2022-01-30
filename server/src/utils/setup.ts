@@ -1,8 +1,8 @@
+// @ts-nocheck
 import { db } from '../db';
 
-const setup = async () => {
+const setup = async (): Promise<void> => {
     await db.migrate.latest();
-    // await db.seed();
     await db.destroy();
 };
 

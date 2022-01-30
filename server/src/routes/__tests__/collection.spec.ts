@@ -39,7 +39,7 @@ describe('collection routes', () => {
                     name: expect.any(String),
                     createdAt: expect.any(String),
                     updatedAt: expect.any(String),
-                    user_id: null
+                    user_id: 123
                 },
                 locations: [
                     {
@@ -62,9 +62,10 @@ describe('collection routes', () => {
                     }
                 ]
             });
-            done();
         } catch (err) {
             throw err;
+        } finally {
+            done();
         }
     });
 
@@ -82,7 +83,7 @@ describe('collection routes', () => {
                     name: expect.any(String),
                     createdAt: expect.any(String),
                     updatedAt: expect.any(String),
-                    user_id: null
+                    user_id: 123
                 },
                 locations: [
                     {
@@ -105,9 +106,10 @@ describe('collection routes', () => {
                     }
                 ]
             });
-            done();
         } catch (err) {
             throw err;
+        } finally {
+            done();
         }
     });
 
@@ -124,9 +126,10 @@ describe('collection routes', () => {
                 id: collectionResp.body.data.collection.id,
                 message: 'Wanderlist deleted'
             });
-            done();
         } catch (err) {
             throw err;
+        } finally {
+            done();
         }
     });
 
@@ -156,7 +159,7 @@ describe('collection routes', () => {
                     name: 'South Korea',
                     createdAt: expect.any(String),
                     updatedAt: expect.any(String),
-                    user_id: null
+                    user_id: 123
                 },
                 locations: [
                     {
@@ -170,9 +173,10 @@ describe('collection routes', () => {
                     }
                 ]
             });
-            done();
         } catch (err) {
             throw err;
+        } finally {
+            done();
         }
     });
 });
