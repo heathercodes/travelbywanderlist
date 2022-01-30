@@ -10,11 +10,8 @@ export async function createCollection(
     try {
         const data = await collectionService.createCollection(req.body);
         return res.status(201).json({ data });
-    } catch (error) {
-        return next({
-            message: error,
-            statusCode: 500
-        });
+    } catch (err) {
+        return next(err);
     }
 }
 
@@ -29,11 +26,8 @@ export async function getCollectionById(
         const data = await collectionService.getCollectionById({ id: Number(id) });
 
         return res.status(200).json({ data });
-    } catch (error) {
-        return next({
-            message: error,
-            statusCode: 404
-        });
+    } catch (err) {
+        return next(err);
     }
 }
 
@@ -45,11 +39,8 @@ export async function updateCollection(
     try {
         const data = await collectionService.updateCollection(req.body);
         return res.status(201).json({ data });
-    } catch (error) {
-        return next({
-            message: error,
-            statusCode: 404
-        });
+    } catch (err) {
+        return next(err);
     }
 }
 
@@ -68,10 +59,7 @@ export async function deleteCollection(
                 id: collectionId
             }
         });
-    } catch (error) {
-        return next({
-            message: error,
-            statusCode: 500
-        });
+    } catch (err) {
+        return next(err);
     }
 }

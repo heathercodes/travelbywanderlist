@@ -3,15 +3,10 @@ exports.up = function (knex) {
         .createTable('users', (table) => {
             table.increments();
             table.string('name');
+            table.string('password').notNullable();
+            table.string('email').notNullable().unique();
             table.timestamp('createdAt').notNullable().defaultTo(knex.fn.now());
             table.timestamp('updatedAt').notNullable().defaultTo(knex.fn.now());
-        })
-        .createTable('accounts', (table) => {
-            table.increments();
-            table.integer('user_id').unsigned().notNullable().references('id').inTable('users');
-            table.string('name');
-            table.string('password');
-            table.string('email');
         })
         .createTable('wanderlists', (table) => {
             table.increments();
@@ -42,9 +37,5 @@ exports.up = function (knex) {
 };
 
 exports.down = function (knex) {
-    return knex.schema
-        .dropTable('locations')
-        .dropTable('wanderlists')
-        .dropTable('accounts')
-        .dropTable('users');
+    return knex.schema.dropTable('locations').dropTable('wanderlists').dropTable('users');
 };

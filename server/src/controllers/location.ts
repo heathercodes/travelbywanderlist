@@ -12,11 +12,8 @@ export async function getLocationById(
     try {
         const data = await locationService.getLocationById({ id: Number(id) });
         return res.status(200).json({ data });
-    } catch (error) {
-        return next({
-            message: error,
-            statusCode: 404
-        });
+    } catch (err) {
+        return next(err);
     }
 }
 
@@ -30,11 +27,8 @@ export async function updateLocation(
     try {
         const data = await locationService.updateLocation({ ...req.body, id: Number(id) });
         return res.status(201).json({ data });
-    } catch (error) {
-        return next({
-            message: error,
-            statusCode: 500
-        });
+    } catch (err) {
+        return next(err);
     }
 }
 
@@ -53,11 +47,8 @@ export async function deleteLocationById(
                 id: locationId
             }
         });
-    } catch (error) {
-        return next({
-            message: error,
-            statusCode: 500
-        });
+    } catch (err) {
+        return next(err);
     }
 }
 
@@ -69,10 +60,7 @@ export async function createLocation(
     try {
         const data = await locationService.createLocation(req.body);
         return res.status(201).json({ data });
-    } catch (error) {
-        next({
-            message: error,
-            statusCode: 500
-        });
+    } catch (err) {
+        return next(err);
     }
 }

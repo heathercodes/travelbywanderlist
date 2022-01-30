@@ -1,11 +1,41 @@
 import { Dispatch, SetStateAction } from 'react';
 
+export interface Collection {
+  id: number;
+  name: string;
+}
+
+export interface Location {
+  id?: number;
+  name: string;
+  latitude: number;
+  longitude: number;
+  imageUrl?: string;
+  description?: string;
+}
+
+export interface Wanderlist {
+  collection: Collection;
+  locations?: Location[];
+}
+
+export interface UserState {
+  id: number;
+  email: string;
+  name: string;
+}
+
 export interface GlobalState {
   wanderlist: Wanderlist;
   currentLocation: Location;
   ui: {
     isFetching: boolean;
     isError: boolean;
+  };
+  user: {
+    id: number;
+    email: string;
+    name: string;
   };
 }
 
@@ -14,6 +44,7 @@ export interface GlobalContextTypes extends GlobalState {
   updateWanderlist(wanderlist: Wanderlist): void;
   updateCurrentLocation(location: Location): void;
   updateLocation(location: Location): void;
+  setUser(user: UserState): void;
 }
 
 export interface UserAuthState {
@@ -30,15 +61,6 @@ export interface UserAuthHandler {
 export interface ErrorHandler {
   error: string;
   showError(msg: string): void;
-}
-
-export interface Location {
-  id?: number;
-  name: string;
-  latitude: number;
-  longitude: number;
-  imageUrl?: string;
-  description?: string;
 }
 
 export interface LocationState {
@@ -70,14 +92,4 @@ export interface MapSettings {
 export interface SettingsState {
   settings: MapSettings;
   setSettings: Dispatch<SetStateAction<MapSettings>>;
-}
-
-export interface Collection {
-  id: number;
-  name: string;
-}
-
-export interface Wanderlist {
-  collection: Collection;
-  locations?: Location[];
 }

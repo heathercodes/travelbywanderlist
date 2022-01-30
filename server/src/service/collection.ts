@@ -41,6 +41,22 @@ export async function getCollectionById(data: { id: number }): Promise<Wanderlis
     return { collection };
 }
 
+export async function getCollectionByUserId(data: { id: number }): Promise<Wanderlist> {
+    const collection = await collectionRepo.getCollectionByUserId(data);
+
+    if (!collection) {
+        return Promise.reject(new Error('getCollectionByUserId error'));
+    }
+
+    const locations = await locationRepo.getLocationsByCollectionId(data);
+
+    if (locations.length) {
+        return { collection, locations };
+    }
+
+    return { collection };
+}
+
 export async function updateCollection(data: CollectionUpdateReq): Promise<Wanderlist> {
     const { collection } = data;
     const updatedCollection = await collectionRepo.updateCollection(collection);
