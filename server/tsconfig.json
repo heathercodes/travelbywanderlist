@@ -57,6 +57,12 @@
         // "experimentalDecorators": true,        /* Enables experimental support for ES7 decorators. */
         // "emitDecoratorMetadata": true,         /* Enables experimental support for emitting type metadata for decorators. */
     },
-    "include": ["./src/**/*", "./typings.d.ts", "knexfile.js"],
+    "include": [
+        "./src/**/*",
+        "./typings.d.ts",
+        "knexfile.js",
+        "tests/setup.ts",
+        "tests/teardown.ts"
+    ],
     "exclude": ["./node_modules/**/*", "./src/db.ts", "./src/**/__tests__/*.spec.ts", "test"]
 }

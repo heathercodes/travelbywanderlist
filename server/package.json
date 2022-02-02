@@ -53,6 +53,7 @@
     "eslint-plugin-import": "^2.19.1",
     "faker": "^5.1.0",
     "jest": "^27.4.7",
+    "jest-extended": "^2.0.0",
     "nodemon": "^2.0.15",
     "supertest": "^6.2.2",
     "ts-jest": "^27.1.3",
