@@ -5,10 +5,9 @@ const collectionRouter = Router();
 
 collectionRouter
     .get('/:id', collectionController.getCollectionById)
-    .delete('/:id', collectionController.deleteCollection);
+    .delete('/:id', collectionController.deleteCollection)
+    .put('/:id', collectionController.updateCollection);
 
-collectionRouter
-    .post('', collectionController.createCollection)
-    .put('', collectionController.updateCollection);
+collectionRouter.post('', collectionController.createCollection);
 
 export { collectionRouter };

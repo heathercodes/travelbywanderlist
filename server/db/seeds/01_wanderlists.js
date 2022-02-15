@@ -1,36 +1,38 @@
 const faker = require('faker');
 
-const createWanderlists = (array) => ({
+const createWanderlists = (i, array) => ({
     name: faker.address.country(),
-    id: faker.random.number(),
+    id: i,
     user_id: faker.random.arrayElement(array)
 });
 
 const createNWanderlists = (n, arr) => {
-    return Array.from(Array(n)).map(() => createWanderlists(arr));
+    return Array.from(Array(n)).map((i) => createWanderlists(i, arr));
 };
 
-const createLocations = (array) => ({
+const createLocations = (i, array) => ({
     wanderlist_id: faker.random.arrayElement(array),
+    description: 'a string',
     name: faker.address.city(),
     latitude: faker.address.latitude(),
     longitude: faker.address.longitude(),
-    id: faker.random.number()
+    image_url: 'https://upslash.com',
+    id: i
 });
 
 const createNLocations = (n, arr) => {
-    return Array.from(Array(n)).map(() => createLocations(arr));
+    return Array.from(Array(n)).map((i) => createLocations(i, arr));
 };
 
-const createUsers = () => ({
-    id: faker.random.number(),
+const createUsers = (i) => ({
+    id: i,
     email: faker.internet.email(),
     name: faker.name.findName(),
     password: 'password'
 });
 
 const createNUsers = (n) => {
-    return Array.from(Array(n)).map(() => createUsers());
+    return Array.from(Array(n)).map((i) => createUsers(i));
 };
 
 exports.seed = (knex) => {

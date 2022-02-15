@@ -1,6 +1,5 @@
 // @ts-nocheck
 import request from 'supertest';
-import Knex from 'knex';
 import { app as server } from '../../index';
 
 const requestBody = {
@@ -22,24 +21,25 @@ const requestBody = {
             description: 'Great place',
             image_url: 'url'
         }
-    ],
-    user: {
-        id: 123
-    }
+    ]
 };
 
 describe('collection routes', () => {
-    it.only('POST /collection create a collection', async () => {
-        const response = await request(server).post('/api/collection').send(requestBody);
-        console.log('hello', response.body, response);
-        expect(response.status).toBe(201);
-        expect(response.body.data).toStrictEqual({
+    let baseResponse;
+
+    it('POST /collection create a collection', async () => {
+        baseResponse = await request(server)
+            .post('/api/collection')
+            .send({ ...requestBody, user: { id: 1 } });
+
+        expect(baseResponse.status).toBe(201);
+        expect(baseResponse.body.data).toStrictEqual({
             collection: {
                 id: expect.any(Number),
                 name: expect.any(String),
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
-                user_id: 123
+                user_id: 1
             },
             locations: [
                 {
@@ -65,9 +65,8 @@ describe('collection routes', () => {
     });
 
     it('GET /collection get a collection', async () => {
-        const collectionResp = await request(server).post('/api/collection').send(requestBody);
         const response = await request(server).get(
-            `/api/collection/${collectionResp.body.data.collection.id}`
+            `/api/collection/${baseResponse.body.data.collection.id}`
         );
 
         expect(response.status).toBe(200);
@@ -77,7 +76,7 @@ describe('collection routes', () => {
                 name: expect.any(String),
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
-                user_id: 123
+                user_id: expect.any(Number)
             },
             locations: [
                 {
@@ -103,53 +102,49 @@ describe('collection routes', () => {
     });
 
     it('DELETE /collection deletes a collection', async () => {
-        const collectionResp = await request(server).post('/api/collection').send(requestBody);
-
-        const response = await request(server).delete(
-            `/api/collection/${collectionResp.body.data.collection.id}`
-        );
+        const response = await request(server).delete('/api/collection/2');
 
         expect(response.status).toBe(200);
         expect(response.body.data).toStrictEqual({
-            id: collectionResp.body.data.collection.id,
+            id: 2,
             message: 'Wanderlist deleted'
         });
     });
 
     it('UPDATE /collection updates a collection', async () => {
-        const collectionResp = await request(server).post('/api/collection').send(requestBody);
-
         const updateBody = {
             collection: {
                 name: 'South Korea',
-                id: collectionResp.body.data.collection.id
+                id: baseResponse.body.data.collection.id
             },
             locations: [
                 {
-                    id: collectionResp.body.data.locations[0].id,
+                    id: baseResponse.body.data.locations[0].id,
                     description: 'an ok place',
                     image_url: 'url.com'
                 }
             ]
         };
-        const response = await request(server).put('/api/collection').send(updateBody);
+        const response = await request(server)
+            .put(`/api/collection/${baseResponse.body.data.collection.id}`)
+            .send(updateBody);
 
         expect(response.status).toBe(201);
         expect(response.body.data).toStrictEqual({
             collection: {
-                id: collectionResp.body.data.collection.id,
+                id: baseResponse.body.data.collection.id,
                 name: 'South Korea',
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
-                user_id: 123
+                user_id: 1
             },
             locations: [
                 {
-                    id: collectionResp.body.data.locations[0].id,
+                    id: baseResponse.body.data.locations[0].id,
                     description: 'an ok place',
                     name: 'Seoul',
                     image_url: 'url.com',
-                    wanderlist_id: collectionResp.body.data.collection.id,
+                    wanderlist_id: baseResponse.body.data.collection.id,
                     latitude: 213,
                     longitude: 12312
                 }

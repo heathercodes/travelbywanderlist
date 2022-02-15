@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "NODE_ENV=development nodemon -r dotenv/config src/server.ts",
-    "test": "jest --detectOpenHandles",
+    "test": "jest",
     "test:ci": "docker-compose run --rm server npm test",
     "lint": "eslint ./src/**/**.ts",
     "build": "tsc",
@@ -29,6 +29,7 @@
     "passport-jwt": "^4.0.0",
     "passport-local": "^1.0.0",
     "pg": "^8.7.1",
+    "weak-napi": "^2.0.2",
     "winston": "^3.5.0"
   },
   "devDependencies": {

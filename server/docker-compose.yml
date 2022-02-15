@@ -6,15 +6,15 @@ services:
         ports:
             - '9000:9000'
         environment:
-            - DATABASE_HOST=localhost
+            - DATABASE_HOST=postgresdb
             - POSTGRES_DB=test
             - POSTGRES_USER=postgres
             - POSTGRES_PASSWORD=postgres
             - DATABASE_PORT=5432
         depends_on:
-            - localhost
+            - postgresdb
 
-    localhost:
+    postgresdb:
         image: postgres
         restart: always
         environment:

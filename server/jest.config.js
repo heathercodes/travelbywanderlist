@@ -1,16 +1,17 @@
 module.exports = {
-    testEnvironment: 'node',
+    clearMocks: true,
+    moduleFileExtensions: ['ts', 'js'],
     roots: ['<rootDir>'],
+    testEnvironment: 'node',
     transform: {
-        '^.+\\.ts$': 'ts-jest'
+        '^.+\\.ts?$': 'ts-jest'
     },
     setupFilesAfterEnv: ['jest-extended'],
-    preset: 'ts-jest',
-    verbose: true,
-    setupFiles: ['dotenv/config'],
-    coveragePathIgnorePatterns: ['/node_modules/'],
-    watchPathIgnorePatterns: ['/node_modules/', '/dist/'],
-    testRunner: 'jest-jasmine2',
+    globals: {
+        'ts-jest': {
+            diagnostics: false
+        }
+    },
     globalSetup: '<rootDir>/tests/setup.ts',
     globalTeardown: '<rootDir>/tests/teardown.ts'
 };
