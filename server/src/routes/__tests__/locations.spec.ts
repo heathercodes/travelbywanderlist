@@ -11,29 +11,20 @@ const requestBody = {
     image_url: 'url'
 };
 
-const collectionBody = {
-    collection: {
-        name: 'Colorado'
-    }
-};
-
 describe('location routes', () => {
-    beforeAll(async (done) => {
+    beforeAll(async () => {
         await db.migrate.latest();
         await db.seed.run();
-        done();
     });
-    afterAll(async (done) => {
+    afterAll(async () => {
         await db.destroy();
-        done();
     });
 
-    it('POST /location create a location', async (done) => {
-        const collectionResp = await request(server).post('/api/collection').send(collectionBody);
+    it('POST /location create a location', async () => {
         const response = await request(server)
             .post('/api/location')
-            .send({ ...requestBody, wanderlist_id: collectionResp.body.data.collection.id });
-
+            .send({ ...requestBody, wanderlist_id: 2 });
+        console.log(response);
         expect(response.status).toBe(201);
         expect(response.body.data).toStrictEqual({
             id: expect.any(Number),
@@ -44,14 +35,12 @@ describe('location routes', () => {
             latitude: expect.any(Number),
             longitude: expect.any(Number)
         });
-        done();
     });
 
-    it('GET /location get a location by ID', async (done) => {
-        const collectionResp = await request(server).post('/api/collection').send(collectionBody);
+    it('GET /location get a location by ID', async () => {
         const locationResponse = await request(server)
             .post('/api/location')
-            .send({ ...requestBody, wanderlist_id: collectionResp.body.data.collection.id });
+            .send({ ...requestBody, wanderlist_id: 2 });
 
         const response = await request(server).get(
             `/api/location/${locationResponse.body.data.id}`
@@ -66,14 +55,12 @@ describe('location routes', () => {
             latitude: expect.any(Number),
             longitude: expect.any(Number)
         });
-        done();
     });
 
-    it('DELETE /location deletes a location', async (done) => {
-        const collectionResp = await request(server).post('/api/collection').send(collectionBody);
+    it('DELETE /location deletes a location', async () => {
         const locationResponse = await request(server)
             .post('/api/location')
-            .send({ ...requestBody, wanderlist_id: collectionResp.body.data.collection.id });
+            .send({ ...requestBody, wanderlist_id: 1 });
         const response = await request(server).delete(
             `/api/location/${locationResponse.body.data.id}`
         );
@@ -83,6 +70,5 @@ describe('location routes', () => {
             message: 'Location deleted',
             id: locationResponse.body.data.id
         });
-        done();
     });
 });

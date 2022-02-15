@@ -1,13 +1,13 @@
 const faker = require('faker');
 
-const createWanderlists = (array) => ({
+const createWanderlists = (array, i) => ({
     name: faker.address.country(),
-    id: faker.random.number(),
+    id: i,
     user_id: faker.random.arrayElement(array)
 });
 
 const createNWanderlists = (n, arr) => {
-    return Array.from(Array(n)).map(() => createWanderlists(arr));
+    return Array.from(Array(n)).map((i) => createWanderlists(arr, i));
 };
 
 const createLocations = (array) => ({
@@ -22,15 +22,15 @@ const createNLocations = (n, arr) => {
     return Array.from(Array(n)).map(() => createLocations(arr));
 };
 
-const createUsers = () => ({
-    id: faker.random.number(),
+const createUsers = (i) => ({
+    id: i,
     email: faker.internet.email(),
     name: faker.name.findName(),
     password: 'password'
 });
 
 const createNUsers = (n) => {
-    return Array.from(Array(n)).map(() => createUsers());
+    return Array.from(Array(n)).map((i) => createUsers(i));
 };
 
 exports.seed = (knex) => {
@@ -50,11 +50,11 @@ exports.seed = (knex) => {
                                     const ids = user_ids.map((user) => user.id);
                                     return knex('wanderlists')
                                         .returning('id')
-                                        .insert(createNWanderlists(5, ids))
+                                        .insert(createNWanderlists(2, ids))
                                         .then((wanderlist_ids) => {
                                             const ids = wanderlist_ids.map((list) => list.id);
                                             return knex('locations').insert(
-                                                createNLocations(20, ids)
+                                                createNLocations(3, ids)
                                             );
                                         });
                                 });
