@@ -1,6 +1,8 @@
 // @ts-nocheck
 import request from 'supertest';
-import { app as server } from '../../index';
+import { app } from '../../index';
+
+const agent = request.agent(app);
 
 const requestBody = {
     name: 'Portland',
@@ -13,10 +15,12 @@ const requestBody = {
 describe('location routes', () => {
     let baseResponse;
 
+    beforeAll(() => {
+        jest.resetModules();
+    });
+
     it('POST /location create a location', async () => {
-        baseResponse = await request(server)
-            .post('/api/location')
-            .send({ ...requestBody, wanderlist_id: 3 });
+        baseResponse = await agent.post('/api/location').send({ ...requestBody, wanderlist_id: 3 });
 
         expect(baseResponse.status).toBe(201);
         expect(baseResponse.body.data).toStrictEqual({
@@ -31,7 +35,7 @@ describe('location routes', () => {
     });
 
     it('GET /location get a location by ID', async () => {
-        const response = await request(server).get(`/api/location/${baseResponse.body.data.id}`);
+        const response = await agent.get(`/api/location/${baseResponse.body.data.id}`);
 
         expect(response.status).toBe(200);
         expect(response.body.data).toStrictEqual({
@@ -48,7 +52,7 @@ describe('location routes', () => {
     });
 
     it('DELETE /location deletes a location', async () => {
-        const response = await request(server).delete(`/api/location/${baseResponse.body.data.id}`);
+        const response = await agent.delete(`/api/location/${baseResponse.body.data.id}`);
 
         expect(response.status).toBe(200);
         expect(response.body.data).toStrictEqual({

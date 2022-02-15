@@ -4,7 +4,7 @@
   "license": "MIT",
   "scripts": {
     "start": "NODE_ENV=development nodemon -r dotenv/config src/server.ts",
-    "test": "jest",
+    "test": "jest --runInBand --detectOpenHandles",
     "test:ci": "docker-compose run --rm server npm test",
     "lint": "eslint ./src/**/**.ts",
     "build": "tsc",

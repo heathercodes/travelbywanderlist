@@ -25,6 +25,10 @@ const requestBody = {
 };
 
 describe('collection routes', () => {
+    beforeAll(() => {
+        jest.resetModules();
+    });
+
     let baseResponse;
 
     it('POST /collection create a collection', async () => {
