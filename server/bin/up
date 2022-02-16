@@ -10,7 +10,7 @@ docker-compose exec postgres bash -c "$WAIT_FOR_PG_ISREADY"
 for ENV in test
 do
   # Create database for this environment if it doesn't already exist.
-  docker-compose exec postgresdb \
+  docker-compose exec --no-cache postgresdb \
     su - postgres -c "psql $ENV -c '' || createdb $ENV -U postgres"
 
   # Run migrations in this environment.
