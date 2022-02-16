@@ -16,6 +16,7 @@ describe('collection routes', () => {
         await db.seed.run();
     });
     afterAll(async () => {
+        await db.migrate.rollback();
         await db.destroy();
     });
 

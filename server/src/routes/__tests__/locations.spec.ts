@@ -17,6 +17,7 @@ describe('location routes', () => {
         await db.seed.run();
     });
     afterAll(async () => {
+        await db.migrate.rollback();
         await db.destroy();
     });
 
@@ -24,7 +25,7 @@ describe('location routes', () => {
         const response = await request(server)
             .post('/api/location')
             .send({ ...requestBody, wanderlist_id: 2 });
-        console.log(response);
+
         expect(response.status).toBe(201);
         expect(response.body.data).toStrictEqual({
             id: expect.any(Number),

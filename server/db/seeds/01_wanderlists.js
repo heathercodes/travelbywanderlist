@@ -10,16 +10,18 @@ const createNWanderlists = (n, arr) => {
     return Array.from(Array(n)).map((i) => createWanderlists(arr, i));
 };
 
-const createLocations = (array) => ({
+const createLocations = (array, i) => ({
     wanderlist_id: faker.random.arrayElement(array),
     name: faker.address.city(),
+    description: 'a string',
     latitude: faker.address.latitude(),
     longitude: faker.address.longitude(),
-    id: faker.random.number()
+    image_url: 'https://unsplash.com',
+    id: i
 });
 
 const createNLocations = (n, arr) => {
-    return Array.from(Array(n)).map(() => createLocations(arr));
+    return Array.from(Array(n)).map((i) => createLocations(arr, i));
 };
 
 const createUsers = (i) => ({
