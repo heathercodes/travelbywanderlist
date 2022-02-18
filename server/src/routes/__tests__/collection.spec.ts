@@ -7,36 +7,20 @@ const requestBody = {
     collection: {
         name: 'Korea'
     },
-    locations: [
-        {
-            name: 'Seoul',
-            latitude: '213',
-            longitude: '12312',
-            description: 'Great place',
-            image_url: 'url'
-        },
-        {
-            name: 'Seoul2',
-            latitude: '213',
-            longitude: '12312',
-            description: 'Great place',
-            image_url: 'url'
-        }
-    ]
+    user: { id: 1 }
 };
 
 describe('collection routes', () => {
-    beforeAll(async (done) => {
+    beforeAll(async () => {
         await db.migrate.latest();
         await db.seed.run();
-        done();
     });
-    afterAll(async (done) => {
+    afterAll(async () => {
+        await db.migrate.rollback();
         await db.destroy();
-        done();
     });
 
-    it('POST /collection create a collection', async (done) => {
+    it('POST /collection create a collection', async () => {
         const response = await request(server).post('/api/collection').send(requestBody);
 
         expect(response.status).toBe(201);
@@ -46,34 +30,33 @@ describe('collection routes', () => {
                 name: expect.any(String),
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
-                user_id: null
-            },
-            locations: [
-                {
-                    id: expect.any(Number),
-                    description: expect.any(String),
-                    name: expect.any(String),
-                    image_url: expect.any(String),
-                    wanderlist_id: expect.any(Number),
-                    latitude: expect.any(Number),
-                    longitude: expect.any(Number)
-                },
-                {
-                    id: expect.any(Number),
-                    description: expect.any(String),
-                    name: expect.any(String),
-                    image_url: expect.any(String),
-                    wanderlist_id: expect.any(Number),
-                    latitude: expect.any(Number),
-                    longitude: expect.any(Number)
-                }
-            ]
+                user_id: 1
+            }
         });
-        done();
     });
 
-    it('GET /collection get a collection', async (done) => {
-        const collectionResp = await request(server).post('/api/collection').send(requestBody);
+    it('GET /collection get a collection', async () => {
+        const collectionResp = await request(server)
+            .post('/api/collection')
+            .send({
+                ...requestBody,
+                locations: [
+                    {
+                        name: 'Seoul',
+                        latitude: '213',
+                        longitude: '12312',
+                        description: 'Great place',
+                        image_url: 'url'
+                    },
+                    {
+                        name: 'Seoul2',
+                        latitude: '213',
+                        longitude: '12312',
+                        description: 'Great place',
+                        image_url: 'url'
+                    }
+                ]
+            });
         const response = await request(server).get(
             `/api/collection/${collectionResp.body.data.collection.id}`
         );
@@ -85,7 +68,7 @@ describe('collection routes', () => {
                 name: expect.any(String),
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
-                user_id: null
+                user_id: 1
             },
             locations: [
                 {
@@ -108,10 +91,9 @@ describe('collection routes', () => {
                 }
             ]
         });
-        done();
     });
 
-    it('DELETE /collection deletes a collection', async (done) => {
+    it('DELETE /collection deletes a collection', async () => {
         const collectionResp = await request(server).post('/api/collection').send(requestBody);
 
         const response = await request(server).delete(
@@ -123,11 +105,23 @@ describe('collection routes', () => {
             id: collectionResp.body.data.collection.id,
             message: 'Wanderlist deleted'
         });
-        done();
     });
 
-    it('UPDATE /collection updates a collection', async (done) => {
-        const collectionResp = await request(server).post('/api/collection').send(requestBody);
+    it('UPDATE /collection updates a collection', async () => {
+        const collectionResp = await request(server)
+            .post('/api/collection')
+            .send({
+                ...requestBody,
+                locations: [
+                    {
+                        name: 'Seoul',
+                        latitude: '213',
+                        longitude: '12312',
+                        description: 'Great place',
+                        image_url: 'url'
+                    }
+                ]
+            });
 
         const updateBody = {
             collection: {
@@ -151,7 +145,7 @@ describe('collection routes', () => {
                 name: 'South Korea',
                 createdAt: expect.any(String),
                 updatedAt: expect.any(String),
-                user_id: null
+                user_id: 1
             },
             locations: [
                 {
@@ -165,6 +159,5 @@ describe('collection routes', () => {
                 }
             ]
         });
-        done();
     });
 });

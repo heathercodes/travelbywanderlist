@@ -1,7 +1,10 @@
 module.exports = {
+    roots: ['<rootDir>'],
     testEnvironment: 'node',
-    transform: {
-        '^.+\\.ts$': 'ts-jest'
+    globals: {
+        'ts-jest': {
+            diagnostics: false
+        }
     },
     preset: 'ts-jest',
     verbose: true,

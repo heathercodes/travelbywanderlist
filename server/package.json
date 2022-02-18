@@ -4,8 +4,8 @@
   "license": "MIT",
   "scripts": {
     "start": "NODE_ENV=development nodemon -r dotenv/config src/server.ts",
-    "test": "jest",
-    "test:ci": "docker-compose run --rm server npm test",
+    "test": "jest --runInBand",
+    "test:ci": "docker-compose run --rm server npm run test",
     "lint": "eslint ./src/**/**.ts",
     "build": "tsc",
     "db:migrate:latest": "NODE_ENV=development knex migrate:latest",

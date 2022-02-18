@@ -7,10 +7,6 @@ services:
             - '9000:9000'
         environment:
             - DATABASE_HOST=postgresdb
-            - POSTGRES_DB=test
-            - POSTGRES_USER=postgres
-            - POSTGRES_PASSWORD=postgres
-            - DATABASE_PORT=5432
         depends_on:
             - postgresdb
 
@@ -23,8 +19,6 @@ services:
             - POSTGRES_PASSWORD=postgres
         ports:
             - '5432:5432'
-        volumes:
-            - ./data/postgres:/var/lib/postgresql/data
 
 volumes:
     server_node_modules:
