@@ -2,7 +2,7 @@ module.exports = {
     development: {
         client: 'postgresql',
         connection: {
-            host: '127.0.0.1',
+            host: 'localhost',
             user: 'traveladmin',
             password: process.env.POSTGRES_PASSWORD,
             database: 'travelbywanderlistdb',
@@ -24,7 +24,7 @@ module.exports = {
     test: {
         client: 'postgresql',
         connection: {
-            host: 'localhost',
+            host: process.env.DATABASE_HOST || 'localhost',
             user: 'postgres',
             password: 'postgres',
             database: 'test',
