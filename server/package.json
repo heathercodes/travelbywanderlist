@@ -22,7 +22,7 @@
     "express": "^4.17.2",
     "jest-jasmine2": "^27.4.6",
     "jsonwebtoken": "^8.5.1",
-    "knex": "^1.0.1",
+    "knex": "^2.4.0",
     "morgan": "^1.10.0",
     "node-fetch": "^2.6.7",
     "passport": "^0.5.2",
